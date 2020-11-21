@@ -21,7 +21,7 @@ public class JavaApplication2 {
         int g=9;
 
         System.out.println("Ciao ragazzi??");  
-
+        int v=9;
         System.out.println("yo");
 
         System.out.println("sabri yo");
