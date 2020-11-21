@@ -23,7 +23,8 @@ public class JavaApplication2 {
         System.out.println("Ciao ragazzi??");  
 
         System.out.println("yo");
-
+        
+        System.out.println("g");
         System.out.println("sabri yo");
     }
     
