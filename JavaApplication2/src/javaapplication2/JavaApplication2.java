@@ -18,6 +18,7 @@ public class JavaApplication2 {
         System.out.println("Hello Team!!!!!!!");
         System.out.println("Ciao ragazzi");
         System.out.println("Ciao ragazzi???");   
+        int g=9;
     }
     
 }
