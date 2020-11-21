@@ -21,11 +21,10 @@ public class JavaApplication2 {
         int g=9;
 
         System.out.println("Ciao ragazzi??");  
-
         System.out.println("yoooo");
         System.out.println("yo");
-
         System.out.println("sabri yo");
+        System.out.println("yo a tutti");
     }
     
 }
