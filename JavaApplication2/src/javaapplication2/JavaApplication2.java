@@ -24,6 +24,7 @@ public class JavaApplication2 {
 
         System.out.println("yo");
 
+        System.out.println("sabri yo");
     }
     
 }
