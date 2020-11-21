@@ -22,6 +22,7 @@ public class JavaApplication2 {
 
         System.out.println("Ciao ragazzi??");  
 
+        System.out.println("yoooo");
         System.out.println("yo");
 
         System.out.println("sabri yo");
