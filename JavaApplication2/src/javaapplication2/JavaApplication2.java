@@ -17,6 +17,7 @@ public class JavaApplication2 {
     public static void main(String[] args) {
         System.out.println("Hello Team!!!!!!!");
         System.out.println("Ciao ragazzi");
+        System.out.println("Ciao ragazzi vvb");
     }
     
 }
