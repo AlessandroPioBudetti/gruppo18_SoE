@@ -10,7 +10,7 @@ public class Database {
     }
     
     public Statement connectToDatabase(){
-        
+    
         
         String url = "jdbc:postgresql://hattie.db.elephantsql.com:5432/vvtnxvos";
         String username="vvtnxvos";
