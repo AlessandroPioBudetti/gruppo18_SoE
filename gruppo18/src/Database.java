@@ -14,6 +14,7 @@ public class Database {
         
         String url = "jdbc:postgresql://hattie.db.elephantsql.com:5432/vvtnxvos";
         String username="vvtnxvos";
+        String password = "***";
         /**String password = "***";;* Prima di poter utilizzare il database, bisogna inserire la password conosciuta dai membri del gruppo.
         Ricorda di togliere la password prima di effettuare una commit.
         */
