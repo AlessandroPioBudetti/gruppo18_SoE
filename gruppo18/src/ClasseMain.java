@@ -8,6 +8,13 @@
  *
  * @author ALEX
  */
-public class TestClass {
+public class ClasseMain {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        System.out.println("cIAO");
+    }
     
 }
