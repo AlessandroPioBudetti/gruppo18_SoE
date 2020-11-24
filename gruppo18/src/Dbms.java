@@ -23,15 +23,16 @@ public class Dbms {
             Connection db = DriverManager.getConnection(url,username,password);
             Statement st = db.createStatement();
             System.out.println("Ciao, la tua connessione al database è avvenuta con successo.");
-            db.close();
-            st.close();
+            //db.close();
+            //st.close();
             return st;
             
         }catch(java.sql.SQLException e){
             System.out.println(e.getMessage());
+            return null;
         }
         
-        return null;
+        
     }
 
 }

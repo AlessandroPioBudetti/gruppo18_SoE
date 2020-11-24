@@ -14,7 +14,13 @@ public class Main {
     public static void main(String[] args) {
       Dbms datb = new Dbms();
       Statement st = datb.connectToDatabase();
-      
+      /*  Questo codice serve per avviare l'interfaccia GuiAddUser, passandogli l'oggetto statement - SERVE SOLO PER PROVA NON VA NEL MAIN DEFINITIVO.
+      java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new GuiAddUser(st).setVisible(true);
+            }
+        });
+    */
     }
     
 }

@@ -1,4 +1,5 @@
 
+import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.*;
@@ -13,12 +14,14 @@ import javax.swing.*;
  * @author sabrina
  */
 public class GuiAddUser extends javax.swing.JFrame {
-
+    Statement st;
     /**
      * Creates new form GuiAmministratore
+     * @param st
      */
-    public GuiAddUser() {
+    public GuiAddUser(Statement st) {
         initComponents();
+        this.st=st;
     }
 
     /**
@@ -146,8 +149,9 @@ public class GuiAddUser extends javax.swing.JFrame {
             String userName = jTextFieldUserName.getText().trim();      // il metodo trim() rimuove spazi bianchi
             String password = jTextFieldPassword.getText().trim();
             String utente = jComboBoxUtenti.getSelectedItem().toString();
-            System.out.println(userName + " " +password + " " +utente);
-        // INSERIMENTO NEL DATABASE
+            inserimento(userName, password, utente);
+            jTextFieldUserName.setText("");
+            jTextFieldPassword.setText("");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -166,6 +170,24 @@ public class GuiAddUser extends javax.swing.JFrame {
     private void jComboBoxUtentiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxUtentiMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxUtentiMouseClicked
+
+    private void inserimento(String username, String password, String utente) {
+        TablePlanner planner = new TablePlanner(st);
+        TableMantainer mantainer = new TableMantainer(st);
+        if (utente.equalsIgnoreCase("planner")) {
+            if (planner.insert(username, password) == true) {
+                JOptionPane.showMessageDialog(null, "Registrazione avvenuta con successo\nUsername: " + username + "\nPassword: " + password);
+            } else {
+                JOptionPane.showMessageDialog(null, "Registrazione non avvenuta");
+            }
+        } else {
+            if (mantainer.insert(username, password) == true) {
+                JOptionPane.showMessageDialog(null, "Registrazione avvenuta con successo\nUsername: " + username + "\nPassword: " + password);
+            } else {
+                JOptionPane.showMessageDialog(null, "Registrazione non avvenuta");
+            }
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -204,10 +226,10 @@ public class GuiAddUser extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GuiAddUser().setVisible(true);
+       //         new GuiAddUser().setVisible(true);
             }
         });
-    }
+    }  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
