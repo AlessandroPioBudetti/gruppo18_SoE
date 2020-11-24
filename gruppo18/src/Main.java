@@ -6,7 +6,7 @@ import java.sql.Statement;
 
 
 
-public class ClasseMain {
+public class Main {
 
     /**
      * Ci siamo connessi al nostro server remoto ElephantSQL, un servizio di hosting del server PostgreSQL.
