@@ -18,12 +18,11 @@ import java.util.Random;
 public class TableType {
     private String idType;
     private String type;
-    Statement stm;
+    private Statement stm;
 
-    public TableType(Statement stm, Random R, String type) {
+    public TableType(Statement stm, Random R) {
         int len=1+R.nextInt(15);
         this.idType= randomString(3,R);
-        this.type=type;
         this.stm=stm;
     }
      
