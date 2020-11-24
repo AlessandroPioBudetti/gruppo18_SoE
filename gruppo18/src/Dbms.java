@@ -4,9 +4,9 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 
 
-public class Database {
+public class Dbms {
 
-    public Database() {
+    public Dbms() {
     }
     
     public Statement connectToDatabase(){
