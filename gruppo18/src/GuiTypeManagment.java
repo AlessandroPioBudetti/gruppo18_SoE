@@ -93,7 +93,7 @@ public class GuiTypeManagment extends javax.swing.JFrame {
             }
         });
 
-        deleteButton.setText("Remuve");
+        deleteButton.setText("Remove");
         deleteButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 deleteButtonMouseClicked(evt);
@@ -248,16 +248,7 @@ public class GuiTypeManagment extends javax.swing.JFrame {
         });
     }
      private void updateCombo() {
-        /* String sql = "select * from type";
-       try{
-        pst=conn.prepareStatement(sql);
-        rs=pst.executeQuery();
-        while(rs.next()){
-          typeComboBox.addItem(rs.getString("TYPE"));
-        }
-       }catch(Exception e){
-       
-       }*/
+    
       typeComboBox.addItem("ELETTRICA");
       typeComboBox.addItem("IDRAULICA");
       typeComboBox.addItem("MECCANICA");
