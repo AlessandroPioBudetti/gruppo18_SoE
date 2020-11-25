@@ -1,3 +1,10 @@
+
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,12 +16,13 @@
  * @author ALEX
  */
 public class GuiLogin extends javax.swing.JFrame {
-
+    Statement st;
     /**
      * Creates new form GuiLogin
      */
-    public GuiLogin() {
+    public GuiLogin(Statement st) {
         initComponents();
+        this.st = st;
     }
 
     /**
@@ -26,22 +34,151 @@ public class GuiLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextFieldUN = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        buttonLogin = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jTextFieldPW = new javax.swing.JTextField();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("Username");
+
+        jLabel2.setText("Password");
+
+        buttonLogin.setText("LOGIN");
+        buttonLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonLoginActionPerformed(evt);
+            }
+        });
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Planner", "Maintainer", "Administrator" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextFieldUN, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+                            .addComponent(jTextFieldPW))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(175, Short.MAX_VALUE)
+                .addComponent(buttonLogin)
+                .addGap(162, 162, 162))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldUN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextFieldPW, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addComponent(buttonLogin)
+                .addGap(48, 48, 48))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
+        /* Quando il bottone Login è premuto, accediamo al nostro database per controllare che le credenziali siano corrette; in caso affermativo, accediamo ai menù corrispondenti*/
+        if (jTextFieldUN.getText().isEmpty() || jTextFieldPW.getText().isEmpty()){
+           JOptionPane.showMessageDialog(null, "Riempire tutti i campi.");
+       } else {
+           
+           String username = jTextFieldUN.getText().trim();
+           String password = jTextFieldPW.getText().trim();
+           //IL CAMPO PASSWORD è UN SEMPLICE TEXTFIELD IN CHIARO. DA TENER CONTO!!
+           String utente = jComboBox1.getSelectedItem().toString();
+           selectAdministrator(username,password,utente);
+           selectPlanner(username,password,utente);
+           selectMaintainer(username,password,utente);
+           jTextFieldUN.setText("");
+           jTextFieldPW.setText("");
+           }
+                   
+           
+       
+
+       
+        
+    
+    }//GEN-LAST:event_buttonLoginActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    
+    private void selectAdministrator(String username, String password, String utente){
+        /* Controlliamo se le credenziali dell'amministratore sono corrette accedendo alla classe TableAdministrator, che a sua volta si connette al database*/
+        if (utente.equalsIgnoreCase("Administrator")){
+                TableAdministrator amministratore = new TableAdministrator(st);
+                boolean x;
+                x = amministratore.selectAdm(username, password);
+                if(x==true){
+                    JOptionPane.showMessageDialog(null, "Hai inserito correttamente id e password!","Login", JOptionPane.INFORMATION_MESSAGE);
+                    
+                    
+                }else{
+                    JOptionPane.showMessageDialog(null, "Attenzione: Sei sicuro di aver inserito correttamente le credenziali?","Login", JOptionPane.ERROR_MESSAGE);
+                }
+        }      
+
+    }
+    /*Le funzioni riportati di seguito hanno lo stesso funzionamento di selectAdministrator*/
+    private void selectPlanner(String username, String password, String utente){
+        if (utente.equalsIgnoreCase("Planner")){
+                TablePlanner planner = new TablePlanner(st);
+                boolean x;
+                x = planner.selectPl(username, password);
+                if(x==true){
+                    JOptionPane.showMessageDialog(null, "Hai inserito correttamente id e password!","Login", JOptionPane.INFORMATION_MESSAGE);
+                    
+                }else{
+                    JOptionPane.showMessageDialog(null, "Attenzione: Sei sicuro di aver inserito correttamente le credenziali?","Login", JOptionPane.ERROR_MESSAGE);
+                }
+        }      
+
+    }
+    private void selectMaintainer(String username, String password, String utente){
+        if (utente.equalsIgnoreCase("Maintainer")){
+                TableMantainer mantainer = new TableMantainer(st);
+                boolean x;
+                x = mantainer.selectMaint(username, password);
+                if(x==true){
+                    JOptionPane.showMessageDialog(null, "Hai inserito correttamente id e password!","Login", JOptionPane.INFORMATION_MESSAGE);
+                    
+                }else{
+                    JOptionPane.showMessageDialog(null, "Attenzione: Sei sicuro di aver inserito correttamente le credenziali?","Login", JOptionPane.ERROR_MESSAGE);
+                }
+        }      
+
+    }
     /**
      * @param args the command line arguments
      */
@@ -72,11 +209,17 @@ public class GuiLogin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GuiLogin().setVisible(true);
+                //new GuiLogin().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonLogin;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JTextField jTextFieldPW;
+    private javax.swing.JTextField jTextFieldUN;
     // End of variables declaration//GEN-END:variables
 }
