@@ -15,6 +15,8 @@ import javax.swing.*;
  */
 public class GuiAddUser extends javax.swing.JFrame {
     Statement st;
+    TablePlanner planner;
+    TableMantainer mantainer;    
     /**
      * Creates new form GuiAmministratore
      * @param st
@@ -22,6 +24,8 @@ public class GuiAddUser extends javax.swing.JFrame {
     public GuiAddUser(Statement st) {
         initComponents();
         this.st=st;
+        planner = new TablePlanner(st);
+        mantainer = new TableMantainer(st);
     }
 
     /**
@@ -172,19 +176,17 @@ public class GuiAddUser extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxUtentiMouseClicked
 
     private void inserimento(String username, String password, String utente) {
-        TablePlanner planner = new TablePlanner(st);
-        TableMantainer mantainer = new TableMantainer(st);
         if (utente.equalsIgnoreCase("planner")) {
             if (planner.insert(username, password) == true) {
-                JOptionPane.showMessageDialog(null, "Registrazione avvenuta con successo\nUsername: " + username + "\nPassword: " + password);
+                JOptionPane.showMessageDialog(null, "Registrazione avvenuta con successo:\nUsername: " + username + "\nPassword: " + password);
             } else {
                 JOptionPane.showMessageDialog(null, "Registrazione non avvenuta");
             }
         } else {
             if (mantainer.insert(username, password) == true) {
-                JOptionPane.showMessageDialog(null, "Registrazione avvenuta con successo\nUsername: " + username + "\nPassword: " + password);
+                JOptionPane.showMessageDialog(null, "Registrazione avvenuta con successo:\nUsername: " + username + "\nPassword: " + password);
             } else {
-                JOptionPane.showMessageDialog(null, "Registrazione non avvenuta");
+                JOptionPane.showMessageDialog(null, "Registrazione non avvenuta.");
             }
         }
     }

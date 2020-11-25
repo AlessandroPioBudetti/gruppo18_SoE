@@ -2,8 +2,6 @@
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -13,30 +11,17 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author sabrina
+ * @author ALEX
  */
-public class TablePlanner { // Questa classe gestisce gli inserimenti di username e password dei planner.
-   Statement st;
-
-    public TablePlanner(Statement st) {
-        this.st=st;
-    }
-    
-    public boolean insert(String userName, String pass) {
-        String query = "insert into Planner values('"+userName+"','"+pass+"')";
-       try {
-           st.executeUpdate(query);
-          
-           return true;
-       } catch (SQLException ex) {
-           System.out.println(ex);
-           return false;
-       }
+public class TableAdministrator {
+    Statement st;
+    public TableAdministrator(Statement st) {
+        this.st = st;
     }
     /*Questo metodo controlla, tramite una query, se nel nostro database ci sono corrispondenze delle credenziali data la password*/
-     public boolean selectPl(String username, String password){
+    public boolean selectAdm(String username, String password){
         String user= "";
-        String sql = "select username from Planner where pass = '" + password + "'";
+        String sql = "select username from Administrator where pass = '" + password + "'";
         
         try{
             ResultSet rs = st.executeQuery(sql);
@@ -58,5 +43,5 @@ public class TablePlanner { // Questa classe gestisce gli inserimenti di usernam
         
         
     }
-   
+    
 }
