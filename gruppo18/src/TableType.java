@@ -16,21 +16,17 @@ import java.util.Random;
  * @author 39392
  */
 public class TableType {
-    private String idType;
     private String type;
     private Statement stm;
 
-    public TableType(Statement stm, Random R) {
-        int len=1+R.nextInt(15);
-        this.idType= randomString(3,R);
+    public TableType(Statement stm) {
         this.stm=stm;
     }
      
-    public void getInsertQuery(String type){
+    public void insert(String type){
         StringBuilder temp= new StringBuilder();
-        temp.append("insert into Type(idType, type)");
+        temp.append("insert into Typology(tipo)");
         temp.append("values(");
-        temp.append("'").append(idType).append("',");
         temp.append("'").append(type).append("'");
         temp.append(")");
         try{
@@ -42,10 +38,10 @@ public class TableType {
   
     public void update(String type, String typeUpdate){
         StringBuilder temp= new StringBuilder();
-        temp.append("update Type set type=");
-        temp.append(typeUpdate);
-        temp.append("where type=");
-        temp.append(type);
+        temp.append("update Typology set tipo=");
+        temp.append("'").append(typeUpdate).append("'");
+        temp.append(" where tipo=");
+        temp.append("'").append(type).append("'");
         try{
         stm.executeUpdate(temp.toString());
         }catch(SQLException ex){
@@ -55,9 +51,9 @@ public class TableType {
     
     public void delete(String type){
         StringBuilder temp= new StringBuilder();
-        temp.append("delete from Type");
-        temp.append("where type=");
-        temp.append(type);
+        temp.append("delete from Typology ");
+        temp.append("where tipo = ");
+        temp.append("'").append(type).append("'");
         try{
         stm.executeUpdate(temp.toString());
         }catch(SQLException ex){
@@ -69,11 +65,11 @@ public class TableType {
     StringBuilder temp= new StringBuilder();
     ArrayList <String> types=new ArrayList();
     String type;
-        temp.append("select * from Type");    
+        temp.append("select * from Typology");    
         try{
          ResultSet rst=stm.executeQuery(temp.toString());
          while(rst.next()){
-             type=rst.getString("type");
+             type=rst.getString("tipo");
              types.add(type);
          }     
         }catch(SQLException ex){
@@ -81,14 +77,5 @@ public class TableType {
         }
      return types; 
     }
-    
-   public String randomString(int len, Random R) {
-    String lowerLetters = "abcdefghilmnopqrstuvz";
-    StringBuilder temp = new StringBuilder();
-    temp.setLength(0);
-    while (temp.length() < len) {
-      temp.append(lowerLetters.charAt(R.nextInt(lowerLetters.length())));
-    }
-    return temp.toString();
-  }
+   
 }

@@ -1,4 +1,6 @@
 
+import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -12,13 +14,16 @@ import javax.swing.table.DefaultTableModel;
  * @author 39392
  */
 public class GuiTypeManagment extends javax.swing.JFrame {
-
-    DefaultTableModel model;
+   private Statement st;
+   private DefaultTableModel model;
+   private TableType typology;
     
-    public GuiTypeManagment() {
+    public GuiTypeManagment(Statement st) {
         initComponents();
+        this.st=st;
         model= (DefaultTableModel) manutTable.getModel();
-        updateCombo();
+        typology= new TableType(st);
+        visualizeInCombo();
         updateTable();
     }
 
@@ -169,7 +174,12 @@ public class GuiTypeManagment extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void updateButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateButtonMouseClicked
-          int on=0;
+        int on=0;
+        String updateType=typeTextField.getText().toUpperCase();
+        if(typeComboBox.getSelectedIndex()==0){
+           typeTextField.setText("Type not valid"); 
+           on=1;
+        }
         for(int i=0; i<typeComboBox.getItemCount(); i++){
             if(typeComboBox.getItemAt(i).equals(typeTextField.getText())){
                 typeTextField.setText("Type already present");
@@ -177,28 +187,33 @@ public class GuiTypeManagment extends javax.swing.JFrame {
             }
         }
         if(on!=1){
-            typeComboBox.insertItemAt(typeTextField.getText(), typeComboBox.getSelectedIndex());
-            typeComboBox.removeItem(typeComboBox.getSelectedItem());
+            updateInCombo(updateType,typeComboBox.getSelectedIndex(),typeComboBox.getSelectedItem().toString());
             typeTextField.setText("");
-            //typeComboBox.getSelectedIndex();
+            
         }
     }//GEN-LAST:event_updateButtonMouseClicked
 
     private void deleteButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteButtonMouseClicked
-        typeComboBox.removeItem(typeTextField.getText());
+        String deleteType=typeTextField.getText().toUpperCase();
+        deleteInCombo(deleteType);
         typeTextField.setText("");
     }//GEN-LAST:event_deleteButtonMouseClicked
 
     private void addButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addButtonMouseClicked
-          int on=0;
+        int on=0;
+        String newType=typeTextField.getText().toUpperCase();
+        if(typeTextField.getText().equals("") || typeComboBox.getSelectedIndex()==0 ){
+           typeTextField.setText("Type not valid"); 
+           on=1;
+        }
         for(int i=0; i<typeComboBox.getItemCount(); i++){
-            if(typeComboBox.getItemAt(i).equals(typeTextField.getText())){
+            if(typeComboBox.getItemAt(i).equals(newType)){
                 typeTextField.setText("Type already present");
                 on=1;
             }
         }
         if(on!=1){
-            typeComboBox.addItem(typeTextField.getText());
+            addInCombo(newType);
             typeTextField.setText("");
         }
     }//GEN-LAST:event_addButtonMouseClicked
@@ -243,16 +258,31 @@ public class GuiTypeManagment extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GuiTypeManagment().setVisible(true);
+               // new GuiTypeManagment().setVisible(true);
             }
         });
     }
-     private void updateCombo() {
-    
-      typeComboBox.addItem("ELETTRICA");
-      typeComboBox.addItem("IDRAULICA");
-      typeComboBox.addItem("MECCANICA");
+     private void visualizeInCombo(){
+      ArrayList <String> items=new ArrayList();;
+      items=typology.visualize();
+      for (String k : items){
+          typeComboBox.addItem(k);
+      }
     }
+    private void addInCombo(String item){
+      typology.insert(item);
+      typeComboBox.addItem(item);  
+    }
+    private void deleteInCombo(String item){
+      typology.delete(item);
+      typeComboBox.removeItem(item);
+    }
+    private void updateInCombo(String newItem, int indexOldItem,String oldItem){
+      typology.update(oldItem, newItem);
+      typeComboBox.insertItemAt(newItem, indexOldItem);
+      typeComboBox.removeItem(oldItem);
+    }
+    
        private void updateTable(){
          model.insertRow(model.getRowCount(),new Object[]{123, "NOCERA", "ELETTRICA", 30});
          model.insertRow(model.getRowCount(),new Object[]{111, "SERINO", "MECCANICA", 60});

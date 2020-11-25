@@ -21,6 +21,13 @@ public class Main {
             }
         });
     */
+      /*  Questo codice serve per avviare l'interfaccia GuiTypeManagment, passandogli l'oggetto statement - SERVE SOLO PER PROVA NON VA NEL MAIN DEFINITIVO.
+      java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new GuiTypeManagment(st).setVisible(true);
+            }
+        });
+    */
     }
     
 }
