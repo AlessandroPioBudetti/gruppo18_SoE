@@ -58,5 +58,49 @@ public class TablePlanner { // Questa classe gestisce gli inserimenti di usernam
         
         
     }
+    
+    public String[] visualizePlanners() {
+        String query = "select * from planner";
+        String[] planners =new String[100];
+        int i = 0;
+        try {
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                planners[i] = rs.getString("username");
+                i++;
+            }  
+        } catch (SQLException ex) {
+            Logger.getLogger(TablePlanner.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return planners;
+    }
+    
+    public String getPassword(String username) {
+        String query = "select pass from planner where username = '" + username + "'";
+        try {
+            ResultSet rs = st.executeQuery(query);
+            rs.next();
+            String pass = rs.getString("pass");
+            return pass;
+        } catch (SQLException ex) {
+            Logger.getLogger(TableMantainer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public boolean update(String username, String pass, String olduser){
+        String query="update planner set username = '"+username+"' where username = '"+olduser+"'";
+        String query2="update planner set pass = '"+pass+"' where username = '"+username+"'";
+        try {
+            st.executeUpdate(query);
+            st.executeUpdate(query2);
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(TablePlanner.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        
+    }
+
    
 }

@@ -45,6 +45,7 @@ public class TablePlannerTest {
         try {
             st.executeUpdate(query);
             st.executeUpdate(query1);
+            st.close();
         } catch (SQLException ex) {
             System.out.println("Errore RemovePreviousInser\n"+ex.getMessage());
         }

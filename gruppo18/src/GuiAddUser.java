@@ -3,6 +3,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,16 +16,19 @@ import javax.swing.*;
  * @author sabrina
  */
 public class GuiAddUser extends javax.swing.JFrame {
+
     Statement st;
     TablePlanner planner;
-    TableMantainer mantainer;    
+    TableMantainer mantainer;
+
     /**
      * Creates new form GuiAmministratore
+     *
      * @param st
      */
     public GuiAddUser(Statement st) {
         initComponents();
-        this.st=st;
+        this.st = st;
         planner = new TablePlanner(st);
         mantainer = new TableMantainer(st);
     }
@@ -45,11 +50,16 @@ public class GuiAddUser extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jComboBoxUtenti = new javax.swing.JComboBox<>();
         jLabelScegli = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jListUtenti = new javax.swing.JList<>();
+        jButtonVisualize = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabelInserireUtente.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabelInserireUtente.setText("Inserire un nuovo utente");
+        jLabelInserireUtente.setText("Gestione utenti");
 
         jLabelUserName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelUserName.setText("User Name : ");
@@ -91,6 +101,34 @@ public class GuiAddUser extends javax.swing.JFrame {
         jLabelScegli.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelScegli.setText("Scegli il tipo di utente:");
 
+        jListUtenti.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jListUtentiMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jListUtenti);
+
+        jButtonVisualize.setText("VISUALIZE");
+        jButtonVisualize.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVisualizeActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("DELETE");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("UPDATE");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -98,47 +136,68 @@ public class GuiAddUser extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(174, 174, 174)
-                        .addComponent(jLabelInserireUtente, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(78, 78, 78)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelUserName)
                             .addComponent(jLabelPassword)
                             .addComponent(jLabelScegli))
-                        .addGap(72, 72, 72)
+                        .addGap(0, 0, 0))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+                        .addGap(77, 77, 77)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(86, 86, 86)
+                                .addComponent(jLabelInserireUtente, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(113, 113, 113)
+                                .addComponent(jButton1)
+                                .addGap(128, 128, 128)
+                                .addComponent(jButtonVisualize, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextFieldUserName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
                             .addComponent(jTextFieldPassword, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jComboBoxUtenti, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(81, 81, 81)
-                        .addComponent(jButton1)))
-                .addGap(57, 57, 57))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(25, 25, 25)
                 .addComponent(jLabelInserireUtente, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelUserName)
-                    .addComponent(jTextFieldUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelPassword)
-                    .addComponent(jTextFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabelUserName)
+                            .addComponent(jTextFieldUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(41, 41, 41)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelPassword)
+                            .addComponent(jTextFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(39, 39, 39)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jComboBoxUtenti, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelScegli))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(88, 88, 88))))
+                        .addGap(80, 80, 80)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonVisualize, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         pack();
@@ -174,6 +233,51 @@ public class GuiAddUser extends javax.swing.JFrame {
     private void jComboBoxUtentiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxUtentiMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxUtentiMouseClicked
+
+    private void jButtonVisualizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVisualizeActionPerformed
+        String utente = jComboBoxUtenti.getSelectedItem().toString();
+        if (utente.equalsIgnoreCase("planner")) {
+            String[] planners;
+            planners = planner.visualizePlanners();
+            jListUtenti.setListData(planners);
+        } else {
+            String[] maintainers;
+            maintainers = mantainer.visualizeMaintainers();
+            jListUtenti.setListData(maintainers);
+        }
+    }//GEN-LAST:event_jButtonVisualizeActionPerformed
+String userSelected;
+String passSelected;
+    private void jListUtentiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListUtentiMouseClicked
+         userSelected = jListUtenti.getSelectedValue();
+        jTextFieldUserName.setText(userSelected);
+        if (jComboBoxUtenti.getSelectedItem().toString().equalsIgnoreCase("planner")) {
+            passSelected=planner.getPassword(userSelected);
+            jTextFieldPassword.setText(passSelected);
+        } else {
+            passSelected=mantainer.getPassword(userSelected);
+            jTextFieldPassword.setText(passSelected);
+        }
+    }//GEN-LAST:event_jListUtentiMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+       String user =jTextFieldUserName.getText();
+       String pass=jTextFieldPassword.getText();
+       if (user.equals(userSelected)&&pass.equals(passSelected)){
+           return;
+       }
+       if (jComboBoxUtenti.getSelectedItem().toString().equalsIgnoreCase("planner")){
+           boolean result=planner.update(user, pass, userSelected);
+           if (result){
+               JOptionPane.showMessageDialog(null, "Aggiornamento avvenuto");
+           }else {JOptionPane.showMessageDialog(null, "Aggiornamento non avvenuto");}
+       }
+       
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void inserimento(String username, String password, String utente) {
         if (utente.equalsIgnoreCase("planner")) {
@@ -228,18 +332,23 @@ public class GuiAddUser extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-       //         new GuiAddUser().setVisible(true);
+                //         new GuiAddUser().setVisible(true);
             }
         });
-    }  
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonVisualize;
     private javax.swing.JComboBox<String> jComboBoxUtenti;
     private javax.swing.JLabel jLabelInserireUtente;
     private javax.swing.JLabel jLabelPassword;
     private javax.swing.JLabel jLabelScegli;
     private javax.swing.JLabel jLabelUserName;
+    private javax.swing.JList<String> jListUtenti;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextFieldPassword;
     private javax.swing.JTextField jTextFieldUserName;
     // End of variables declaration//GEN-END:variables
