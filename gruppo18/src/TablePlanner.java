@@ -34,9 +34,11 @@ public class TablePlanner { // Questa classe gestisce gli inserimenti di usernam
        }
     }
     /*Questo metodo controlla, tramite una query, se nel nostro database ci sono corrispondenze delle credenziali data la password*/
-     public boolean selectPl(String username, String password){
+     public boolean selectPl(String username, char[] password){
+        String psw = String.valueOf(password);
+        
         String user= "";
-        String sql = "select username from Planner where pass = '" + password + "'";
+        String sql = "select username from Planner where pass = '" + psw + "'";
         
         try{
             ResultSet rs = st.executeQuery(sql);

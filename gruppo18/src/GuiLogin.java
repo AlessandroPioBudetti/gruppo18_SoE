@@ -34,12 +34,13 @@ public class GuiLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextFieldPW = new javax.swing.JTextField();
         jTextFieldUN = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         buttonLogin = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jTextFieldPW = new javax.swing.JTextField();
+        jPasswordField1 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,6 +62,12 @@ public class GuiLogin extends javax.swing.JFrame {
             }
         });
 
+        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordField1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -76,10 +83,10 @@ public class GuiLogin extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextFieldUN, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
-                            .addComponent(jTextFieldPW))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jPasswordField1))))
+                .addContainerGap(166, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(175, Short.MAX_VALUE)
+                .addContainerGap(142, Short.MAX_VALUE)
                 .addComponent(buttonLogin)
                 .addGap(162, 162, 162))
         );
@@ -95,7 +102,7 @@ public class GuiLogin extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextFieldPW, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addComponent(buttonLogin)
                 .addGap(48, 48, 48))
@@ -106,20 +113,22 @@ public class GuiLogin extends javax.swing.JFrame {
 
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
         /* Quando il bottone Login è premuto, accediamo al nostro database per controllare che le credenziali siano corrette; in caso affermativo, accediamo ai menù corrispondenti*/
-        if (jTextFieldUN.getText().isEmpty() || jTextFieldPW.getText().isEmpty()){
-           JOptionPane.showMessageDialog(null, "Riempire tutti i campi.");
+        
+        char[] password = jPasswordField1.getPassword();
+        if (jTextFieldUN.getText().isEmpty() || password.length==0){
+            JOptionPane.showMessageDialog(null, "Riempire tutti i campi.");
+            
        } else {
            
            String username = jTextFieldUN.getText().trim();
-           String password = jTextFieldPW.getText().trim();
-           //IL CAMPO PASSWORD è UN SEMPLICE TEXTFIELD IN CHIARO. DA TENER CONTO!!
+           password = jPasswordField1.getPassword();
            String utente = jComboBox1.getSelectedItem().toString();
            selectAdministrator(username,password,utente);
            selectPlanner(username,password,utente);
            selectMaintainer(username,password,utente);
-           jTextFieldUN.setText("");
-           jTextFieldPW.setText("");
            }
+       jTextFieldUN.setText("");
+       jPasswordField1.setText("");
                    
            
        
@@ -133,8 +142,12 @@ public class GuiLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPasswordField1ActionPerformed
+
     
-    private void selectAdministrator(String username, String password, String utente){
+    private void selectAdministrator(String username, char[] password, String utente){
         /* Controlliamo se le credenziali dell'amministratore sono corrette accedendo alla classe TableAdministrator, che a sua volta si connette al database*/
         if (utente.equalsIgnoreCase("Administrator")){
                 TableAdministrator amministratore = new TableAdministrator(st);
@@ -142,6 +155,7 @@ public class GuiLogin extends javax.swing.JFrame {
                 x = amministratore.selectAdm(username, password);
                 if(x==true){
                     JOptionPane.showMessageDialog(null, "Hai inserito correttamente id e password!","Login", JOptionPane.INFORMATION_MESSAGE);
+                    new GuiMenuAdmin(st).setVisible(true);
                     
                     
                 }else{
@@ -151,28 +165,28 @@ public class GuiLogin extends javax.swing.JFrame {
 
     }
     /*Le funzioni riportati di seguito hanno lo stesso funzionamento di selectAdministrator*/
-    private void selectPlanner(String username, String password, String utente){
+    private void selectPlanner(String username, char[] password, String utente){
         if (utente.equalsIgnoreCase("Planner")){
                 TablePlanner planner = new TablePlanner(st);
                 boolean x;
                 x = planner.selectPl(username, password);
                 if(x==true){
                     JOptionPane.showMessageDialog(null, "Hai inserito correttamente id e password!","Login", JOptionPane.INFORMATION_MESSAGE);
-                    
+                    new GuiMenuPlanner(st).setVisible(true);
                 }else{
                     JOptionPane.showMessageDialog(null, "Attenzione: Sei sicuro di aver inserito correttamente le credenziali?","Login", JOptionPane.ERROR_MESSAGE);
                 }
         }      
 
     }
-    private void selectMaintainer(String username, String password, String utente){
+    private void selectMaintainer(String username, char[] password, String utente){
         if (utente.equalsIgnoreCase("Maintainer")){
                 TableMantainer mantainer = new TableMantainer(st);
                 boolean x;
                 x = mantainer.selectMaint(username, password);
                 if(x==true){
                     JOptionPane.showMessageDialog(null, "Hai inserito correttamente id e password!","Login", JOptionPane.INFORMATION_MESSAGE);
-                    
+                    new GuiMenuMaint(st).setVisible(true);
                 }else{
                     JOptionPane.showMessageDialog(null, "Attenzione: Sei sicuro di aver inserito correttamente le credenziali?","Login", JOptionPane.ERROR_MESSAGE);
                 }
@@ -219,6 +233,7 @@ public class GuiLogin extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextFieldPW;
     private javax.swing.JTextField jTextFieldUN;
     // End of variables declaration//GEN-END:variables

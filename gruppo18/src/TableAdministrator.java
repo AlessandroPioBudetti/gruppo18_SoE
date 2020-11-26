@@ -19,9 +19,10 @@ public class TableAdministrator {
         this.st = st;
     }
     /*Questo metodo controlla, tramite una query, se nel nostro database ci sono corrispondenze delle credenziali data la password*/
-    public boolean selectAdm(String username, String password){
+    public boolean selectAdm(String username, char[] password){
+        String psw = String.valueOf(password);
         String user= "";
-        String sql = "select username from Administrator where pass = '" + password + "'";
+        String sql = "select username from Administrator where pass = '" + psw + "'";
         
         try{
             ResultSet rs = st.executeQuery(sql);
