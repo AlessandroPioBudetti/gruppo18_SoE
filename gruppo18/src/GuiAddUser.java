@@ -52,9 +52,9 @@ public class GuiAddUser extends javax.swing.JFrame {
         jLabelScegli = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jListUtenti = new javax.swing.JList<>();
-        jButtonVisualize = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jButtonDelete = new javax.swing.JButton();
+        jButtonUpdate = new javax.swing.JButton();
+        jButtonMenu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -108,24 +108,24 @@ public class GuiAddUser extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jListUtenti);
 
-        jButtonVisualize.setText("VISUALIZE");
-        jButtonVisualize.addActionListener(new java.awt.event.ActionListener() {
+        jButtonDelete.setText("DELETE");
+        jButtonDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonVisualizeActionPerformed(evt);
+                jButtonDeleteActionPerformed(evt);
             }
         });
 
-        jButton2.setText("DELETE");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonUpdate.setText("UPDATE");
+        jButtonUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonUpdateActionPerformed(evt);
             }
         });
 
-        jButton3.setText("UPDATE");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonMenu.setText("Menu");
+        jButtonMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButtonMenuActionPerformed(evt);
             }
         });
 
@@ -134,46 +134,42 @@ public class GuiAddUser extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(78, 78, 78)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonMenu)
+                    .addComponent(jLabelUserName)
+                    .addComponent(jLabelPassword)
+                    .addComponent(jLabelScegli))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelUserName)
-                            .addComponent(jLabelPassword)
-                            .addComponent(jLabelScegli))
-                        .addGap(0, 0, 0))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
-                        .addGap(77, 77, 77)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(86, 86, 86)
-                                .addComponent(jLabelInserireUtente, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(113, 113, 113)
-                                .addComponent(jButton1)
-                                .addGap(128, 128, 128)
-                                .addComponent(jButtonVisualize, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(86, 86, 86)
+                        .addComponent(jLabelInserireUtente, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextFieldUserName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
                             .addComponent(jTextFieldPassword, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jComboBoxUtenti, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39))))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(182, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(89, 89, 89)
+                .addComponent(jButtonUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(100, 100, 100)
+                .addComponent(jButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(191, 191, 191))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(jLabelInserireUtente, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelInserireUtente, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(70, 70, 70)
@@ -188,16 +184,15 @@ public class GuiAddUser extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jComboBoxUtenti, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelScegli))
-                        .addGap(80, 80, 80)
+                        .addGap(90, 90, 90)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonVisualize, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jButtonUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(46, 46, 46)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         pack();
@@ -215,6 +210,7 @@ public class GuiAddUser extends javax.swing.JFrame {
             inserimento(userName, password, utente);
             jTextFieldUserName.setText("");
             jTextFieldPassword.setText("");
+            visualizzaLista();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -227,14 +223,6 @@ public class GuiAddUser extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldPasswordActionPerformed
 
     private void jComboBoxUtentiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxUtentiActionPerformed
-
-    }//GEN-LAST:event_jComboBoxUtentiActionPerformed
-
-    private void jComboBoxUtentiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxUtentiMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxUtentiMouseClicked
-
-    private void jButtonVisualizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVisualizeActionPerformed
         String utente = jComboBoxUtenti.getSelectedItem().toString();
         if (utente.equalsIgnoreCase("planner")) {
             String[] planners;
@@ -245,53 +233,115 @@ public class GuiAddUser extends javax.swing.JFrame {
             maintainers = mantainer.visualizeMaintainers();
             jListUtenti.setListData(maintainers);
         }
-    }//GEN-LAST:event_jButtonVisualizeActionPerformed
-String userSelected;
-String passSelected;
+    }//GEN-LAST:event_jComboBoxUtentiActionPerformed
+
+    private void jComboBoxUtentiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxUtentiMouseClicked
+
+    }//GEN-LAST:event_jComboBoxUtentiMouseClicked
+    String userSelected;
+    String passSelected;
     private void jListUtentiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListUtentiMouseClicked
-         userSelected = jListUtenti.getSelectedValue();
+        userSelected = jListUtenti.getSelectedValue();
         jTextFieldUserName.setText(userSelected);
         if (jComboBoxUtenti.getSelectedItem().toString().equalsIgnoreCase("planner")) {
-            passSelected=planner.getPassword(userSelected);
+            passSelected = planner.getPassword(userSelected);
             jTextFieldPassword.setText(passSelected);
         } else {
-            passSelected=mantainer.getPassword(userSelected);
+            passSelected = mantainer.getPassword(userSelected);
             jTextFieldPassword.setText(passSelected);
         }
     }//GEN-LAST:event_jListUtentiMouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
+        boolean result;
+        String user = jTextFieldUserName.getText();
+        String pass = jTextFieldPassword.getText();
+        if (user.compareToIgnoreCase(userSelected) != 0 || pass.compareToIgnoreCase(passSelected) != 0) {  // se non sono state fatte modifiche non eseguo nessun aggiornamento
+            JOptionPane.showMessageDialog(null, "Non modificare i campi durante la cancellazione.");
+            jTextFieldUserName.setText("");
+            jTextFieldPassword.setText("");
+            return;
+        }
+        if (user.isEmpty() || pass.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Selezionare l'utente da eliminare.");
+            return;
+        }
+        if (jComboBoxUtenti.getSelectedItem().toString().equalsIgnoreCase("planner")) {
+            result = planner.delete(user);
+        } else {
+            result = mantainer.delete(user);
+        }
+        if (result) {
+            JOptionPane.showMessageDialog(null, "Cancellazione avvenuta.");
+        } else {
+            JOptionPane.showMessageDialog(null, "Utente non esistente.");
+        }
+        jTextFieldUserName.setText("");
+        jTextFieldPassword.setText("");
+        visualizzaLista();
+    }//GEN-LAST:event_jButtonDeleteActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       String user =jTextFieldUserName.getText();
-       String pass=jTextFieldPassword.getText();
-       if (user.equals(userSelected)&&pass.equals(passSelected)){
-           return;
-       }
-       if (jComboBoxUtenti.getSelectedItem().toString().equalsIgnoreCase("planner")){
-           boolean result=planner.update(user, pass, userSelected);
-           if (result){
-               JOptionPane.showMessageDialog(null, "Aggiornamento avvenuto");
-           }else {JOptionPane.showMessageDialog(null, "Aggiornamento non avvenuto");}
-       }
-       
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed
+        String user = jTextFieldUserName.getText();
+        String pass = jTextFieldPassword.getText();
+        boolean result;
+        if (user.equals(userSelected) && pass.equals(passSelected)) {  // se non sono state fatte modifiche non eseguo nessun aggiornamento
+            JOptionPane.showMessageDialog(null, "Nessun aggiornamento effettuato.");
+            jTextFieldUserName.setText("");
+            jTextFieldPassword.setText("");
+            return;
+        }
+        if (user.isEmpty() || pass.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Riempire tutti i campi.");
+            jTextFieldUserName.setText("");
+            jTextFieldPassword.setText("");
+            return;
+        }
+        if (jComboBoxUtenti.getSelectedItem().toString().equalsIgnoreCase("planner")) {  // se ho selezionato un planner
+            result = planner.update(user, pass, userSelected);                           // modifico i suoi dati con quelli inseriti nelle text area user e pass
+        } else {                                                                         // se ho selezionato un maintainer
+            result = mantainer.update(user, pass, userSelected);                         //modifico i suoi dati con quelli inseriti nelle text area user e pass
+        }
+        if (result) {                                                                    // se il risultato dell'aggiornamento è true
+            JOptionPane.showMessageDialog(null, "Aggiornamento avvenuto.");             // allora l'agg è avvenuto con successo 
+        } else {
+            JOptionPane.showMessageDialog(null, "Aggiornamento non avvenuto: password duplicata.");
+        }
+        jTextFieldUserName.setText("");
+        jTextFieldPassword.setText("");
+        visualizzaLista();
+    }//GEN-LAST:event_jButtonUpdateActionPerformed
+
+    private void jButtonMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMenuActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonMenuActionPerformed
 
     private void inserimento(String username, String password, String utente) {
         if (utente.equalsIgnoreCase("planner")) {
             if (planner.insert(username, password) == true) {
                 JOptionPane.showMessageDialog(null, "Registrazione avvenuta con successo:\nUsername: " + username + "\nPassword: " + password);
             } else {
-                JOptionPane.showMessageDialog(null, "Registrazione non avvenuta");
+                JOptionPane.showMessageDialog(null, "Registrazione non avvenuta: password duplicata.");
             }
         } else {
             if (mantainer.insert(username, password) == true) {
                 JOptionPane.showMessageDialog(null, "Registrazione avvenuta con successo:\nUsername: " + username + "\nPassword: " + password);
             } else {
-                JOptionPane.showMessageDialog(null, "Registrazione non avvenuta.");
+                JOptionPane.showMessageDialog(null, "Registrazione non avvenuta: password duplicata.");
             }
+        }
+    }
+
+    private void visualizzaLista() {
+        String utente = jComboBoxUtenti.getSelectedItem().toString();
+        if (utente.equalsIgnoreCase("planner")) {
+            String[] planners;
+            planners = planner.visualizePlanners();
+            jListUtenti.setListData(planners);
+        } else {
+            String[] maintainers;
+            maintainers = mantainer.visualizeMaintainers();
+            jListUtenti.setListData(maintainers);
         }
     }
 
@@ -339,9 +389,9 @@ String passSelected;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButtonVisualize;
+    private javax.swing.JButton jButtonDelete;
+    private javax.swing.JButton jButtonMenu;
+    private javax.swing.JButton jButtonUpdate;
     private javax.swing.JComboBox<String> jComboBoxUtenti;
     private javax.swing.JLabel jLabelInserireUtente;
     private javax.swing.JLabel jLabelPassword;

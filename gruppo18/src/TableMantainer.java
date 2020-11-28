@@ -35,13 +35,12 @@ public class TableMantainer {// Questa classe gestisce gli inserimenti di userna
     }
 
     /*Questo metodo controlla, tramite una query, se nel nostro database ci sono corrispondenze delle credenziali data la password*/
-
-    public boolean selectMaint(String username, char[] password){
+    public boolean selectMaint(String username, char[] password) {
         String psw = String.valueOf(password);
-        String user= "";
+        String user = "";
         String sql = "select username from Mantainer where pass = '" + psw + "'";
-        
-        try{
+
+        try {
 
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
@@ -89,6 +88,31 @@ public class TableMantainer {// Questa classe gestisce gli inserimenti di userna
             Logger.getLogger(TableMantainer.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    
+    public boolean update(String username, String pass, String olduser){
+        String query="update mantainer set username = '"+username+"' where username = '"+olduser+"'";
+        String query2="update mantainer set pass = '"+pass+"' where username = '"+username+"'";
+        try {
+            st.executeUpdate(query);
+            st.executeUpdate(query2);
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(TablePlanner.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        
+    }
+    
+    public boolean delete(String username) {
+        String query = "delete from mantainer where username = '" + username + "'";
+        try {
+            st.executeUpdate(query);
+            return true;
+        } catch (SQLException ex) {
+            System.out.println("errore delete planner:\n"+ex.getMessage());
+            return false;
+        }
     }
 
 }
