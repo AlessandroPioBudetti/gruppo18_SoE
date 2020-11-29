@@ -97,6 +97,11 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
         });
 
         updateButton.setText("Update");
+        updateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateButtonActionPerformed(evt);
+            }
+        });
 
         maintenanceTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -117,6 +122,11 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
         maintenanceTable.setToolTipText("");
         maintenanceTable.getTableHeader().setReorderingAllowed(false);
         maintenanceTable.setVerifyInputWhenFocusTarget(false);
+        maintenanceTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                maintenanceTableMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(maintenanceTable);
         if (maintenanceTable.getColumnModel().getColumnCount() > 0) {
             maintenanceTable.getColumnModel().getColumn(0).setMinWidth(60);
@@ -222,19 +232,19 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(typeComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(weekComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(typeOfMainanceComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(44, 44, 44)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(yesRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(noRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(typeOfMainanceComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(91, 91, 91)
+                                .addGap(99, 99, 99)
                                 .addComponent(removeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(100, 100, 100)
-                                .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(92, 92, 92)
+                                .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(44, 44, 44)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(yesRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(noRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 1151, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -315,21 +325,55 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_noRadioButtonActionPerformed
 
     private void addButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addButtonMouseClicked
-        if(idTextField.getText().equals("") || typeOfMainanceComboBox.getSelectedIndex()==0 || typeComboBox.getSelectedIndex()==0 || areaTextField.getText().equals("")|| weekComboBox.getSelectedIndex()==0 || selectedRadioButton().equals("")){
-            JOptionPane.showMessageDialog(this, "Plase enter all data.","ERROR",JOptionPane.ERROR_MESSAGE);
-            
-        }else{
+        if(idTextField.getText().equals("") || typeOfMainanceComboBox.getSelectedIndex()==0 || typeComboBox.getSelectedIndex()==0 || areaTextField.getText().equals("")|| weekComboBox.getSelectedIndex()==0 || selectedRadioButton().equals(""))
+            JOptionPane.showMessageDialog(this, "Plase enter all data.","ERROR",JOptionPane.ERROR_MESSAGE); 
+        else{
+        if(checkId()){
         visualizeInTable();
+        resetFields();
+        }else{
+           JOptionPane.showMessageDialog(this, "Plase specify another id.","ERROR",JOptionPane.ERROR_MESSAGE);
         }
+       }
     }//GEN-LAST:event_addButtonMouseClicked
 
     private void removeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeButtonMouseClicked
         deleteInTable();
     }//GEN-LAST:event_removeButtonMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
+    private void maintenanceTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maintenanceTableMouseClicked
+        resetFields();
+        visualizeFields();
+    }//GEN-LAST:event_maintenanceTableMouseClicked
+
+    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
+     String id=idTextField.getText();
+     String typologyOfMaintenance= typeOfMainanceComboBox.getSelectedItem().toString();
+     String type=typeComboBox.getSelectedItem().toString();
+     String area=areaTextField.getText();
+     String week= weekComboBox.getSelectedItem().toString(); 
+     String estimatedTime=estimatedTimeSpinner.getValue().toString(); 
+     String interruptibleActivity=selectedRadioButton();
+     if(maintenanceTable.getSelectedRowCount()==1 ){
+           if(checkId() ||  model.getValueAt(maintenanceTable.getSelectedRow(), 0).toString().equals(idTextField.getText())){
+               model.setValueAt(id, maintenanceTable.getSelectedRow(),0);
+               model.setValueAt(typologyOfMaintenance, maintenanceTable.getSelectedRow(),1);
+               model.setValueAt(type, maintenanceTable.getSelectedRow(),2);
+               model.setValueAt(area, maintenanceTable.getSelectedRow(),3);
+               model.setValueAt(week, maintenanceTable.getSelectedRow(),4);
+               model.setValueAt(estimatedTime, maintenanceTable.getSelectedRow(),5);
+               model.setValueAt(interruptibleActivity, maintenanceTable.getSelectedRow(),6);
+               JOptionPane.showMessageDialog(this, "Update successfully", "INFORMATION MESSAGE", JOptionPane.INFORMATION_MESSAGE);
+           }else{
+               JOptionPane.showMessageDialog(this, "Plase specify another id.","ERROR",JOptionPane.ERROR_MESSAGE);
+           }
+      }else{
+          JOptionPane.showMessageDialog(this, "Plase select single row for update.","ERROR",JOptionPane.ERROR_MESSAGE);    
+       }
+           
+    }//GEN-LAST:event_updateButtonActionPerformed
+
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -380,7 +424,7 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
  }
   private void deleteInTable(){
        // model.removeRow(model.);
-      //   model.insertRow(model.getRowCount(),new Object[]{idTextField.getText(),typeOfMainanceComboBox.getSelectedItem(),typeComboBox.getSelectedItem(), areaTextField.getText(), weekComboBox.getSelectedItem(), estimatedTimeSpinner.getValue(), selectedRadioButton()});
+      //  model.insertRow(model.getRowCount(),new Object[]{idTextField.getText(),typeOfMainanceComboBox.getSelectedItem(),typeComboBox.getSelectedItem(), areaTextField.getText(), weekComboBox.getSelectedItem(), estimatedTimeSpinner.getValue(), selectedRadioButton()});
  }
  
   
@@ -391,7 +435,46 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
     return "No";
    return "";
 }
-
+ private void resetFields(){
+   idTextField.setText("");
+   typeOfMainanceComboBox.setSelectedIndex(0); 
+   typeComboBox.setSelectedIndex(0);
+   areaTextField.setText("");
+   weekComboBox.setSelectedIndex(0);
+   yesRadioButton.setSelected(false);
+   noRadioButton.setSelected(false);
+   estimatedTimeSpinner.setValue(1);
+ }
+ 
+ private boolean checkId(){
+     //ritorna true se l'id non è già presente nella tabella, false altrimenti.
+     for(int i=0; i<model.getRowCount(); i++){
+         //in getValue i è la riga, 0 è la colonna
+         if(idTextField.getText().equals(model.getValueAt(i, 0).toString())){
+             return false;
+        }
+     }
+     return true;
+ }
+ private void visualizeFields(){
+    String id=model.getValueAt(maintenanceTable.getSelectedRow(), 0).toString();
+    String typologyOfMaintenance=model.getValueAt(maintenanceTable.getSelectedRow(), 1).toString();
+    String type=model.getValueAt(maintenanceTable.getSelectedRow(), 2).toString();
+    String area=model.getValueAt(maintenanceTable.getSelectedRow(), 3).toString();
+    String week=model.getValueAt(maintenanceTable.getSelectedRow(), 4).toString();
+    Object estimatedTime=model.getValueAt(maintenanceTable.getSelectedRow(), 5);
+    String interruptibleActivity=model.getValueAt(maintenanceTable.getSelectedRow(), 6).toString();
+    idTextField.setText(id);
+    typeOfMainanceComboBox.setSelectedItem(typologyOfMaintenance);
+    typeComboBox.setSelectedItem(type);
+    areaTextField.setText(area);
+    weekComboBox.setSelectedItem(week);
+    estimatedTimeSpinner.setValue( estimatedTime);
+    if(interruptibleActivity.equals("Yes"))
+        yesRadioButton.setSelected(true);
+    else
+        noRadioButton.setSelected(true);
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JTextField areaTextField;
