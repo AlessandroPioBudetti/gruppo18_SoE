@@ -17,15 +17,18 @@ import javax.swing.table.DefaultTableModel;
 public class GuiMaintenanceManagement extends javax.swing.JFrame {
     private Statement st;
     private DefaultTableModel model;
+    private TableMaintenanceActivities maintenanceActivities;
     
     public GuiMaintenanceManagement(Statement st) {
         initComponents();
         this.st=st;
+        maintenanceActivities= new TableMaintenanceActivities(st);
         model=(DefaultTableModel) maintenanceTable.getModel();
+        visualizeInTable();
         visualizeTypeInCombo();
         visualizeWeekInCombo();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -325,11 +328,20 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_noRadioButtonActionPerformed
 
     private void addButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addButtonMouseClicked
-        if(idTextField.getText().equals("") || typeOfMainanceComboBox.getSelectedIndex()==0 || typeComboBox.getSelectedIndex()==0 || areaTextField.getText().equals("")|| weekComboBox.getSelectedIndex()==0 || selectedRadioButton().equals(""))
+        String id=idTextField.getText();
+        String typeOfMainance=typeOfMainanceComboBox.getSelectedItem().toString(); 
+        String type= typeComboBox.getSelectedItem().toString();
+        String area=areaTextField.getText();
+        String week=weekComboBox.getSelectedItem().toString();
+        String interruptibleActivity=selectedRadioButton();
+        Object estimatedTime= estimatedTimeSpinner.getValue();
+           
+        if(id.equals("") || typeOfMainanceComboBox.getSelectedIndex()==0 || typeComboBox.getSelectedIndex()==0 || area.equals("")|| weekComboBox.getSelectedIndex()==0 || interruptibleActivity.equals(""))
             JOptionPane.showMessageDialog(this, "Plase enter all data.","ERROR",JOptionPane.ERROR_MESSAGE); 
         else{
         if(checkId()){
-        visualizeInTable();
+        model.insertRow(model.getRowCount(),new Object[]{id, typeOfMainance, type,area, week, estimatedTime, interruptibleActivity});
+        maintenanceActivities.insert(id, typeOfMainance, type, area, week, estimatedTime, interruptibleActivity);
         resetFields();
         }else{
            JOptionPane.showMessageDialog(this, "Plase specify another id.","ERROR",JOptionPane.ERROR_MESSAGE);
@@ -338,7 +350,10 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_addButtonMouseClicked
 
     private void removeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeButtonMouseClicked
-        deleteInTable();
+       String id=model.getValueAt(maintenanceTable.getSelectedRow(), 0).toString();
+       maintenanceActivities.delete(id);
+       model.removeRow(maintenanceTable.getSelectedRow());
+       resetFields();
     }//GEN-LAST:event_removeButtonMouseClicked
 
     private void maintenanceTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maintenanceTableMouseClicked
@@ -347,15 +362,17 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_maintenanceTableMouseClicked
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
+     String oldId=model.getValueAt(maintenanceTable.getSelectedRow(), 0).toString();
      String id=idTextField.getText();
      String typologyOfMaintenance= typeOfMainanceComboBox.getSelectedItem().toString();
      String type=typeComboBox.getSelectedItem().toString();
      String area=areaTextField.getText();
      String week= weekComboBox.getSelectedItem().toString(); 
-     String estimatedTime=estimatedTimeSpinner.getValue().toString(); 
+     Object estimatedTime=estimatedTimeSpinner.getValue(); 
      String interruptibleActivity=selectedRadioButton();
      if(maintenanceTable.getSelectedRowCount()==1 ){
            if(checkId() ||  model.getValueAt(maintenanceTable.getSelectedRow(), 0).toString().equals(idTextField.getText())){
+               maintenanceActivities.update(oldId, id, typologyOfMaintenance, type, area, week, estimatedTime, interruptibleActivity);
                model.setValueAt(id, maintenanceTable.getSelectedRow(),0);
                model.setValueAt(typologyOfMaintenance, maintenanceTable.getSelectedRow(),1);
                model.setValueAt(type, maintenanceTable.getSelectedRow(),2);
@@ -370,7 +387,6 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
       }else{
           JOptionPane.showMessageDialog(this, "Plase select single row for update.","ERROR",JOptionPane.ERROR_MESSAGE);    
        }
-           
     }//GEN-LAST:event_updateButtonActionPerformed
 
 
@@ -420,13 +436,12 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
    }
 }
   private void visualizeInTable(){
-      model.insertRow(model.getRowCount(),new Object[]{idTextField.getText(),typeOfMainanceComboBox.getSelectedItem(),typeComboBox.getSelectedItem(), areaTextField.getText(), weekComboBox.getSelectedItem(), estimatedTimeSpinner.getValue(), selectedRadioButton()});
+      ArrayList <ArrayList> items=new ArrayList();
+      items=maintenanceActivities.visualize();
+      for (ArrayList k : items){
+        model.insertRow(model.getRowCount(),new Object[]{k.get(0).toString(),k.get(1).toString(),k.get(2).toString(), k.get(3).toString(), k.get(4).toString(), k.get(5), k.get(6).toString()});
+      }
  }
-  private void deleteInTable(){
-       // model.removeRow(model.);
-      //  model.insertRow(model.getRowCount(),new Object[]{idTextField.getText(),typeOfMainanceComboBox.getSelectedItem(),typeComboBox.getSelectedItem(), areaTextField.getText(), weekComboBox.getSelectedItem(), estimatedTimeSpinner.getValue(), selectedRadioButton()});
- }
- 
   
  private String selectedRadioButton(){
   if(yesRadioButton.isSelected())
@@ -469,7 +484,7 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
     typeComboBox.setSelectedItem(type);
     areaTextField.setText(area);
     weekComboBox.setSelectedItem(week);
-    estimatedTimeSpinner.setValue( estimatedTime);
+    estimatedTimeSpinner.setValue(estimatedTime);
     if(interruptibleActivity.equals("Yes"))
         yesRadioButton.setSelected(true);
     else
