@@ -23,7 +23,7 @@ public class TableType {
         this.stm=stm;
     }
      
-    public void insert(String type){
+    public boolean insert(String type){
         StringBuilder temp= new StringBuilder();
         temp.append("insert into Typology(tipo)");
         temp.append("values(");
@@ -31,12 +31,14 @@ public class TableType {
         temp.append(")");
         try{
         stm.executeUpdate(temp.toString());
+        return true;
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
+            return false;
         }
     }
   
-    public void update(String type, String typeUpdate){
+    public boolean update(String type, String typeUpdate){
         StringBuilder temp= new StringBuilder();
         temp.append("update Typology set tipo=");
         temp.append("'").append(typeUpdate).append("'");
@@ -44,20 +46,24 @@ public class TableType {
         temp.append("'").append(type).append("'");
         try{
         stm.executeUpdate(temp.toString());
+        return true;
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
+            return false;
         }
     }
     
-    public void delete(String type){
+    public boolean delete(String type){
         StringBuilder temp= new StringBuilder();
         temp.append("delete from Typology ");
         temp.append("where tipo = ");
         temp.append("'").append(type).append("'");
         try{
         stm.executeUpdate(temp.toString());
+        return true;
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
+            return false;
         }
     }
     

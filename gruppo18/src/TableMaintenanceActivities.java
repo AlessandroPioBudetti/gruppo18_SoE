@@ -16,7 +16,7 @@ public class TableMaintenanceActivities {
         this.stm = stm;
     }
       
-    public void insert(String id, String typeOfMainance, String type, String area, String week, Object estimatedTime, String interruptibleActivity){
+    public boolean insert(String id, String typeOfMainance, String type, String area, String week, Object estimatedTime, String interruptibleActivity){
         StringBuilder temp= new StringBuilder();
         temp.append("insert into manutenzione(identificativo, tipologia, sito, settimana, tipo_manutenzione, tempo_stimato, interrompibile)");
         temp.append("values(");
@@ -30,12 +30,14 @@ public class TableMaintenanceActivities {
         temp.append(")");
         try{
         stm.executeUpdate(temp.toString());
+        return true;
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
+            return false;
         }
     }
   
-    public void update(String oldId, String id, String typeOfMainance, String type, String area, String week, Object estimatedTime, String interruptibleActivity){
+    public boolean update(String oldId, String id, String typeOfMainance, String type, String area, String week, Object estimatedTime, String interruptibleActivity){
         StringBuilder temp= new StringBuilder();
         temp.append("update manutenzione set identificativo=");
         temp.append("'").append(id).append("', tipologia=");
@@ -49,20 +51,24 @@ public class TableMaintenanceActivities {
         temp.append("'").append(oldId).append("'");
         try{
         stm.executeUpdate(temp.toString());
+        return true;
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
+            return false;
         }
     }
     
-    public void delete(String id){
+    public boolean delete(String id){
         StringBuilder temp= new StringBuilder();
         temp.append("delete from manutenzione ");
         temp.append("where identificativo = ");
         temp.append("'").append(id).append("'");
         try{
         stm.executeUpdate(temp.toString());
+        return true;
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
+            return false;
         }
     }
     
