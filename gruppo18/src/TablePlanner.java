@@ -72,7 +72,7 @@ public class TablePlanner { // Questa classe gestisce gli inserimenti di usernam
                 i++;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(TablePlanner.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
         return planners;
     }
@@ -83,11 +83,13 @@ public class TablePlanner { // Questa classe gestisce gli inserimenti di usernam
             ResultSet rs = st.executeQuery(query);
             rs.next();
             String pass = rs.getString("pass");
+            rs.close();
             return pass;
         } catch (SQLException ex) {
-            Logger.getLogger(TableMantainer.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Errore GetPasseord:\n"+ex.getMessage());
+            return null;
         }
-        return null;
+       
     }
 
     public boolean update(String username, String pass, String olduser) {
@@ -98,7 +100,7 @@ public class TablePlanner { // Questa classe gestisce gli inserimenti di usernam
             st.executeUpdate(query2);
             return true;
         } catch (SQLException ex) {
-            System.out.println("errore update planner:\n" + ex.getMessage());
+            System.out.println("Errore Update planner:\n" + ex.getMessage());
             return false;
         }
 
