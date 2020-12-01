@@ -72,7 +72,7 @@ public class TableMantainer {// Questa classe gestisce gli inserimenti di userna
                 i++;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(TablePlanner.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
         return maintainers;
     }
@@ -85,9 +85,10 @@ public class TableMantainer {// Questa classe gestisce gli inserimenti di userna
             String pass = rs.getString("pass");
             return pass;
         } catch (SQLException ex) {
-            Logger.getLogger(TableMantainer.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
+            return null;
         }
-        return null;
+        
     }
     
     public boolean update(String username, String pass, String olduser){
@@ -98,7 +99,7 @@ public class TableMantainer {// Questa classe gestisce gli inserimenti di userna
             st.executeUpdate(query2);
             return true;
         } catch (SQLException ex) {
-            Logger.getLogger(TablePlanner.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
             return false;
         }
         
