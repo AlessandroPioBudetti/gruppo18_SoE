@@ -20,27 +20,36 @@ import static org.junit.Assert.*;
 public class TableAdminTest {
     Statement st;
     TableAdministrator admin;
-    public TableAdminTest() {
-        Dbms db = new Dbms();
+    Dbms db;
+    
+    @Before
+    public void iniz(){
+        db = new Dbms();
         st = db.connectToDatabase();
         admin = new TableAdministrator(st);
-        
     }
    
     
     @Test
+    //Il test passa correttamente se il nostro Admin è presente.
     public void testAdminPresente(){
         char[] password = {'0','9','8','7','6'};
         assertTrue(admin.selectAdm("asdfgh",password));
         }
     @Test
+    //Il test passa correttamente se il nostro Admin non è presente.
     public void testAdminNonPresente(){
         char[] password = {'0','9','8','7','6'};  
         assertFalse(admin.selectAdm("asdfg",password));
         }
     
     @After
-    public void chiudiDb() throws SQLException{
-        st.close();
+    public void chiudiDb(){
+        try{
+            st.close();
+            db.getDb().close();
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }  
     }
 }
