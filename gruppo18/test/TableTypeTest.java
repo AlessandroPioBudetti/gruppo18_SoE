@@ -28,25 +28,28 @@ public class TableTypeTest {
     @Test
     public void testInsert() {
        assertTrue(t.insert("TYPE"));
-       assertTrue(t.insert("TYPE2"));
     }
 
     @Test
     public void testInsertDuplicate() {
-        t.insert("TYPE3");
-        assertFalse(t.insert("TYPE3"));
+        t.insert("TYPE");
+        assertFalse(t.insert("TYPE"));
     }
     
     @Test
     public void testUpdateNoDuplicate() {
-       assertTrue(t.update("TYPE3","TYPE4"));
+       t.insert("TYPE1");
+       t.insert("TYPE2");
+       assertTrue(t.update("TYPE1","TYPE"));
     }
-   /* 
+   
     @Test
     public void testUpdateDuplicate() {
-       assertFalse(t.update("TYPE2","TYPE"));
+       t.insert("TYPE1");
+       t.insert("TYPE2");
+       assertFalse(t.update("TYPE2","TYPE1"));
     }
-    */
+    
     @Test
     public void testUpdateUnexisting(){
         assertTrue(t.update("TYPE5", "TYPE6"));
@@ -54,7 +57,8 @@ public class TableTypeTest {
     
     @Test
     public void testDelete(){
-        assertTrue(t.delete("TYPE3"));
+        t.insert("TYPE");
+        assertTrue(t.delete("TYPE"));
     }
     
     @Test

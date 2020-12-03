@@ -28,25 +28,27 @@ public class TableMaintenanceActivitiesTest {
     @Test
     public void testInsertNew(){
        assertTrue(t.insert("ID1", "Planned activity", "IDRAULICA", "Nord-Est", "2", "30", "No"));
-       assertTrue(t.insert("ID2", "Planned activity", "IDRAULICA", "Nord-Est", "2", "30", "No"));
     }
 
     @Test
     public void testInsertDuplicate() {
-        t.insert("ID3", "Planned activity", "IDRAULICA", "Nord-Est", "2", "30", "No");
-        assertFalse(t.insert("ID3", "Planned activity", "IDRAULICA", "Nord-Est", "2", "30", "No"));
+        t.insert("ID1", "Planned activity", "IDRAULICA", "Nord-Est", "2", "30", "No");
+        assertFalse(t.insert("ID1", "Planned activity", "IDRAULICA", "Nord-Est", "2", "30", "No"));
     }
 
     @Test
     public void testUpdateNoDuplicate() {
-       assertTrue(t.update("ID1","ID4", "Planned activity", "IDRAULICA", "Nord-Est", "2", "30", "No"));
+        t.insert("ID1", "Planned activity", "IDRAULICA", "Nord-Est", "2", "30", "No");
+        assertTrue(t.update("ID1","ID4", "Planned activity", "IDRAULICA", "Nord-Est", "2", "30", "No"));
     }
-  /*  
+    
     @Test
     public void testUpdateDuplicate() {
-       assertFalse(t.update("ID3","ID2", "Planned activity", "IDRAULICA", "Nord-Est", "2", "30", "No"));
+       t.insert("ID2", "Planned activity", "IDRAULICA", "Nord-Est", "2", "30", "No");
+       t.insert("ID3", "Planned activity", "IDRAULICA", "Nord-Est", "2", "30", "No");
+       assertFalse(t.update("ID2","ID3", "Planned activity", "IDRAULICA", "Nord-Est", "2", "30", "No"));
     }
-    */
+    
     @Test
     public void testUpdateUnexisting(){
         assertTrue(t.update("ID5","ID2", "Planned activity", "IDRAULICA", "Nord-Est", "2", "30", "No"));
@@ -54,6 +56,7 @@ public class TableMaintenanceActivitiesTest {
     
     @Test
     public void testDelete(){
+        t.insert("ID3", "Planned activity", "IDRAULICA", "Nord-Est", "2", "30", "No");
         assertTrue(t.delete("ID3"));
     }
     

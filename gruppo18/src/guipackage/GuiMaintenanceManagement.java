@@ -350,10 +350,14 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_addButtonMouseClicked
 
     private void removeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeButtonMouseClicked
+      try{
        String id=model.getValueAt(maintenanceTable.getSelectedRow(), 0).toString();
        maintenanceActivities.delete(id);
        model.removeRow(maintenanceTable.getSelectedRow());
        resetFields();
+       }catch(java.lang.ArrayIndexOutOfBoundsException ex){
+        JOptionPane.showMessageDialog(this, "Plase select one row.","ERROR",JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_removeButtonMouseClicked
 
     private void maintenanceTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maintenanceTableMouseClicked
@@ -362,6 +366,7 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_maintenanceTableMouseClicked
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
+     try{
      String oldId=model.getValueAt(maintenanceTable.getSelectedRow(), 0).toString();
      String id=idTextField.getText();
      String typologyOfMaintenance= typeOfMainanceComboBox.getSelectedItem().toString();
@@ -387,6 +392,9 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
       }else{
           JOptionPane.showMessageDialog(this, "Plase select single row for update.","ERROR",JOptionPane.ERROR_MESSAGE);    
        }
+     }catch(java.lang.ArrayIndexOutOfBoundsException ex){
+        JOptionPane.showMessageDialog(this, "Plase select one row.","ERROR",JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_updateButtonActionPerformed
 
 
