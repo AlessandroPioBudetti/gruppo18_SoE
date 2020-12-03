@@ -42,7 +42,7 @@ java.awt.EventQueue.invokeLater(new Runnable() {
 
  java.awt.EventQueue.invokeLater(new Runnable() {
      public void run() {
-        new GuiMaintenanceManagement(st).setVisible(true);
+        new GuiLogin(st).setVisible(true);
       }
      });
  }
