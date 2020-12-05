@@ -111,7 +111,7 @@ public class TableMantainer {// Questa classe gestisce gli inserimenti di userna
             st.executeUpdate(query);
             return true;
         } catch (SQLException ex) {
-            System.out.println("errore delete planner:\n"+ex.getMessage());
+            System.out.println("errore delete maintainer:\n"+ex.getMessage());
             return false;
         }
     }

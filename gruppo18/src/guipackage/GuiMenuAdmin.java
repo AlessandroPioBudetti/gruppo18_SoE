@@ -1,4 +1,5 @@
 
+import guipackage.GuiCompetencies;
 import java.sql.Statement;
 
 /*
@@ -6,13 +7,14 @@ import java.sql.Statement;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author ALEX
  */
 public class GuiMenuAdmin extends javax.swing.JFrame {
+
     Statement st;
+
     /**
      * Creates new form GuiMenuAdmin
      */
@@ -49,8 +51,6 @@ public class GuiMenuAdmin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menù amministratore");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\ALEX\\Desktop\\hr-manager-thumb.png")); // NOI18N
-
         jMenu1.setText("File");
 
         jMenuItem1.setText("Exit");
@@ -85,6 +85,11 @@ public class GuiMenuAdmin extends javax.swing.JFrame {
         jMenu2.add(jMenuItem5);
 
         jMenuItem6.setText("Gestione competenze");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem6);
 
         jMenuItem7.setText("Gestione siti");
@@ -154,6 +159,10 @@ public class GuiMenuAdmin extends javax.swing.JFrame {
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         new GuiTypeManagment(st).setVisible(true);
     }//GEN-LAST:event_jMenuItem11ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        new GuiCompetencies(st).setVisible(true);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
      * @param args the command line arguments

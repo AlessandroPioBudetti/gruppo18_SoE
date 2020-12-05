@@ -77,8 +77,8 @@ public class TablePlannerTest {
     }
     
     @Test 
-    public void testUpdateWithDuplicatePassword(){
-        assertFalse(tp.update("giovanni5", "bbbb", "giovanni"));
+    public void testUpdateWithDuplicateUser(){
+        assertFalse(tp.update("giovanni2", "oooo", "giovanni"));
     }
     
     @Test

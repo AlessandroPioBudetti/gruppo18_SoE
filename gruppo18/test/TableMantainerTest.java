@@ -77,8 +77,8 @@ public class TableMantainerTest {
     }
     
     @Test 
-    public void testUpdateWithDuplicatePassword(){
-        assertFalse(tm.update("giovanni5", "bbbb", "giovanni"));
+    public void testUpdateWithDuplicateUser(){
+        assertFalse(tm.update("giovanni2", "oooo", "giovanni"));
     }
     
     @Test

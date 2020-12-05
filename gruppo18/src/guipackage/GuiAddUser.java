@@ -58,13 +58,13 @@ public class GuiAddUser extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabelInserireUtente.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabelInserireUtente.setText("Gestione utenti");
+        jLabelInserireUtente.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabelInserireUtente.setText("Users management");
 
-        jLabelUserName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabelUserName.setText("User Name : ");
+        jLabelUserName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelUserName.setText("Username : ");
 
-        jLabelPassword.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabelPassword.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelPassword.setText("Password : ");
 
         jTextFieldPassword.addActionListener(new java.awt.event.ActionListener() {
@@ -86,6 +86,7 @@ public class GuiAddUser extends javax.swing.JFrame {
             }
         });
 
+        jComboBoxUtenti.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jComboBoxUtenti.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Planner", "Mantainer" }));
         jComboBoxUtenti.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -98,9 +99,10 @@ public class GuiAddUser extends javax.swing.JFrame {
             }
         });
 
-        jLabelScegli.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabelScegli.setText("Scegli il tipo di utente:");
+        jLabelScegli.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelScegli.setText("User Type :");
 
+        jListUtenti.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jListUtenti.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jListUtentiMouseClicked(evt);
@@ -122,7 +124,7 @@ public class GuiAddUser extends javax.swing.JFrame {
             }
         });
 
-        jButtonMenu.setText("Menu");
+        jButtonMenu.setText("MENU");
         jButtonMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonMenuActionPerformed(evt);
@@ -136,41 +138,44 @@ public class GuiAddUser extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(78, 78, 78)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonMenu)
                     .addComponent(jLabelUserName)
                     .addComponent(jLabelPassword)
-                    .addComponent(jLabelScegli))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jButtonMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelScegli)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(86, 86, 86)
-                        .addComponent(jLabelInserireUtente, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(84, 84, 84)
+                        .addComponent(jLabelInserireUtente, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldUserName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
-                            .addComponent(jTextFieldPassword, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jComboBoxUtenti, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39))))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(182, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(89, 89, 89)
-                .addComponent(jButtonUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(100, 100, 100)
-                .addComponent(jButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(191, 191, 191))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(80, 80, 80)
+                                .addComponent(jButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(128, 128, 128))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextFieldUserName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                                    .addComponent(jTextFieldPassword, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jComboBoxUtenti, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(39, 39, 39))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelInserireUtente, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addComponent(jLabelInserireUtente, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(70, 70, 70)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -188,11 +193,9 @@ public class GuiAddUser extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButtonUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(59, Short.MAX_VALUE))
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         pack();
@@ -201,7 +204,7 @@ public class GuiAddUser extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         if (jTextFieldUserName.getText().isEmpty() || jTextFieldPassword.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Riempire tutti i campi!");
+            JOptionPane.showMessageDialog(null, "Insert all fields.");
 
         } else {
             String userName = jTextFieldUserName.getText().trim();      // il metodo trim() rimuove spazi bianchi
@@ -256,25 +259,26 @@ public class GuiAddUser extends javax.swing.JFrame {
         boolean result;
         String user = jTextFieldUserName.getText();
         String pass = jTextFieldPassword.getText();
+        if (user.isEmpty() || pass.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Select the user to delete from the list.");
+            return;
+        }
         if (user.compareToIgnoreCase(userSelected) != 0 || pass.compareToIgnoreCase(passSelected) != 0) {  // se non sono state fatte modifiche non eseguo nessun aggiornamento
-            JOptionPane.showMessageDialog(null, "Non modificare i campi durante la cancellazione.");
+            JOptionPane.showMessageDialog(null, "Don't modify the fields before the deletion.");
             jTextFieldUserName.setText("");
             jTextFieldPassword.setText("");
             return;
         }
-        if (user.isEmpty() || pass.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Selezionare l'utente da eliminare.");
-            return;
-        }
+        
         if (jComboBoxUtenti.getSelectedItem().toString().equalsIgnoreCase("planner")) {
             result = planner.delete(user);
         } else {
             result = mantainer.delete(user);
         }
         if (result) {
-            JOptionPane.showMessageDialog(null, "Cancellazione avvenuta.");
+            JOptionPane.showMessageDialog(null, "Successful deletion.");
         } else {
-            JOptionPane.showMessageDialog(null, "Utente non esistente.");
+            JOptionPane.showMessageDialog(null, "Error: user inexistent.");
         }
         jTextFieldUserName.setText("");
         jTextFieldPassword.setText("");
@@ -286,13 +290,13 @@ public class GuiAddUser extends javax.swing.JFrame {
         String pass = jTextFieldPassword.getText();
         boolean result;
         if (user.equals(userSelected) && pass.equals(passSelected)) {  // se non sono state fatte modifiche non eseguo nessun aggiornamento
-            JOptionPane.showMessageDialog(null, "Nessun aggiornamento effettuato.");
+            JOptionPane.showMessageDialog(null, "No update maded.");
             jTextFieldUserName.setText("");
             jTextFieldPassword.setText("");
             return;
         }
         if (user.isEmpty() || pass.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Riempire tutti i campi.");
+            JOptionPane.showMessageDialog(null, "Insert all fields.");
             jTextFieldUserName.setText("");
             jTextFieldPassword.setText("");
             return;
@@ -303,9 +307,9 @@ public class GuiAddUser extends javax.swing.JFrame {
             result = mantainer.update(user, pass, userSelected);                         //modifico i suoi dati con quelli inseriti nelle text area user e pass
         }
         if (result) {                                                                    // se il risultato dell'aggiornamento è true
-            JOptionPane.showMessageDialog(null, "Aggiornamento avvenuto.");             // allora l'agg è avvenuto con successo 
+            JOptionPane.showMessageDialog(null, "Successful update.");             // allora l'agg è avvenuto con successo 
         } else {
-            JOptionPane.showMessageDialog(null, "Aggiornamento non avvenuto: password duplicata.");
+            JOptionPane.showMessageDialog(null, "No update maded: user already exists.");
         }
         jTextFieldUserName.setText("");
         jTextFieldPassword.setText("");
@@ -319,15 +323,15 @@ public class GuiAddUser extends javax.swing.JFrame {
     private void inserimento(String username, String password, String utente) {
         if (utente.equalsIgnoreCase("planner")) {
             if (planner.insert(username, password) == true) {
-                JOptionPane.showMessageDialog(null, "Registrazione avvenuta con successo:\nUsername: " + username + "\nPassword: " + password);
+                JOptionPane.showMessageDialog(null, "Successful registration:\nUsername: " + username + "\nPassword: " + password);
             } else {
-                JOptionPane.showMessageDialog(null, "Registrazione non avvenuta: password duplicata.");
+                JOptionPane.showMessageDialog(null, "Error: username already existing.");
             }
         } else {
             if (mantainer.insert(username, password) == true) {
-                JOptionPane.showMessageDialog(null, "Registrazione avvenuta con successo:\nUsername: " + username + "\nPassword: " + password);
+                JOptionPane.showMessageDialog(null, "Successful registration:\nUsername: " + username + "\nPassword: " + password);
             } else {
-                JOptionPane.showMessageDialog(null, "Registrazione non avvenuta: password duplicata.");
+                JOptionPane.showMessageDialog(null, "Error: user already exists.");
             }
         }
     }
