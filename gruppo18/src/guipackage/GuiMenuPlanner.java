@@ -42,7 +42,7 @@ public class GuiMenuPlanner extends javax.swing.JFrame {
         setTitle("Menù Planner");
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\ALEX\\Desktop\\management-systems-thumb.png")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagepackage/management-systems-thumb.png"))); // NOI18N
 
         jMenu1.setText("File");
 

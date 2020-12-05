@@ -40,7 +40,7 @@ public class GuiMenuMaint extends javax.swing.JFrame {
         setTitle("Menù maintainer");
         setAlwaysOnTop(true);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\ALEX\\Desktop\\technician-thumb.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagepackage/technician-thumb.png"))); // NOI18N
 
         jMenu1.setText("File");
 
