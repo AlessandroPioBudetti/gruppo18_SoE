@@ -48,22 +48,22 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="0" pref="15" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <Component id="siteComboBox" min="-2" pref="151" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="siteTextField" min="-2" pref="151" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" attributes="0">
-                          <Component id="AddButton" min="-2" pref="151" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="RemoveButton" min="-2" pref="151" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="UpdateButton" min="-2" pref="151" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="AddSiteButton" min="-2" pref="151" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="removeSiteButton" min="-2" pref="151" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="updateSiteButton" min="-2" pref="151" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -75,13 +75,13 @@
                       <Component id="siteComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="siteTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="AddButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="RemoveButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="UpdateButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="AddSiteButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="removeSiteButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="updateSiteButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="33" max="32767" attributes="0"/>
+                  <EmptySpace pref="30" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -104,28 +104,28 @@
         </Component>
         <Component class="javax.swing.JTextField" name="siteTextField">
         </Component>
-        <Component class="javax.swing.JToggleButton" name="AddButton">
+        <Component class="javax.swing.JButton" name="AddSiteButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Add"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="AddButtonMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="AddSiteButtonMouseClicked"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JToggleButton" name="RemoveButton">
+        <Component class="javax.swing.JButton" name="removeSiteButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Remove"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="RemoveButtonMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="removeSiteButtonMouseClicked"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JToggleButton" name="UpdateButton">
+        <Component class="javax.swing.JButton" name="updateSiteButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Update"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="UpdateButtonMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="updateSiteButtonMouseClicked"/>
           </Events>
         </Component>
       </SubComponents>

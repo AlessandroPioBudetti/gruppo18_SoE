@@ -35,9 +35,9 @@ public class GuiSiteManagment extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         siteComboBox = new javax.swing.JComboBox<>();
         siteTextField = new javax.swing.JTextField();
-        AddButton = new javax.swing.JToggleButton();
-        RemoveButton = new javax.swing.JToggleButton();
-        UpdateButton = new javax.swing.JToggleButton();
+        AddSiteButton = new javax.swing.JButton();
+        removeSiteButton = new javax.swing.JButton();
+        updateSiteButton = new javax.swing.JButton();
 
         setTitle("SITE MANAGEMENT");
         setResizable(false);
@@ -52,24 +52,24 @@ public class GuiSiteManagment extends javax.swing.JFrame {
             }
         });
 
-        AddButton.setText("Add");
-        AddButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        AddSiteButton.setText("Add");
+        AddSiteButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                AddButtonMouseClicked(evt);
+                AddSiteButtonMouseClicked(evt);
             }
         });
 
-        RemoveButton.setText("Remove");
-        RemoveButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        removeSiteButton.setText("Remove");
+        removeSiteButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                RemoveButtonMouseClicked(evt);
+                removeSiteButtonMouseClicked(evt);
             }
         });
 
-        UpdateButton.setText("Update");
-        UpdateButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        updateSiteButton.setText("Update");
+        updateSiteButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                UpdateButtonMouseClicked(evt);
+                updateSiteButtonMouseClicked(evt);
             }
         });
 
@@ -78,19 +78,19 @@ public class GuiSiteManagment extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 15, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(siteComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(siteTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(AddButton, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(RemoveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(UpdateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(22, 22, 22))
+                        .addComponent(AddSiteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(removeSiteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(updateSiteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(11, 11, 11))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,12 +99,12 @@ public class GuiSiteManagment extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(siteComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(siteTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AddButton)
-                    .addComponent(RemoveButton)
-                    .addComponent(UpdateButton))
-                .addContainerGap(33, Short.MAX_VALUE))
+                    .addComponent(AddSiteButton)
+                    .addComponent(removeSiteButton)
+                    .addComponent(updateSiteButton))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -121,10 +121,19 @@ public class GuiSiteManagment extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void AddButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddButtonMouseClicked
-        int on=0;
+    private void siteComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siteComboBoxActionPerformed
+       String selectedValue=siteComboBox.getSelectedItem().toString();
+        if(siteComboBox.getSelectedIndex()==0){
+            siteTextField.setText("Invalid selection");
+        }else{
+            siteTextField.setText(selectedValue);
+        }
+    }//GEN-LAST:event_siteComboBoxActionPerformed
+
+    private void AddSiteButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddSiteButtonMouseClicked
+       int on=0;
         String newSite=siteTextField.getText().toUpperCase();
-        if(siteTextField.getText().equals("") || siteComboBox.getSelectedIndex()==0 ){
+        if(siteTextField.getText().equals("")){
            siteTextField.setText("Site not valid"); 
            on=1;
         }
@@ -138,16 +147,16 @@ public class GuiSiteManagment extends javax.swing.JFrame {
             addInCombo(newSite);
             siteTextField.setText("");
         }
-    }//GEN-LAST:event_AddButtonMouseClicked
+    }//GEN-LAST:event_AddSiteButtonMouseClicked
 
-    private void RemoveButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RemoveButtonMouseClicked
+    private void removeSiteButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeSiteButtonMouseClicked
         String deleteSite=siteTextField.getText().toUpperCase();
         deleteInCombo(deleteSite);
-        siteTextField.setText("");
-    }//GEN-LAST:event_RemoveButtonMouseClicked
+        siteTextField.setText("");  
+    }//GEN-LAST:event_removeSiteButtonMouseClicked
 
-    private void UpdateButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UpdateButtonMouseClicked
-       int on=0;
+    private void updateSiteButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateSiteButtonMouseClicked
+        int on=0;
         String updateSite=siteTextField.getText().toUpperCase();
         if(siteComboBox.getSelectedIndex()==0){
            siteTextField.setText("Site not valid"); 
@@ -164,16 +173,7 @@ public class GuiSiteManagment extends javax.swing.JFrame {
             siteTextField.setText("");
             
         }
-    }//GEN-LAST:event_UpdateButtonMouseClicked
-
-    private void siteComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siteComboBoxActionPerformed
-       String selectedValue=siteComboBox.getSelectedItem().toString();
-        if(siteComboBox.getSelectedIndex()==0){
-            siteTextField.setText("Invalid selection");
-        }else{
-            siteTextField.setText(selectedValue);
-        }
-    }//GEN-LAST:event_siteComboBoxActionPerformed
+    }//GEN-LAST:event_updateSiteButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -230,11 +230,11 @@ public class GuiSiteManagment extends javax.swing.JFrame {
       siteComboBox.removeItem(oldItem);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton AddButton;
-    private javax.swing.JToggleButton RemoveButton;
-    private javax.swing.JToggleButton UpdateButton;
+    private javax.swing.JButton AddSiteButton;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton removeSiteButton;
     private javax.swing.JComboBox<String> siteComboBox;
     private javax.swing.JTextField siteTextField;
+    private javax.swing.JButton updateSiteButton;
     // End of variables declaration//GEN-END:variables
 }
