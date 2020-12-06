@@ -37,17 +37,17 @@ public class TableMantainer {// Questa classe gestisce gli inserimenti di userna
     /*Questo metodo controlla, tramite una query, se nel nostro database ci sono corrispondenze delle credenziali data la password*/
     public boolean selectMaint(String username, char[] password) {
         String psw = String.valueOf(password);
-        String user = "";
-        String sql = "select username from Mantainer where pass = '" + psw + "'";
+        String password2 = "";
+        String sql = "select pass from Mantainer where username = '" + username + "'";
 
         try {
 
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
-                user = rs.getString("username");
+                password2 = rs.getString("pass");
             }
 
-            if (user.equals(username)) {
+            if (psw.equals(password2)) {
                 return true;
             } else {
 

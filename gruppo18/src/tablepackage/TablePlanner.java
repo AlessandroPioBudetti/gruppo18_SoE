@@ -38,16 +38,16 @@ public class TablePlanner { // Questa classe gestisce gli inserimenti di usernam
     public boolean selectPl(String username, char[] password) {
         String psw = String.valueOf(password);
 
-        String user = "";
-        String sql = "select username from Planner where pass = '" + psw + "'";
+        String password2 = "";
+        String sql = "select pass from Planner where username = '" + username + "'";
 
         try {
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
-                user = rs.getString("username");
+                password2 = rs.getString("pass");
             }
 
-            if (user.equals(username)) {
+            if (psw.equals(password2)) {
                 return true;
             } else {
 

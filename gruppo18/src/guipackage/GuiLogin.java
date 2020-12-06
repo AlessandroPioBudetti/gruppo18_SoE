@@ -116,7 +116,7 @@ public class GuiLogin extends javax.swing.JFrame {
         
         char[] password = jPasswordField1.getPassword();
         if (jTextFieldUN.getText().isEmpty() || password.length==0){
-            JOptionPane.showMessageDialog(null, "Riempire tutti i campi.");
+            JOptionPane.showMessageDialog(null, "Fill in all fields.");
             
        } else {
            
@@ -154,12 +154,12 @@ public class GuiLogin extends javax.swing.JFrame {
                 boolean x;
                 x = amministratore.selectAdm(username, password);
                 if(x==true){
-                    JOptionPane.showMessageDialog(null, "Hai inserito correttamente id e password!","Login", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "You have entered your ID and Password correctly.","Login", JOptionPane.INFORMATION_MESSAGE);
                     new GuiMenuAdmin(st).setVisible(true);
-                    
+                    this.setVisible(false);
                     
                 }else{
-                    JOptionPane.showMessageDialog(null, "Attenzione: Sei sicuro di aver inserito correttamente le credenziali?","Login", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Warning: Are you sure you have entered your credentials correctly?","Login", JOptionPane.ERROR_MESSAGE);
                 }
         }      
 
@@ -171,10 +171,11 @@ public class GuiLogin extends javax.swing.JFrame {
                 boolean x;
                 x = planner.selectPl(username, password);
                 if(x==true){
-                    JOptionPane.showMessageDialog(null, "Hai inserito correttamente id e password!","Login", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "You have entered your ID and Password correctly.","Login", JOptionPane.INFORMATION_MESSAGE);
                     new GuiMenuPlanner(st).setVisible(true);
+                    this.setVisible(false);
                 }else{
-                    JOptionPane.showMessageDialog(null, "Attenzione: Sei sicuro di aver inserito correttamente le credenziali?","Login", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Warning: Are you sure you have entered your credentials correctly?","Login", JOptionPane.ERROR_MESSAGE);
                 }
         }      
 
@@ -185,10 +186,11 @@ public class GuiLogin extends javax.swing.JFrame {
                 boolean x;
                 x = mantainer.selectMaint(username, password);
                 if(x==true){
-                    JOptionPane.showMessageDialog(null, "Hai inserito correttamente id e password!","Login", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "You have entered your ID and Password correctly.","Login", JOptionPane.INFORMATION_MESSAGE);
                     new GuiMenuMaint(st).setVisible(true);
+                    this.setVisible(false);
                 }else{
-                    JOptionPane.showMessageDialog(null, "Attenzione: Sei sicuro di aver inserito correttamente le credenziali?","Login", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Warning: Are you sure you have entered your credentials correctly?","Login", JOptionPane.ERROR_MESSAGE);
                 }
         }      
 
