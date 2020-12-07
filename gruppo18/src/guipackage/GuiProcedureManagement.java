@@ -7,6 +7,7 @@ package guipackage;
 
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import tablepackage.TableProcedure;
 
 /**
  *
@@ -14,12 +15,11 @@ import javax.swing.JOptionPane;
  */
 public class GuiProcedureManagement extends javax.swing.JFrame {
     Statement st;
-    /**
-     * Creates new form GuiProcedureManagement
-     */
+    TableProcedure proced;
     public GuiProcedureManagement(Statement st) {
         initComponents();
         this.st = st;
+        proced = new TableProcedure(st);
     }
 
     /**
@@ -33,14 +33,16 @@ public class GuiProcedureManagement extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        jNameField = new javax.swing.JTextField();
+        jUrlField = new javax.swing.JTextField();
+        jInsert = new javax.swing.JButton();
+        jDelete = new javax.swing.JButton();
+        jUpdate = new javax.swing.JButton();
+        jVisualize = new javax.swing.JButton();
+        jMenu = new javax.swing.JButton();
+        jInfo = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jListProcedure = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Procedure Management");
@@ -49,44 +51,66 @@ public class GuiProcedureManagement extends javax.swing.JFrame {
 
         jLabel2.setText("URL");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jNameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                jNameFieldActionPerformed(evt);
             }
         });
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        jUrlField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                jUrlFieldActionPerformed(evt);
             }
         });
 
-        jButton1.setText("INSERT");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jInsert.setText("INSERT");
+        jInsert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jInsertActionPerformed(evt);
             }
         });
 
-        jButton2.setText("DELETE");
-
-        jButton3.setText("UPDATE");
-
-        jButton4.setText("VISUALIZE");
-
-        jButton5.setText("Menu");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jDelete.setText("DELETE");
+        jDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jDeleteActionPerformed(evt);
             }
         });
 
-        jButton6.setText("INFO");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        jUpdate.setText("UPDATE");
+        jUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                jUpdateActionPerformed(evt);
             }
         });
+
+        jVisualize.setText("VISUALIZE");
+        jVisualize.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jVisualizeActionPerformed(evt);
+            }
+        });
+
+        jMenu.setText("Menu");
+        jMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuActionPerformed(evt);
+            }
+        });
+
+        jInfo.setText("INFO");
+        jInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jInfoActionPerformed(evt);
+            }
+        });
+
+        jListProcedure.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jListProcedureMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jListProcedure);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -98,69 +122,152 @@ public class GuiProcedureManagement extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(jButton1)
-                            .addComponent(jButton5))
+                            .addComponent(jInsert)
+                            .addComponent(jMenu))
                         .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton2)
+                                .addComponent(jDelete)
                                 .addGap(38, 38, 38)
-                                .addComponent(jButton3)
+                                .addComponent(jUpdate)
                                 .addGap(34, 34, 34)
-                                .addComponent(jButton4))
-                            .addComponent(jButton6)))
+                                .addComponent(jVisualize))
+                            .addComponent(jInfo)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jNameField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                                .addComponent(jUrlField, javax.swing.GroupLayout.Alignment.LEADING))))
                     .addComponent(jLabel1))
-                .addContainerGap(340, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(135, 135, 135))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6))
-                .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jMenu)
+                            .addComponent(jInfo))
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jUrlField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(48, 48, 48)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
-                .addContainerGap(55, Short.MAX_VALUE))
+                    .addComponent(jInsert)
+                    .addComponent(jDelete)
+                    .addComponent(jUpdate)
+                    .addComponent(jVisualize))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void jUrlFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jUrlFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_jUrlFieldActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void jNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNameFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_jNameFieldActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jInsertActionPerformed
+        if(jNameField.getText().isEmpty() || jUrlField.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Insert all fields.");
+        }
+        else{
+            String name = jNameField.getText().trim();
+            String url = jUrlField.getText().trim();
+            inserimentoProcedura(name,url);
+            jNameField.setText("");
+            jUrlField.setText("");
+            
+        }
+    }//GEN-LAST:event_jInsertActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void jInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jInfoActionPerformed
         JOptionPane.showMessageDialog(null, "Remember. To be able to insert a new procedure, the URL relating to the Google Drive shared folder must be entered in the URL field.","Insert_Procedure", JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_jInfoActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuActionPerformed
         this.setVisible(false);
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_jMenuActionPerformed
 
+    private void jVisualizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVisualizeActionPerformed
+        jNameField.setText("");
+        jUrlField.setText("");
+        visualizzaListaProcedure();
+        
+    }//GEN-LAST:event_jVisualizeActionPerformed
+
+    private void jListProcedureMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListProcedureMouseClicked
+        String nameSelected = jListProcedure.getSelectedValue();
+        String urlSelected;
+        jNameField.setText(nameSelected);
+        urlSelected = proced.getUrl(nameSelected);
+        jUrlField.setText(urlSelected);
+        
+    }//GEN-LAST:event_jListProcedureMouseClicked
+
+    private void jDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDeleteActionPerformed
+        
+        
+        if(jNameField.getText().isEmpty() || jUrlField.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please select an item from the list first.");
+        }
+        else{
+            String name = jNameField.getText().trim();
+            String url = jUrlField.getText().trim();
+            deleteProcedure(name);
+            jNameField.setText("");
+            jUrlField.setText("");
+            visualizzaListaProcedure();
+        }
+        
+    }//GEN-LAST:event_jDeleteActionPerformed
+
+    private void jUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jUpdateActionPerformed
+        
+    }//GEN-LAST:event_jUpdateActionPerformed
+
+    private void inserimentoProcedura(String name, String url){
+       
+        if(proced.insertProcedure(name, url) == true){
+            JOptionPane.showMessageDialog(null, "Successful insertion");
+            }
+        else{
+            JOptionPane.showMessageDialog(null, "Ops,something went wrong?");
+            }
+    }
+    
+    private void visualizzaListaProcedure() {
+        
+            String[] procedure;
+            procedure = proced.visualizeProcedure();
+            jListProcedure.setListData(procedure);
+    }
+    
+    private void deleteProcedure(String name){
+        
+        
+        if(proced.deleteProcedure(name) == true){
+            JOptionPane.showMessageDialog(null, "Successful deletion");
+            }
+        else{
+            JOptionPane.showMessageDialog(null, "Ops,something went wrong?");
+            }
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -197,15 +304,17 @@ public class GuiProcedureManagement extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jDelete;
+    private javax.swing.JButton jInfo;
+    private javax.swing.JButton jInsert;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JList<String> jListProcedure;
+    private javax.swing.JButton jMenu;
+    private javax.swing.JTextField jNameField;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton jUpdate;
+    private javax.swing.JTextField jUrlField;
+    private javax.swing.JButton jVisualize;
     // End of variables declaration//GEN-END:variables
 }
