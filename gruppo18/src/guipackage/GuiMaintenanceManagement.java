@@ -3,6 +3,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import tablepackage.TableSite;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -25,6 +26,7 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
         maintenanceActivities= new TableMaintenanceActivities(st);
         model=(DefaultTableModel) maintenanceTable.getModel();
         visualizeInTable();
+        visualizeSiteInCombo();
         visualizeTypeInCombo();
         visualizeWeekInCombo();
     }
@@ -51,7 +53,6 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        areaTextField = new javax.swing.JTextField();
         typeComboBox = new javax.swing.JComboBox<>();
         yesRadioButton = new javax.swing.JRadioButton();
         noRadioButton = new javax.swing.JRadioButton();
@@ -61,6 +62,7 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         typeOfMainanceComboBox = new javax.swing.JComboBox<>();
         estimatedTimeSpinner = new javax.swing.JSpinner();
+        siteComboBox = new javax.swing.JComboBox<>();
 
         manutTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -163,12 +165,6 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
 
         jLabel6.setText("ESTIMATED INTERVENTION TIME [min]:");
 
-        areaTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                areaTextFieldActionPerformed(evt);
-            }
-        });
-
         typeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "[-- Select one type --]" }));
 
         yesRadioButton.setBackground(new java.awt.Color(162, 197, 220));
@@ -205,6 +201,8 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
 
         estimatedTimeSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
 
+        siteComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "[-- Select one site --]" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -223,8 +221,8 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(areaTextField)
-                                            .addComponent(estimatedTimeSpinner, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE))
+                                            .addComponent(estimatedTimeSpinner, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                                            .addComponent(siteComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGap(41, 41, 41)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -270,9 +268,9 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
                 .addGap(9, 9, 9)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(areaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(typeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(typeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(siteComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(weekComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -303,10 +301,6 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void areaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_areaTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_areaTextFieldActionPerformed
-
     private void idTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_idTextFieldActionPerformed
@@ -331,12 +325,12 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
         String id=idTextField.getText();
         String typeOfMainance=typeOfMainanceComboBox.getSelectedItem().toString(); 
         String type= typeComboBox.getSelectedItem().toString();
-        String area=areaTextField.getText();
+        String area=siteComboBox.getSelectedItem().toString();
         String week=weekComboBox.getSelectedItem().toString();
         String interruptibleActivity=selectedRadioButton();
         Object estimatedTime= estimatedTimeSpinner.getValue();
            
-        if(id.equals("") || typeOfMainanceComboBox.getSelectedIndex()==0 || typeComboBox.getSelectedIndex()==0 || area.equals("")|| weekComboBox.getSelectedIndex()==0 || interruptibleActivity.equals(""))
+        if(id.equals("") || typeOfMainanceComboBox.getSelectedIndex()==0 || typeComboBox.getSelectedIndex()==0 || siteComboBox.getSelectedIndex()==0|| weekComboBox.getSelectedIndex()==0 || interruptibleActivity.equals(""))
             JOptionPane.showMessageDialog(this, "Plase enter all data.","ERROR",JOptionPane.ERROR_MESSAGE); 
         else{
         if(checkId()){
@@ -371,7 +365,7 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
      String id=idTextField.getText();
      String typologyOfMaintenance= typeOfMainanceComboBox.getSelectedItem().toString();
      String type=typeComboBox.getSelectedItem().toString();
-     String area=areaTextField.getText();
+     String area=siteComboBox.getSelectedItem().toString();
      String week= weekComboBox.getSelectedItem().toString(); 
      Object estimatedTime=estimatedTimeSpinner.getValue(); 
      String interruptibleActivity=selectedRadioButton();
@@ -438,6 +432,15 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
           typeComboBox.addItem(k);
       }
 }
+ 
+  private void visualizeSiteInCombo(){  
+      TableSite sites=new TableSite(this.st);;
+      ArrayList <String> items=new ArrayList();
+      items=sites.visualize();
+      for (String k : items){
+          siteComboBox.addItem(k);
+      }
+}
  private void visualizeWeekInCombo(){  
    for(int i=1; i<53; i++){
       weekComboBox.addItem(""+i);
@@ -462,7 +465,7 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
    idTextField.setText("");
    typeOfMainanceComboBox.setSelectedIndex(0); 
    typeComboBox.setSelectedIndex(0);
-   areaTextField.setText("");
+   siteComboBox.setSelectedIndex(0);
    weekComboBox.setSelectedIndex(0);
    yesRadioButton.setSelected(false);
    noRadioButton.setSelected(false);
@@ -490,7 +493,7 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
     idTextField.setText(id);
     typeOfMainanceComboBox.setSelectedItem(typologyOfMaintenance);
     typeComboBox.setSelectedItem(type);
-    areaTextField.setText(area);
+    siteComboBox.setSelectedItem(area);
     weekComboBox.setSelectedItem(week);
     estimatedTimeSpinner.setValue(estimatedTime);
     if(interruptibleActivity.equals("Yes"))
@@ -500,7 +503,6 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
 }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
-    private javax.swing.JTextField areaTextField;
     private javax.swing.JSpinner estimatedTimeSpinner;
     private javax.swing.JTextField idTextField;
     private javax.swing.JLabel jLabel1;
@@ -517,6 +519,7 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
     private javax.swing.JTable manutTable;
     private javax.swing.JRadioButton noRadioButton;
     private javax.swing.JButton removeButton;
+    private javax.swing.JComboBox<String> siteComboBox;
     private javax.swing.JComboBox<String> typeComboBox;
     private javax.swing.JComboBox<String> typeOfMainanceComboBox;
     private javax.swing.JButton updateButton;
