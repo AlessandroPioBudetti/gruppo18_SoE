@@ -1,3 +1,5 @@
+package guipackage;
+
 
 import guipackage.GuiCompetencies;
 import guipackage.GuiCompetenzeAttività;

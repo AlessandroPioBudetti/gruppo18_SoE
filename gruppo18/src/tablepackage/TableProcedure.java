@@ -63,8 +63,8 @@ public class TableProcedure {
     }
     //Questa funzione ci permette di modificare una procedura.
     public boolean updateProcedure(String newname, String url, String oldname){
-        String query = "update procedure_di_manutenzione set nome = '" + newname + "' where username = '" + oldname + "'";
-        String query2 = "update procedure_di_manutenzione set url = '" + url + "' where nome = '" + newname + "'";
+        String query = "update procedure_di_manutenzione set nome = '" + newname + "' where nome = '" + oldname + "'";
+        String query2 = "update procedure_di_manutenzione set pdf = '" + url + "' where nome = '" + newname + "'";
         try {
             st.executeUpdate(query);
             st.executeUpdate(query2);

@@ -5,7 +5,14 @@
  */
 package guipackage;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import tablepackage.TableProcedure;
 
@@ -43,6 +50,7 @@ public class GuiProcedureManagement extends javax.swing.JFrame {
         jInfo = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jListProcedure = new javax.swing.JList<>();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Procedure Management");
@@ -57,6 +65,11 @@ public class GuiProcedureManagement extends javax.swing.JFrame {
             }
         });
 
+        jUrlField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jUrlFieldMouseClicked(evt);
+            }
+        });
         jUrlField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jUrlFieldActionPerformed(evt);
@@ -112,6 +125,13 @@ public class GuiProcedureManagement extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jListProcedure);
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagepackage/1f4c1.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -133,9 +153,12 @@ public class GuiProcedureManagement extends javax.swing.JFrame {
                                 .addGap(34, 34, 34)
                                 .addComponent(jVisualize))
                             .addComponent(jInfo)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jNameField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
-                                .addComponent(jUrlField, javax.swing.GroupLayout.Alignment.LEADING))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jNameField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                                    .addComponent(jUrlField, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(38, 38, 38)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -146,6 +169,9 @@ public class GuiProcedureManagement extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jMenu)
@@ -154,13 +180,16 @@ public class GuiProcedureManagement extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(36, 36, 36)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jUrlField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jUrlField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jInsert)
@@ -196,7 +225,7 @@ public class GuiProcedureManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_jInsertActionPerformed
 
     private void jInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jInfoActionPerformed
-        JOptionPane.showMessageDialog(null, "Remember. To be able to insert a new procedure, the URL relating to the Google Drive shared folder must be entered in the URL field.","Insert_Procedure", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Remember. To be able to insert a new procedure, the URL relating to the Google Drive(or another service) shared folder must be entered in the URL field.","Insert_Procedure", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jInfoActionPerformed
 
     private void jMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuActionPerformed
@@ -209,10 +238,10 @@ public class GuiProcedureManagement extends javax.swing.JFrame {
         visualizzaListaProcedure();
         
     }//GEN-LAST:event_jVisualizeActionPerformed
-
+    String nameSelected;
+    String urlSelected;
     private void jListProcedureMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListProcedureMouseClicked
-        String nameSelected = jListProcedure.getSelectedValue();
-        String urlSelected;
+        nameSelected = jListProcedure.getSelectedValue();
         jNameField.setText(nameSelected);
         urlSelected = proced.getUrl(nameSelected);
         jUrlField.setText(urlSelected);
@@ -227,7 +256,6 @@ public class GuiProcedureManagement extends javax.swing.JFrame {
         }
         else{
             String name = jNameField.getText().trim();
-            String url = jUrlField.getText().trim();
             deleteProcedure(name);
             jNameField.setText("");
             jUrlField.setText("");
@@ -238,7 +266,56 @@ public class GuiProcedureManagement extends javax.swing.JFrame {
 
     private void jUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jUpdateActionPerformed
         
+        
+        
+        if(jNameField.getText().isEmpty() || jUrlField.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Please select an item from the list first");
+            visualizzaListaProcedure();
+        }
+        else{
+            String newname = jNameField.getText();
+            String url = jUrlField.getText();
+            if(newname.equals(nameSelected) && url.equals(urlSelected)){
+                JOptionPane.showMessageDialog(null,"No update maded.");
+                jNameField.setText("");
+                jUrlField.setText("");
+                
+            }
+            else{
+                updateProcedura(newname,url,nameSelected);
+                visualizzaListaProcedure();
+            }
+        }
+           
     }//GEN-LAST:event_jUpdateActionPerformed
+
+    private void jUrlFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jUrlFieldMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jUrlFieldMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String url = jUrlField.getText();
+        try {
+            Desktop.getDesktop().browse(new URL(url).toURI());
+            //La classe Desktop ha un costruttore privato, e per questo viene istanziato tramite il suo metodo static sync getDestkop().
+            //Una volta istanziato l'oggetto, possiamo chiamare la funzione browse che ci permette di lanciare il nostro browser di default.
+            //Il metodo browse vuole un oggetto di tipo URI, ottenibile grazie al metodo toURI di URL.
+            // new URL(url) prende la stringa e la converte in URL e se fallisce lancia l'eccezione MalformedURLException.
+            // il metodo toURI (Uniform Resource Identifier) converte il corrispettivo URL in URI e lancia, se fallisce, l'eccezione URISyntaxException.
+        } catch (MalformedURLException ex) {
+            //by new URL(url) - Questa eccezione è lanciata se non viene specificato alcun protocollo, o viene trovato un protocollo sconosciuto o la specifica(url nel nostro caso) è nulla 
+            Logger.getLogger(GuiProcedureManagement.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,"Unspecified or incorrect protocol or missing URL.","Malformed",JOptionPane.ERROR_MESSAGE);
+        } catch (URISyntaxException ex) {
+            //by toURI() - Questa eccezione è lanciata nel caso in cui l'URL non è formattato rigorosamente secondo RFC2396 e non può essere convertito in un URI.
+            Logger.getLogger(GuiProcedureManagement.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,"URL not formatted correctly according to RFC2396","URISyntax.",JOptionPane.ERROR_MESSAGE);
+        } catch (IOException ex) {
+            //by browse() - Lancia un eccezione se il browser di default non è stato trovato o ha fallito nel lanciare il browser stesso.
+            Logger.getLogger(GuiProcedureManagement.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,"Default browser not found or browser launch failed.","BrowserError",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void inserimentoProcedura(String name, String url){
        
@@ -248,6 +325,14 @@ public class GuiProcedureManagement extends javax.swing.JFrame {
         else{
             JOptionPane.showMessageDialog(null, "Ops,something went wrong?");
             }
+    }
+    
+    private void updateProcedura(String newname,String url, String oldname){
+        
+        if(proced.updateProcedure(newname, url, oldname))
+            JOptionPane.showMessageDialog(null,"Successful update");
+        else
+            JOptionPane.showMessageDialog(null, "Ops,something went wrong?");
     }
     
     private void visualizzaListaProcedure() {
@@ -304,6 +389,7 @@ public class GuiProcedureManagement extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jDelete;
     private javax.swing.JButton jInfo;
     private javax.swing.JButton jInsert;
