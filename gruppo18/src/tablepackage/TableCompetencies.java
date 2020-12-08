@@ -54,7 +54,7 @@ public class TableCompetencies {
             st.executeUpdate(query);
             return true;
         } catch (SQLException ex) {
-            System.out.println("Errore aggiornamento competenza:\n+"+ex.getMessage());
+            System.out.println("Errore aggiornamento competenza:\n"+ex.getMessage());
             return false;
         }
 

@@ -1,5 +1,6 @@
 
 import guipackage.GuiCompetencies;
+import guipackage.GuiCompetenzeAttività;
 import guipackage.GuiProcedureManagement;
 import guipackage.GuiSiteManagment;
 import java.sql.Statement;
@@ -82,6 +83,11 @@ public class GuiMenuAdmin extends javax.swing.JFrame {
         jMenu2.add(jMenuItem2);
 
         jMenuItem3.setText("Assegna competenze");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem3);
 
         jMenuItem4.setText("Assegna procedure");
@@ -184,6 +190,10 @@ public class GuiMenuAdmin extends javax.swing.JFrame {
         new GuiProcedureManagement(st).setVisible(true);
         JOptionPane.showMessageDialog(null, "Please, read the INFO field.","Info", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+       new GuiCompetenzeAttività(st).setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments

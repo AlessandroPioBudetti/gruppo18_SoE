@@ -104,7 +104,50 @@ public class TableMaintenanceActivities {
      return maintenance; 
     }
    
+    public String[] visualizeActivities() {
+        String query = "select * from Manutenzione ";
+        String[] activities = new String[100];
+        int i = 0;
+        try {
+            ResultSet rs = stm.executeQuery(query);
+            while (rs.next()) {
+                activities[i] = rs.getString("identificativo");
+                i++;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Errore visualizza attività:\n"+ex.getMessage());
+        }
+        return activities;
+    }
     
-    
+     public String visualizeActivity(String identifier) {
+        String query = "select * from Manutenzione where identificativo = '"+identifier+"'";
+        String dati;
+        String id,typeOfMainance,type,area, week,interruptibleActivity,estimatedTime;
+        try {
+            ResultSet rst = stm.executeQuery(query);
+            rst.next();
+            id=rst.getString("identificativo");
+            typeOfMainance=rst.getString("tipologia");
+            type=rst.getString("tipo_manutenzione");
+            area=rst.getString("sito");
+            week=rst.getString("settimana");
+            interruptibleActivity=rst.getString("interrompibile");
+            estimatedTime=(String)rst.getString("tempo_stimato");
+            dati = "identifier: " +id+
+                    "\ntypology: "+ typeOfMainance +
+                    "\ntype of maintenance: "+ type +
+                    "\narea: "+ area+
+                    "\nweek: "+ week+
+                    "\ninterruptible activity: "+interruptibleActivity+
+                    "\nestimated time: "+ estimatedTime;
+            return dati;
+            
+        } catch (SQLException ex) {
+            System.out.println("Errore visualizza attività:\n"+ex.getMessage());
+            return null;
+        }
+       
+    }
     
 }
