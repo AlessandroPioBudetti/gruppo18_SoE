@@ -1,7 +1,10 @@
+package guipackage;
+
 
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import tablepackage.TableType;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

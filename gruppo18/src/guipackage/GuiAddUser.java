@@ -1,3 +1,5 @@
+package guipackage;
+
 
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -5,6 +7,8 @@ import javax.swing.JOptionPane;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import tablepackage.TableMantainer;
+import tablepackage.TablePlanner;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
