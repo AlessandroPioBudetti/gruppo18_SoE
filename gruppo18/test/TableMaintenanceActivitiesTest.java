@@ -10,6 +10,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import tablepackage.TableMaintenanceActivities;
+import tablepackage.TableSite;
+import tablepackage.TableType;
 /**
  *
  * @author 39392
@@ -17,6 +19,8 @@ import tablepackage.TableMaintenanceActivities;
 public class TableMaintenanceActivitiesTest {
    Statement st;
    TableMaintenanceActivities t; 
+   TableSite site;
+   TableType type; 
    Dbms db;
    
     @Before
@@ -24,29 +28,39 @@ public class TableMaintenanceActivitiesTest {
         db = new Dbms();
         st = db.connectToDatabase();
         t = new TableMaintenanceActivities(st);
+        site = new TableSite(st);
+        type = new TableType(st);
     }
    
     @Test
     public void testInsertNew(){
-       assertTrue(t.insert("ID1", "Planned activity", "IDRAULICA", "Nord-Est", "2", "30", "No"));
+       site.insert("SITE");
+       type.insert("TYPE");
+       assertTrue(t.insert("ID1", "Planned activity", "TYPE", "SITE", "2", "30", "No"));
     }
 
     @Test
     public void testInsertDuplicate() {
-        t.insert("ID1", "Planned activity", "IDRAULICA", "Nord-Est", "2", "30", "No");
-        assertFalse(t.insert("ID1", "Planned activity", "IDRAULICA", "Nord-Est", "2", "30", "No"));
+        site.insert("SITE");
+        type.insert("TYPE");
+        t.insert("ID1", "Planned activity", "TYPE", "SITE", "2", "30", "No");
+        assertFalse(t.insert("ID1", "Planned activity", "TYPE", "SITE", "2", "30", "No"));
     }
 
     @Test
     public void testUpdateNoDuplicate() {
-        t.insert("ID1", "Planned activity", "IDRAULICA", "Nord-Est", "2", "30", "No");
-        assertTrue(t.update("ID1","ID4", "Planned activity", "IDRAULICA", "Nord-Est", "2", "30", "No"));
+        site.insert("SITE");
+        type.insert("TYPE");
+        t.insert("ID1", "Planned activity", "TYPE", "SITE", "2", "30", "No");
+        assertTrue(t.update("ID1","ID4", "Planned activity", "TYPE", "SITE", "2", "30", "No"));
     }
     
     @Test
     public void testUpdateDuplicate() {
-       t.insert("ID2", "Planned activity", "IDRAULICA", "Nord-Est", "2", "30", "No");
-       t.insert("ID3", "Planned activity", "IDRAULICA", "Nord-Est", "2", "30", "No");
+       site.insert("SITE");
+       type.insert("TYPE");
+       t.insert("ID2", "Planned activity", "TYPE", "SITE", "2", "30", "No");
+       t.insert("ID3", "Planned activity", "TYPE", "SITE", "2", "30", "No");
        assertFalse(t.update("ID2","ID3", "Planned activity", "IDRAULICA", "Nord-Est", "2", "30", "No"));
     }
     
@@ -57,7 +71,9 @@ public class TableMaintenanceActivitiesTest {
     
     @Test
     public void testDelete(){
-        t.insert("ID3", "Planned activity", "IDRAULICA", "Nord-Est", "2", "30", "No");
+        site.insert("SITE");
+        type.insert("TYPE");
+        t.insert("ID3", "Planned activity", "TYPE", "SITE", "2", "30", "No");
         assertTrue(t.delete("ID3"));
     }
     

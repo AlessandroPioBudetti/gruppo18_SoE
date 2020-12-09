@@ -151,5 +151,46 @@ public class TableMaintenanceActivities {
         }
        
     }
-    
+    public String visualizeActivity2(String identifier) {
+        String query = "select * from Manutenzione where identificativo = '"+identifier+"'";
+        String dati;
+        String id,typeOfMainance,area,estimatedTime;
+        try {
+            ResultSet rst = stm.executeQuery(query);
+            rst.next();
+            id=rst.getString("identificativo");
+            typeOfMainance=rst.getString("tipologia");
+            
+            area=rst.getString("sito");
+            
+          
+            estimatedTime=(String)rst.getString("tempo_stimato");
+            dati = "      "+id+
+                   "      -      "+ area+
+                   "      -      "+typeOfMainance+
+                    "    -       "+ estimatedTime + " min";
+            return dati;
+            
+        } catch (SQLException ex) {
+            System.out.println("Errore visualizza attività:\n"+ex.getMessage());
+            return null;
+        }
+    }
+     
+     public String getWeekActivity(String identifier) {
+        String query = "select * from Manutenzione where identificativo = '"+identifier+"'";
+        String dati;
+        String week;
+        try {
+            ResultSet rst = stm.executeQuery(query);
+            rst.next();
+            week=rst.getString("settimana"); 
+            dati = "     "+ week;
+            return dati;
+            
+        } catch (SQLException ex) {
+            System.out.println("Errore visualizza attività:\n"+ex.getMessage());
+            return null;
+        }
+    }
 }

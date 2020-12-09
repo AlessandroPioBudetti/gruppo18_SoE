@@ -4,6 +4,7 @@ package tablepackage;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -62,7 +63,7 @@ public class TableMantainer {// Questa classe gestisce gli inserimenti di userna
         }
 
     }
-
+    
     public String[] visualizeMaintainers() {
         String query = "select * from mantainer";
         String[] maintainers = new String[100];
@@ -74,6 +75,22 @@ public class TableMantainer {// Questa classe gestisce gli inserimenti di userna
                 i++;
             }
         } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return maintainers;
+    }
+    
+public ArrayList <String> visualizeUsernameMaintainers() {
+        String query = "select username from mantainer";
+        ArrayList <String>  maintainers= new ArrayList();
+        String username;  
+        try{
+         ResultSet rst=st.executeQuery(query);
+         while(rst.next()){
+             username=rst.getString("username");
+             maintainers.add(username);
+         }     
+        }catch(SQLException ex){
             System.out.println(ex.getMessage());
         }
         return maintainers;
