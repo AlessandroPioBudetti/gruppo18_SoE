@@ -5,10 +5,12 @@
         <group>
             <file>file:/C:/Users/sabrina/Documents/GitHub/gruppo18_SoE/gruppo18/src/Main.java</file>
             <file>file:/C:/Users/sabrina/Documents/GitHub/gruppo18_SoE/gruppo18/src/tablepackage/TableMaintenanceActivities.java</file>
-            <file>file:/C:/Users/sabrina/Documents/GitHub/gruppo18_SoE/gruppo18/src/guipackage/GuiCompetencies.java</file>
+            <file>file:/C:/Users/sabrina/Documents/GitHub/gruppo18_SoE/gruppo18/test/TableMaintenanceActivitiesTest.java</file>
+            <file>file:/C:/Users/sabrina/Documents/GitHub/gruppo18_SoE/gruppo18/test/TableCompetenciesTest.java</file>
             <file>file:/C:/Users/sabrina/Documents/GitHub/gruppo18_SoE/gruppo18/src/tablepackage/TableCompetencies.java</file>
             <file>file:/C:/Users/sabrina/Documents/GitHub/gruppo18_SoE/gruppo18/src/guipackage/GuiCompetenzeAttività.java</file>
             <file>file:/C:/Users/sabrina/Documents/GitHub/gruppo18_SoE/gruppo18/src/tablepackage/TableCompetenzeAttività.java</file>
+            <file>file:/C:/Users/sabrina/Documents/GitHub/gruppo18_SoE/gruppo18/test/TableCompetenzeAttivitàTest.java</file>
         </group>
     </open-files>
 </project-private>

@@ -48,8 +48,8 @@ public class TableCompetenzeAttività {
         return competencies;
     }
 
-    public boolean delete(String competenza) {
-        String query = "delete from competenze_attività where competenza = '" + competenza + "'";
+    public boolean delete(String competenza, String attività) {
+        String query = "delete from competenze_attività where competenza = '" + competenza + "' and attività = '"+ attività+"'";
         try {
             st.executeUpdate(query);
             return true;

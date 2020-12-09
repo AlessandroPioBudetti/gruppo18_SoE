@@ -11,6 +11,7 @@ import tablepackage.TableCompetencies;
 import tablepackage.TableCompetenzeAttività;
 import tablepackage.TableMaintenanceActivities;
 
+
 /**
  *
  * @author sabrina
@@ -215,7 +216,7 @@ String selectedActivity;
            JOptionPane.showMessageDialog(null, "Please select the activity's competence to remove.");
            return;
        }
-       boolean result = competenzeAttività.delete(competenza);
+       boolean result = competenzeAttività.delete(competenza,selectedActivity);
        if (result){
            visualizzaCompetenzeAttività(selectedActivity);
        }
