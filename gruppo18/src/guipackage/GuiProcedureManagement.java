@@ -296,7 +296,8 @@ public class GuiProcedureManagement extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String url = jUrlField.getText();
         try {
-            Desktop.getDesktop().browse(new URL(url).toURI());
+            URL uri = new URL(url);
+            Desktop.getDesktop().browse(uri.toURI());
             //La classe Desktop ha un costruttore privato, e per questo viene istanziato tramite il suo metodo static sync getDestkop().
             //Una volta istanziato l'oggetto, possiamo chiamare la funzione browse che ci permette di lanciare il nostro browser di default.
             //Il metodo browse vuole un oggetto di tipo URI, ottenibile grazie al metodo toURI di URL.
