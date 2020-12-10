@@ -1,4 +1,7 @@
 
+import guipackage.GuiCompetencies;
+import guipackage.GuiCompetenzeAttività;
+import guipackage.GuiCompetenzeMantainer;
 import guipackage.GuiLogin;
 import java.sql.Statement;
 
@@ -43,7 +46,7 @@ java.awt.EventQueue.invokeLater(new Runnable() {
 
  java.awt.EventQueue.invokeLater(new Runnable() {
      public void run() {
-        new GuiLogin(st).setVisible(true);
+        new GuiCompetenzeMantainer(st).setVisible(true);
       }
      });
  }

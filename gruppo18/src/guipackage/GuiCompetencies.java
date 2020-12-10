@@ -100,27 +100,26 @@ public class GuiCompetencies extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(78, 78, 78)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
-                        .addComponent(jButtonInsert)
-                        .addGap(51, 51, 51)
-                        .addComponent(jButtonUpdate)
-                        .addGap(54, 54, 54)
-                        .addComponent(jButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(108, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                .addComponent(jButtonMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                .addComponent(jButtonInsert)
+                .addGap(51, 51, 51)
+                .addComponent(jButtonUpdate)
+                .addGap(54, 54, 54)
+                .addComponent(jButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(108, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,14 +128,14 @@ public class GuiCompetencies extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
+                        .addGap(38, 38, 38)
                         .addComponent(jLabel2)
-                        .addGap(32, 32, 32)
+                        .addGap(18, 18, 18)
                         .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
+                        .addGap(30, 30, 30)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -154,34 +153,34 @@ public class GuiCompetencies extends javax.swing.JFrame {
 
     private void jButtonInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInsertActionPerformed
         if (jTextFieldName.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Insert all fields.");
+            JOptionPane.showMessageDialog(null, "Insert all fields.","Attention",JOptionPane.INFORMATION_MESSAGE );
         } else {
             String Name = jTextFieldName.getText().trim();      // il metodo trim() rimuove spazi bianchi
             if (competenze.insert(Name)) {
-                JOptionPane.showMessageDialog(null, "Successful insert");
+                visualizzaLista();
             } else {
-                JOptionPane.showMessageDialog(null, "Error: the competence already exists.");
+                JOptionPane.showMessageDialog(null, "Error: the competence already exists.","Error",JOptionPane.ERROR_MESSAGE);
             }
 
             jTextFieldName.setText("");
-            visualizzaLista();
+            
         }
     }//GEN-LAST:event_jButtonInsertActionPerformed
     String oldName;
     private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed
         String Name = jTextFieldName.getText(); // dopo la modifica il valore di name dovrebbe essere cambiato
         if (Name.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Select a competence from the list.");
+            JOptionPane.showMessageDialog(null, "Select a competence from the list.", "Attention",JOptionPane.INFORMATION_MESSAGE );
             return;
         }
         if (Name.equalsIgnoreCase(oldName)) {      // se il nome è uguale a quello originario, si mostra un messaggio e si termina
-            JOptionPane.showMessageDialog(null, "No changes made.");
+            JOptionPane.showMessageDialog(null, "No changes made.","Attention",JOptionPane.INFORMATION_MESSAGE );
 
         } else {
             if (competenze.update(Name, oldName)) {
-                JOptionPane.showMessageDialog(null, "Successful update.");
+                JOptionPane.showMessageDialog(null, "Successful update.","Attention",JOptionPane.INFORMATION_MESSAGE );
             } else {
-                JOptionPane.showMessageDialog(null, "Error: the competence already exists.");
+                JOptionPane.showMessageDialog(null, "Error: the competence already exists.","Error",JOptionPane.ERROR_MESSAGE);
             }
 
         }
@@ -197,17 +196,17 @@ public class GuiCompetencies extends javax.swing.JFrame {
     private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
         String Name = jTextFieldName.getText();
         if (Name.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Select a competence from the list.");
+            JOptionPane.showMessageDialog(null, "Select a competence from the list.","Error",JOptionPane.ERROR_MESSAGE );
             return;
         }
         if (Name.equalsIgnoreCase(oldName)) {      // se il nome è uguale a quello originario, procedo con la cancellazione
             if (competenze.delete(Name)) {
-                JOptionPane.showMessageDialog(null, "Successful delete.");
+                JOptionPane.showMessageDialog(null, "Successful delete.","Attention",JOptionPane.INFORMATION_MESSAGE );
             } else {
                 JOptionPane.showMessageDialog(null, "Error.");
             }
         } else {                                // se viene modificato il nome prima della canellazione appare un messaggio di errore
-            JOptionPane.showMessageDialog(null, "Don't modify the name before the delete.");
+            JOptionPane.showMessageDialog(null, "Don't modify the name before the delete.","Error",JOptionPane.ERROR_MESSAGE  );
         }
         visualizzaLista();
         jTextFieldName.setText("");

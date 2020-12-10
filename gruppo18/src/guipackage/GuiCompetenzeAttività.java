@@ -11,7 +11,6 @@ import tablepackage.TableCompetencies;
 import tablepackage.TableCompetenzeAttività;
 import tablepackage.TableMaintenanceActivities;
 
-
 /**
  *
  * @author sabrina
@@ -179,9 +178,9 @@ String selectedActivity;
         String dati = tm.visualizeActivity(selectedActivity);
         if (selectedActivity != null) {
             JOptionPane.showMessageDialog(null, dati);
-            visualizzaCompetenzeAttività(selectedActivity);
+            visualizzaCompetenzeAttività();
         } else {
-            JOptionPane.showMessageDialog(null, "Activity not found.");
+            JOptionPane.showMessageDialog(null, "Activity not found.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jListActivitiesMouseClicked
 
@@ -191,38 +190,41 @@ String selectedActivity;
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
         if (selectedCompetence == null && selectedActivity == null) {
-            JOptionPane.showMessageDialog(null, "Please select an activity's identifier and a competence.");
+            JOptionPane.showMessageDialog(null, "Please select an activity's identifier and a competence.", "Attention", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         if (selectedCompetence == null) {
-            JOptionPane.showMessageDialog(null,"Please select a competence." );
+            JOptionPane.showMessageDialog(null, "Please select a competence.", "Attention", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         if (selectedActivity == null) {
-            JOptionPane.showMessageDialog(null,"Please select an activity's identifier." );
+            JOptionPane.showMessageDialog(null, "Please select an activity's identifier.", "Attention", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         boolean result = competenzeAttività.insert(selectedCompetence, selectedActivity);
         if (result) {
-            visualizzaCompetenzeAttività(selectedActivity);
+            visualizzaCompetenzeAttività();
         } else {
-            JOptionPane.showMessageDialog(null, "Competence already added for this activity.");
+            JOptionPane.showMessageDialog(null, "Competence already added for this activity.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonAddActionPerformed
 
     private void jButtonRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveActionPerformed
-       String competenza= jListActComp.getSelectedValue();
-       if(competenza==null){
-           JOptionPane.showMessageDialog(null, "Please select the activity's competence to remove.");
-           return;
-       }
-       boolean result = competenzeAttività.delete(competenza,selectedActivity);
-       if (result){
-           visualizzaCompetenzeAttività(selectedActivity);
-       }
-       else{
-           JOptionPane.showMessageDialog(null, "Error.");
-       }
+        String competenza = jListActComp.getSelectedValue();
+        if (selectedActivity == null) {
+            JOptionPane.showMessageDialog(null, "Select the activity id whose competence you want to remove.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (competenza == null) {
+            JOptionPane.showMessageDialog(null, "Please select the activity's competence to remove.", "Attention", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        boolean result = competenzeAttività.delete(competenza, selectedActivity);
+        if (result) {
+            visualizzaCompetenzeAttività();
+        } else {
+            JOptionPane.showMessageDialog(null, "Error.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButtonRemoveActionPerformed
 
     private void visualizzaCompetenze() {
@@ -235,8 +237,8 @@ String selectedActivity;
         jListActivities.setListData(attività);
     }
 
-    private void visualizzaCompetenzeAttività(String attività) {
-        String[] competenze = competenzeAttività.visualizeCompetencies(attività);
+    private void visualizzaCompetenzeAttività() {
+        String[] competenze = competenzeAttività.visualizeCompetencies(selectedActivity);
         jListActComp.setListData(competenze);
     }
 
