@@ -21,9 +21,9 @@ public class TableAvailability {
         this.stm = stm;
     }
    
-   public boolean insertAvailabilityMaintainer(String mantainer){
+   public boolean insertMaintainerInAvailability(String mantainer){
         StringBuilder temp= new StringBuilder();
-        temp.append("insert into Disponibilità");
+        temp.append("insert into Disponibilità(manutentore)");
         temp.append("values(");
         temp.append("'").append(mantainer).append("'");
         temp.append(")");

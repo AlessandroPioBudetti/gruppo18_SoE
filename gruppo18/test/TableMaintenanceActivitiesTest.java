@@ -85,8 +85,12 @@ public class TableMaintenanceActivitiesTest {
     @After
     public void removePreviousInsert() {
         String query = "delete from manutenzione where identificativo like 'ID%'";
+        String query1 = "delete from Site where name_site='SITE'";
+        String query2 = "delete from Typology where tipo='TYPE'";
         try {
             st.executeUpdate(query);
+            st.executeUpdate(query1);
+            st.executeUpdate(query2);
             st.close();
             db.getDb().close();
         } catch (SQLException ex) {
