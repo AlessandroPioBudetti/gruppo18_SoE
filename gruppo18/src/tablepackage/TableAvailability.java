@@ -20,6 +20,21 @@ public class TableAvailability {
     public TableAvailability(Statement stm) {
         this.stm = stm;
     }
+   
+   public boolean insertAvailabilityMaintainer(String mantainer){
+        StringBuilder temp= new StringBuilder();
+        temp.append("insert into Disponibilità");
+        temp.append("values(");
+        temp.append("'").append(mantainer).append("'");
+        temp.append(")");
+        try{
+        stm.executeUpdate(temp.toString());
+        return true;
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
     
      public ArrayList<ArrayList> visualize(String settimanaSelezionata){
     StringBuilder temp= new StringBuilder();
@@ -55,24 +70,8 @@ public class TableAvailability {
         }
      return disponibilità; 
     }
+
     
-    //questo metodo va nella classe tableCompetenzeManutentore
-     public ArrayList<String> visualizeSkillsMaintenance(String manutentore){
-    StringBuilder temp= new StringBuilder();
-    ArrayList <String> competencies=new ArrayList();
-    String skill;
-    temp.append("select competenza from competenze_manutentore where manutentore = '").append(manutentore).append("'");    
-        try{
-         ResultSet rst=stm.executeQuery(temp.toString());
-         while(rst.next()){
-            skill=rst.getString("competenza");
-            competencies.add(skill);
-         }     
-        }catch(SQLException ex){
-            System.out.println(ex.getMessage());
-        }
-     return competencies; 
-    }
     
    
 }

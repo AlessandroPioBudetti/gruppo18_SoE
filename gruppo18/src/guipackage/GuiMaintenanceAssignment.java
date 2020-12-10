@@ -24,6 +24,9 @@ public class GuiMaintenanceAssignment extends javax.swing.JFrame {
     private TableCompetenzeAttività competenzeAttività;
     private TableMaintenanceActivities maintenanceActivities;
     private TableAvailability disponibilità;
+    private TableCompetenzeAttività competenze;
+    private String idActivity;
+    
     
     public GuiMaintenanceAssignment(Statement st) {
         initComponents();
@@ -31,11 +34,13 @@ public class GuiMaintenanceAssignment extends javax.swing.JFrame {
         competenzeAttività= new TableCompetenzeAttività(st);
         maintenanceActivities= new TableMaintenanceActivities(st);
         disponibilità= new TableAvailability(st);
+        competenze= new TableCompetenzeAttività(st);
         model=(DefaultTableModel)availabilityTable.getModel();
-        visualizeInWeekTextField();
-        visualizeInTable();
-        visualizeInSkillsList();
-        visualizeInActivityDataTextField();
+        idActivity="123";
+        visualizeInWeekTextField(idActivity);
+        visualizeInTable(idActivity);
+        visualizeInSkillsList(idActivity);
+        visualizeInActivityDataTextField(idActivity);
     }
 
     /**
@@ -292,39 +297,39 @@ public class GuiMaintenanceAssignment extends javax.swing.JFrame {
         });
     }
 
-    private void visualizeInSkillsList(){
+    private void visualizeInSkillsList(String idActivity){
         String[] competencies = new String[100];
-        competencies=competenzeAttività.visualizeCompetencies("126");
+        competencies=competenzeAttività.visualizeCompetencies(idActivity);
         skillsList.setListData(competencies);
     }
      
-    private void visualizeInWeekTextField(){
+    private void visualizeInWeekTextField(String idActivity){
      String week = new String();
-     week=maintenanceActivities.getWeekActivity("126");
+     week=maintenanceActivities.getWeekActivity(idActivity);
      weekTextField.setText(week);
     }
     
-    private void visualizeInActivityDataTextField(){
+    private void visualizeInActivityDataTextField(String idActivity){
         String data = new String();
-        data=maintenanceActivities.visualizeActivity2("126");
+        data=maintenanceActivities.visualizeActivity2(idActivity);
         activityDataTextField.setText(data);
     }
     
-     private void visualizeInTable(){
+     private void visualizeInTable(String idActivity){
       ArrayList <ArrayList> items=new ArrayList();
-      String selectedWeek=maintenanceActivities.getWeekActivity("126");
+      String selectedWeek=maintenanceActivities.getWeekActivity(idActivity);
       items=disponibilità.visualize(selectedWeek);
       for (ArrayList k : items){
-        model.insertRow(model.getRowCount(),new Object[]{k.get(0).toString(), skillsPossessed(k.get(0).toString()), k.get(1).toString()+"%",k.get(2).toString()+"%", k.get(3).toString()+"%", k.get(4).toString()+"%", k.get(5).toString()+"%", k.get(6).toString()+"%", k.get(7).toString()+"%"});
+        model.insertRow(model.getRowCount(),new Object[]{k.get(0).toString(), skillsPossessed(idActivity, k.get(0).toString()), k.get(1).toString()+"%",k.get(2).toString()+"%", k.get(3).toString()+"%", k.get(4).toString()+"%", k.get(5).toString()+"%", k.get(6).toString()+"%", k.get(7).toString()+"%"});
       }   
  }
-     private String skillsPossessed(String maintainer){
+     private String skillsPossessed(String idActivity, String maintainer){
         String[] competencies = new String[50];
         ArrayList<String>competenciesMaintainer= new ArrayList();
         int count=0, count2=0;
-        competencies=competenzeAttività.visualizeCompetencies("126");
+        competencies=competenzeAttività.visualizeCompetencies(idActivity);
         //questo metodo andrà chiamato sull'oggetto tableCompManut
-        competenciesMaintainer=disponibilità.visualizeSkillsMaintenance(maintainer);
+        competenciesMaintainer=competenze.visualizeSkillsMaintenance(maintainer);
         for (String k : competencies){
             if(competenciesMaintainer.contains(k))
                count++;

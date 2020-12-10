@@ -8,6 +8,7 @@ package tablepackage;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -58,4 +59,22 @@ public class TableCompetenzeAttività {
             return false;
         }
     }
+     public ArrayList<String> visualizeSkillsMaintenance(String manutentore){
+    StringBuilder temp= new StringBuilder();
+    ArrayList <String> competencies=new ArrayList();
+    String skill;
+    temp.append("select competenza from competenze_manutentore where manutentore = '").append(manutentore).append("'");    
+        try{
+         ResultSet rst=st.executeQuery(temp.toString());
+         while(rst.next()){
+            skill=rst.getString("competenza");
+            competencies.add(skill);
+         }     
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+     return competencies; 
+    }
+    
+    
 }

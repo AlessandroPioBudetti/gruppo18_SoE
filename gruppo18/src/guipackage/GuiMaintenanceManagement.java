@@ -112,6 +112,8 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
             }
         });
 
+        maintenanceTable.setBackground(new java.awt.Color(162, 197, 220));
+        maintenanceTable.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         maintenanceTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
