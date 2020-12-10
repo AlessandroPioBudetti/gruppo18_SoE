@@ -5,17 +5,37 @@
  */
 package guipackage;
 
+import java.sql.Statement;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import tablepackage.TableCompetenzeAttività;
+import tablepackage.TableAvailability;
+import tablepackage.TableMaintenanceActivities;
+import tablepackage.TableMantainer;
+
 /**
  *
  * @author 39392
  */
 public class GuiMaintenanceAssignment extends javax.swing.JFrame {
-
-    /**
-     * Creates new form GuiMaintenanceAssignment
-     */
-    public GuiMaintenanceAssignment() {
+    private Statement st;
+    private DefaultTableModel model;
+    private TableMantainer mantainer;
+    private TableCompetenzeAttività competenzeAttività;
+    private TableMaintenanceActivities maintenanceActivities;
+    private TableAvailability disponibilità;
+    
+    public GuiMaintenanceAssignment(Statement st) {
         initComponents();
+        mantainer= new TableMantainer(st);
+        competenzeAttività= new TableCompetenzeAttività(st);
+        maintenanceActivities= new TableMaintenanceActivities(st);
+        disponibilità= new TableAvailability(st);
+        model=(DefaultTableModel)availabilityTable.getModel();
+        visualizeInWeekTextField();
+        visualizeInTable();
+        visualizeInSkillsList();
+        visualizeInActivityDataTextField();
     }
 
     /**
@@ -30,18 +50,18 @@ public class GuiMaintenanceAssignment extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        weekTextField = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        activityDataTextField = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        availabilityTable = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        skillsList = new javax.swing.JList<>();
 
         setTitle("ASSIGNMENT OF A MAINTENANCE ACTIVITY");
         setResizable(false);
@@ -60,7 +80,7 @@ public class GuiMaintenanceAssignment extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -71,6 +91,9 @@ public class GuiMaintenanceAssignment extends javax.swing.JFrame {
         );
 
         jLabel1.getAccessibleContext().setAccessibleDescription("JJAJA");
+
+        weekTextField.setEditable(false);
+        weekTextField.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
 
         jPanel3.setBackground(new java.awt.Color(183, 214, 244));
         jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -85,7 +108,7 @@ public class GuiMaintenanceAssignment extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -95,6 +118,9 @@ public class GuiMaintenanceAssignment extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        activityDataTextField.setEditable(false);
+        activityDataTextField.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
 
         jPanel4.setBackground(new java.awt.Color(183, 214, 244));
         jPanel4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -132,34 +158,43 @@ public class GuiMaintenanceAssignment extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addGap(238, 238, 238)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(259, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        availabilityTable.setBackground(new java.awt.Color(162, 197, 220));
+        availabilityTable.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        availabilityTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Maintainer", "Skills", "Availab Mon", "Availab Tue", "Availab Wed", "Availab Thu", "Availab Fri", "Availab Sat", "Availab Sun"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(availabilityTable);
+
+        skillsList.setBackground(new java.awt.Color(162, 197, 220));
+        skillsList.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        skillsList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        skillsList.setFocusable(false);
+        jScrollPane3.setViewportView(skillsList);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -167,24 +202,22 @@ public class GuiMaintenanceAssignment extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(weekTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE))))
-                .addContainerGap(20, Short.MAX_VALUE))
+                        .addComponent(activityDataTextField))
+                    .addComponent(jScrollPane1)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(23, 23, 23))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,17 +225,17 @@ public class GuiMaintenanceAssignment extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField1)
+                    .addComponent(weekTextField)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField2))
+                    .addComponent(activityDataTextField))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE))
                 .addGap(143, 143, 143))
         );
 
@@ -217,7 +250,7 @@ public class GuiMaintenanceAssignment extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -254,12 +287,58 @@ public class GuiMaintenanceAssignment extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GuiMaintenanceAssignment().setVisible(true);
+               // new GuiMaintenanceAssignment().setVisible(true);
             }
         });
     }
 
+    private void visualizeInSkillsList(){
+        String[] competencies = new String[100];
+        competencies=competenzeAttività.visualizeCompetencies("126");
+        skillsList.setListData(competencies);
+    }
+     
+    private void visualizeInWeekTextField(){
+     String week = new String();
+     week=maintenanceActivities.getWeekActivity("126");
+     weekTextField.setText(week);
+    }
+    
+    private void visualizeInActivityDataTextField(){
+        String data = new String();
+        data=maintenanceActivities.visualizeActivity2("126");
+        activityDataTextField.setText(data);
+    }
+    
+     private void visualizeInTable(){
+      ArrayList <ArrayList> items=new ArrayList();
+      String selectedWeek=maintenanceActivities.getWeekActivity("126");
+      items=disponibilità.visualize(selectedWeek);
+      for (ArrayList k : items){
+        model.insertRow(model.getRowCount(),new Object[]{k.get(0).toString(), skillsPossessed(k.get(0).toString()), k.get(1).toString()+"%",k.get(2).toString()+"%", k.get(3).toString()+"%", k.get(4).toString()+"%", k.get(5).toString()+"%", k.get(6).toString()+"%", k.get(7).toString()+"%"});
+      }   
+ }
+     private String skillsPossessed(String maintainer){
+        String[] competencies = new String[50];
+        ArrayList<String>competenciesMaintainer= new ArrayList();
+        int count=0, count2=0;
+        competencies=competenzeAttività.visualizeCompetencies("126");
+        //questo metodo andrà chiamato sull'oggetto tableCompManut
+        competenciesMaintainer=disponibilità.visualizeSkillsMaintenance(maintainer);
+        for (String k : competencies){
+            if(competenciesMaintainer.contains(k))
+               count++;
+            if(k==null)
+                return count+"/"+count2;
+            count2++;
+        }
+        return count+"/"+count2;
+     }
+     
+     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField activityDataTextField;
+    private javax.swing.JTable availabilityTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -270,10 +349,8 @@ public class GuiMaintenanceAssignment extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JList<String> skillsList;
+    private javax.swing.JTextField weekTextField;
     // End of variables declaration//GEN-END:variables
 }
