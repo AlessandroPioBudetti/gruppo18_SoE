@@ -1,6 +1,5 @@
 package guipackage;
 
-
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -37,7 +36,7 @@ public class GuiAddUser extends javax.swing.JFrame {
         this.st = st;
         planner = new TablePlanner(st);
         mantainer = new TableMantainer(st);
-        disponibilità= new TableAvailability(st);
+        disponibilità = new TableAvailability(st);
     }
 
     /**
@@ -252,7 +251,7 @@ public class GuiAddUser extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         if (jTextFieldUserName.getText().isEmpty() || jTextFieldPassword.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Insert all fields.");
+            JOptionPane.showMessageDialog(null, "Insert all fields.", "Error", JOptionPane.ERROR_MESSAGE);
 
         } else {
             String userName = jTextFieldUserName.getText().trim();      // il metodo trim() rimuove spazi bianchi
@@ -294,6 +293,9 @@ public class GuiAddUser extends javax.swing.JFrame {
     private void jListUtentiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListUtentiMouseClicked
         userSelected = jListUtenti.getSelectedValue();
         jTextFieldUserName.setText(userSelected);
+        if(userSelected==null){
+            return;
+        }
         if (jComboBoxUtenti.getSelectedItem().toString().equalsIgnoreCase("planner")) {
             passSelected = planner.getPassword(userSelected);
             jTextFieldPassword.setText(passSelected);
@@ -308,25 +310,25 @@ public class GuiAddUser extends javax.swing.JFrame {
         String user = jTextFieldUserName.getText();
         String pass = jTextFieldPassword.getText();
         if (user.isEmpty() || pass.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Select the user to delete from the list.");
+            JOptionPane.showMessageDialog(null, "Select the user to delete from the list.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         if (user.compareToIgnoreCase(userSelected) != 0 || pass.compareToIgnoreCase(passSelected) != 0) {  // se non sono state fatte modifiche non eseguo nessun aggiornamento
-            JOptionPane.showMessageDialog(null, "Don't modify the fields before the deletion.");
+            JOptionPane.showMessageDialog(null, "Don't modify the fields before the deletion.", "Warning", JOptionPane.WARNING_MESSAGE);
             jTextFieldUserName.setText("");
             jTextFieldPassword.setText("");
             return;
         }
-        
+
         if (jComboBoxUtenti.getSelectedItem().toString().equalsIgnoreCase("planner")) {
             result = planner.delete(user);
         } else {
             result = mantainer.delete(user);
         }
         if (result) {
-            JOptionPane.showMessageDialog(null, "Successful deletion.");
+            JOptionPane.showMessageDialog(null, "Successful deletion.", "Info", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "Error: user inexistent.");
+            JOptionPane.showMessageDialog(null, "Error: user inexistent.", "Error", JOptionPane.ERROR_MESSAGE);
         }
         jTextFieldUserName.setText("");
         jTextFieldPassword.setText("");
@@ -338,16 +340,23 @@ public class GuiAddUser extends javax.swing.JFrame {
         String pass = jTextFieldPassword.getText();
         boolean result;
         if (user.equals(userSelected) && pass.equals(passSelected)) {  // se non sono state fatte modifiche non eseguo nessun aggiornamento
-            JOptionPane.showMessageDialog(null, "No update maded.");
+            JOptionPane.showMessageDialog(null, "No update maded.", "Info", JOptionPane.INFORMATION_MESSAGE);
+            jTextFieldUserName.setText("");
+            jTextFieldPassword.setText("");
+            return;
+        }
+        if (user.isEmpty() && pass.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Select the user to update from the list.", "Warning", JOptionPane.WARNING_MESSAGE);
             jTextFieldUserName.setText("");
             jTextFieldPassword.setText("");
             return;
         }
         if (user.isEmpty() || pass.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Insert all fields.");
+            JOptionPane.showMessageDialog(null, "Insert all fields.", "Warning", JOptionPane.WARNING_MESSAGE);
             jTextFieldUserName.setText("");
             jTextFieldPassword.setText("");
             return;
+
         }
         if (jComboBoxUtenti.getSelectedItem().toString().equalsIgnoreCase("planner")) {  // se ho selezionato un planner
             result = planner.update(user, pass, userSelected);                           // modifico i suoi dati con quelli inseriti nelle text area user e pass
@@ -355,9 +364,9 @@ public class GuiAddUser extends javax.swing.JFrame {
             result = mantainer.update(user, pass, userSelected);                         //modifico i suoi dati con quelli inseriti nelle text area user e pass
         }
         if (result) {                                                                    // se il risultato dell'aggiornamento è true
-            JOptionPane.showMessageDialog(null, "Successful update.");             // allora l'agg è avvenuto con successo 
+            JOptionPane.showMessageDialog(null, "Successful update.", "Info", JOptionPane.INFORMATION_MESSAGE);             // allora l'agg è avvenuto con successo 
         } else {
-            JOptionPane.showMessageDialog(null, "No update maded: user already exists.");
+            JOptionPane.showMessageDialog(null, "No update maded: user already exists.", "Error", JOptionPane.ERROR_MESSAGE);
         }
         jTextFieldUserName.setText("");
         jTextFieldPassword.setText("");
@@ -371,16 +380,16 @@ public class GuiAddUser extends javax.swing.JFrame {
     private void inserimento(String username, String password, String utente) {
         if (utente.equalsIgnoreCase("planner")) {
             if (planner.insert(username, password) == true) {
-                JOptionPane.showMessageDialog(null, "Successful registration:\nUsername: " + username + "\nPassword: " + password);
+                JOptionPane.showMessageDialog(null, "Successful registration:\nUsername: " + username + "\nPassword: " + password, "Info", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(null, "Error: username already existing.");
+                JOptionPane.showMessageDialog(null, "Error: username already existing.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else {
             if (mantainer.insert(username, password) == true) {
                 disponibilità.insertMaintainerInAvailability(username);
-                JOptionPane.showMessageDialog(null, "Successful registration:\nUsername: " + username + "\nPassword: " + password);
+                JOptionPane.showMessageDialog(null, "Successful registration:\nUsername: " + username + "\nPassword: " + password, "Info", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(null, "Error: user already exists.");
+                JOptionPane.showMessageDialog(null, "Error: user already exists.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
