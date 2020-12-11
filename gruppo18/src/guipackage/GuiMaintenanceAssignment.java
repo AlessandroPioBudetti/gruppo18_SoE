@@ -5,6 +5,8 @@
  */
 package guipackage;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -41,6 +43,7 @@ public class GuiMaintenanceAssignment extends javax.swing.JFrame {
         visualizeInTable(idActivity);
         visualizeInSkillsList(idActivity);
         visualizeInActivityDataTextField(idActivity);
+        setTableDesig();
     }
 
     /**
@@ -73,11 +76,12 @@ public class GuiMaintenanceAssignment extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(162, 197, 220));
 
-        jPanel2.setBackground(new java.awt.Color(183, 214, 244));
+        jPanel2.setBackground(new java.awt.Color(141, 199, 228));
         jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(27, 64, 82));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Week n°");
 
@@ -85,7 +89,7 @@ public class GuiMaintenanceAssignment extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,10 +104,11 @@ public class GuiMaintenanceAssignment extends javax.swing.JFrame {
         weekTextField.setEditable(false);
         weekTextField.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
 
-        jPanel3.setBackground(new java.awt.Color(183, 214, 244));
+        jPanel3.setBackground(new java.awt.Color(141, 199, 228));
         jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(27, 64, 82));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Activity to assign");
 
@@ -113,7 +118,7 @@ public class GuiMaintenanceAssignment extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -127,10 +132,11 @@ public class GuiMaintenanceAssignment extends javax.swing.JFrame {
         activityDataTextField.setEditable(false);
         activityDataTextField.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
 
-        jPanel4.setBackground(new java.awt.Color(183, 214, 244));
+        jPanel4.setBackground(new java.awt.Color(141, 199, 228));
         jPanel4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(27, 64, 82));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Skills needed");
 
@@ -151,10 +157,11 @@ public class GuiMaintenanceAssignment extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel5.setBackground(new java.awt.Color(183, 214, 244));
+        jPanel5.setBackground(new java.awt.Color(141, 199, 228));
         jPanel5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(27, 64, 82));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Maintainer AVAILABILITY");
 
@@ -163,20 +170,21 @@ public class GuiMaintenanceAssignment extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(238, 238, 238)
+                .addGap(268, 268, 268)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(259, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel4)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        availabilityTable.setBackground(new java.awt.Color(162, 197, 220));
+        availabilityTable.setBackground(new java.awt.Color(213, 234, 255));
         availabilityTable.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        availabilityTable.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         availabilityTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -193,10 +201,14 @@ public class GuiMaintenanceAssignment extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        availabilityTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        availabilityTable.setFocusable(false);
+        availabilityTable.setShowVerticalLines(false);
         jScrollPane1.setViewportView(availabilityTable);
 
-        skillsList.setBackground(new java.awt.Color(162, 197, 220));
+        skillsList.setBackground(new java.awt.Color(213, 234, 255));
         skillsList.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        skillsList.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         skillsList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         skillsList.setFocusable(false);
         jScrollPane3.setViewportView(skillsList);
@@ -206,23 +218,23 @@ public class GuiMaintenanceAssignment extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(weekTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(weekTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(activityDataTextField))
-                    .addComponent(jScrollPane1)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(23, 23, 23))
+                        .addComponent(activityDataTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,9 +251,9 @@ public class GuiMaintenanceAssignment extends javax.swing.JFrame {
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE))
-                .addGap(143, 143, 143))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(126, 126, 126))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -322,6 +334,14 @@ public class GuiMaintenanceAssignment extends javax.swing.JFrame {
       for (ArrayList k : items){
         model.insertRow(model.getRowCount(),new Object[]{k.get(0).toString(), skillsPossessed(idActivity, k.get(0).toString()), k.get(1).toString()+"%",k.get(2).toString()+"%", k.get(3).toString()+"%", k.get(4).toString()+"%", k.get(5).toString()+"%", k.get(6).toString()+"%", k.get(7).toString()+"%"});
       }   
+ }
+     //213,234,255
+      private void setTableDesig(){
+      availabilityTable.getTableHeader().setBackground(new Color(141,199,228));
+      availabilityTable.getTableHeader().setForeground(new Color(27,64,82));
+      availabilityTable.getTableHeader().setFont(new Font("Tahoma",Font.BOLD,12));
+      availabilityTable.getTableHeader().setOpaque(false);
+      availabilityTable.setRowHeight(20);
  }
      private String skillsPossessed(String idActivity, String maintainer){
         String[] competencies = new String[50];

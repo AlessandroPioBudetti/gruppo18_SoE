@@ -1,6 +1,8 @@
 package guipackage;
 
 
+import java.awt.Color;
+import java.awt.Font;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -33,6 +35,7 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
         visualizeSiteInCombo();
         visualizeTypeInCombo();
         visualizeWeekInCombo();
+        setTableDesig();
     }
     
     /**
@@ -67,6 +70,9 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
         typeOfMainanceComboBox = new javax.swing.JComboBox<>();
         estimatedTimeSpinner = new javax.swing.JSpinner();
         siteComboBox = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        descriptionScrollPane = new javax.swing.JScrollPane();
+        descriptionTextArea = new javax.swing.JTextArea();
 
         manutTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -91,6 +97,9 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(162, 197, 220));
 
+        addButton.setBackground(new java.awt.Color(141, 199, 228));
+        addButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        addButton.setForeground(new java.awt.Color(34, 102, 136));
         addButton.setText("Add");
         addButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -98,6 +107,9 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
             }
         });
 
+        removeButton.setBackground(new java.awt.Color(141, 199, 228));
+        removeButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        removeButton.setForeground(new java.awt.Color(34, 102, 136));
         removeButton.setText("Remove");
         removeButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -105,6 +117,9 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
             }
         });
 
+        updateButton.setBackground(new java.awt.Color(141, 199, 228));
+        updateButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        updateButton.setForeground(new java.awt.Color(34, 102, 136));
         updateButton.setText("Update");
         updateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,18 +127,19 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
             }
         });
 
-        maintenanceTable.setBackground(new java.awt.Color(162, 197, 220));
+        maintenanceTable.setBackground(new java.awt.Color(213, 234, 255));
         maintenanceTable.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        maintenanceTable.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         maintenanceTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "TYPOLOGY OF MAINTENANCE", "TYPE", "AREA", "WEEK", "ESTIMATED INTERVENTION TIME [min]", "INTERRUPTIBLE ACTIVITY"
+                "ID", "TYPOLOGY OF MAINTENANCE", "TYPE", "AREA", "WEEK", "ESTIMATED INTERVENTION TIME [min]", "INTERRUPTIBLE ACTIVITY", "DESCRIPTION"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -131,6 +147,7 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
             }
         });
         maintenanceTable.setToolTipText("");
+        maintenanceTable.setShowVerticalLines(false);
         maintenanceTable.getTableHeader().setReorderingAllowed(false);
         maintenanceTable.setVerifyInputWhenFocusTarget(false);
         maintenanceTable.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -142,38 +159,51 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
         if (maintenanceTable.getColumnModel().getColumnCount() > 0) {
             maintenanceTable.getColumnModel().getColumn(0).setMinWidth(60);
             maintenanceTable.getColumnModel().getColumn(0).setMaxWidth(60);
-            maintenanceTable.getColumnModel().getColumn(1).setMinWidth(200);
-            maintenanceTable.getColumnModel().getColumn(1).setMaxWidth(200);
-            maintenanceTable.getColumnModel().getColumn(2).setMinWidth(200);
-            maintenanceTable.getColumnModel().getColumn(2).setMaxWidth(200);
-            maintenanceTable.getColumnModel().getColumn(3).setMinWidth(200);
-            maintenanceTable.getColumnModel().getColumn(3).setMaxWidth(200);
+            maintenanceTable.getColumnModel().getColumn(1).setMinWidth(230);
+            maintenanceTable.getColumnModel().getColumn(1).setMaxWidth(230);
+            maintenanceTable.getColumnModel().getColumn(2).setMinWidth(130);
+            maintenanceTable.getColumnModel().getColumn(2).setMaxWidth(130);
+            maintenanceTable.getColumnModel().getColumn(3).setMinWidth(150);
+            maintenanceTable.getColumnModel().getColumn(3).setMaxWidth(150);
             maintenanceTable.getColumnModel().getColumn(4).setMinWidth(60);
             maintenanceTable.getColumnModel().getColumn(4).setMaxWidth(60);
-            maintenanceTable.getColumnModel().getColumn(5).setMinWidth(230);
-            maintenanceTable.getColumnModel().getColumn(5).setMaxWidth(230);
-            maintenanceTable.getColumnModel().getColumn(6).setMinWidth(200);
-            maintenanceTable.getColumnModel().getColumn(6).setMaxWidth(200);
+            maintenanceTable.getColumnModel().getColumn(5).setMinWidth(270);
+            maintenanceTable.getColumnModel().getColumn(5).setMaxWidth(270);
+            maintenanceTable.getColumnModel().getColumn(6).setMinWidth(190);
+            maintenanceTable.getColumnModel().getColumn(6).setMaxWidth(190);
+            maintenanceTable.getColumnModel().getColumn(7).setMinWidth(150);
+            maintenanceTable.getColumnModel().getColumn(7).setMaxWidth(150);
         }
         maintenanceTable.getAccessibleContext().setAccessibleName("");
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(27, 64, 82));
         jLabel3.setText("ID:");
 
+        idTextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         idTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 idTextFieldActionPerformed(evt);
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(27, 64, 82));
         jLabel4.setText("AREA:");
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(27, 64, 82));
         jLabel5.setText("TYPE:");
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(27, 64, 82));
         jLabel6.setText("ESTIMATED INTERVENTION TIME [min]:");
 
+        typeComboBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         typeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "[-- Select one type --]" }));
 
         yesRadioButton.setBackground(new java.awt.Color(162, 197, 220));
+        yesRadioButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         yesRadioButton.setText("Yes");
         yesRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -182,6 +212,7 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
         });
 
         noRadioButton.setBackground(new java.awt.Color(162, 197, 220));
+        noRadioButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         noRadioButton.setText("No");
         noRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -189,10 +220,15 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(27, 64, 82));
         jLabel1.setText("INTERRUPTIBLE ACTIVITY:");
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(27, 64, 82));
         jLabel7.setText("WEEK:");
 
+        weekComboBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         weekComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "[-- Select one week --]" }));
         weekComboBox.setToolTipText("");
         weekComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -201,34 +237,48 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
             }
         });
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(27, 64, 82));
         jLabel8.setText("TYPOLOGY:");
 
+        typeOfMainanceComboBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         typeOfMainanceComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "[-- Select one typology --]", "Planned activity", "Un-planned activity (EWO)", "Extra activity (unplanned activity)" }));
 
+        estimatedTimeSpinner.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         estimatedTimeSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
 
+        siteComboBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         siteComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "[-- Select one site --]" }));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(27, 64, 82));
+        jLabel2.setText("ACTIVITY DESCRIPTION:");
+
+        descriptionTextArea.setColumns(20);
+        descriptionTextArea.setRows(3);
+        descriptionTextArea.setTabSize(5);
+        descriptionScrollPane.setViewportView(descriptionTextArea);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(25, 25, 25)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(estimatedTimeSpinner, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-                                            .addComponent(siteComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addComponent(estimatedTimeSpinner)
+                                            .addComponent(siteComboBox, 0, 187, Short.MAX_VALUE))
                                         .addGap(41, 41, 41)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -242,20 +292,25 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
                                     .addComponent(typeOfMainanceComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(99, 99, 99)
+                                .addGap(93, 93, 93)
                                 .addComponent(removeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(92, 92, 92)
+                                .addGap(98, 98, 98)
                                 .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(44, 44, 44)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(yesRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(noRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(yesRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(noRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(descriptionScrollPane)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 1151, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 1240, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -272,18 +327,22 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
                     .addComponent(noRadioButton)
                     .addComponent(jLabel3))
                 .addGap(9, 9, 9)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(typeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(siteComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(weekComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel6)
-                    .addComponent(estimatedTimeSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(typeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(siteComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(weekComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel6)
+                            .addComponent(estimatedTimeSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(descriptionScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addButton)
                     .addComponent(removeButton)
@@ -297,7 +356,7 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -335,13 +394,14 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
         String week=weekComboBox.getSelectedItem().toString();
         String interruptibleActivity=selectedRadioButton();
         Object estimatedTime= estimatedTimeSpinner.getValue();
+        String description=descriptionTextArea.getText();
            
-        if(id.equals("") || typeOfMainanceComboBox.getSelectedIndex()==0 || typeComboBox.getSelectedIndex()==0 || siteComboBox.getSelectedIndex()==0|| weekComboBox.getSelectedIndex()==0 || interruptibleActivity.equals(""))
+        if(id.equals("") || typeOfMainanceComboBox.getSelectedIndex()==0 || typeComboBox.getSelectedIndex()==0 || siteComboBox.getSelectedIndex()==0|| weekComboBox.getSelectedIndex()==0 || interruptibleActivity.equals("") || descriptionTextArea.equals(""))
             JOptionPane.showMessageDialog(this, "Plase enter all data.","ERROR",JOptionPane.ERROR_MESSAGE); 
         else{
         if(checkId()){
-        model.insertRow(model.getRowCount(),new Object[]{id, typeOfMainance, type,area, week, estimatedTime, interruptibleActivity});
-        maintenanceActivities.insert(id, typeOfMainance, type, area, week, estimatedTime, interruptibleActivity);
+        model.insertRow(model.getRowCount(),new Object[]{id, typeOfMainance, type,area, week, estimatedTime, interruptibleActivity, description});
+        maintenanceActivities.insert(id, typeOfMainance, type, area, week, estimatedTime, interruptibleActivity, description);
         resetFields();
         }else{
            JOptionPane.showMessageDialog(this, "Plase specify another id.","ERROR",JOptionPane.ERROR_MESSAGE);
@@ -373,11 +433,12 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
      String type=typeComboBox.getSelectedItem().toString();
      String area=siteComboBox.getSelectedItem().toString();
      String week= weekComboBox.getSelectedItem().toString(); 
-     Object estimatedTime=estimatedTimeSpinner.getValue(); 
+     Object estimatedTime=estimatedTimeSpinner.getValue();
      String interruptibleActivity=selectedRadioButton();
+     String description=descriptionTextArea.getText();
      if(maintenanceTable.getSelectedRowCount()==1 ){
            if(checkId() ||  model.getValueAt(maintenanceTable.getSelectedRow(), 0).toString().equals(idTextField.getText())){
-               maintenanceActivities.update(oldId, id, typologyOfMaintenance, type, area, week, estimatedTime, interruptibleActivity);
+               maintenanceActivities.update(oldId, id, typologyOfMaintenance, type, area, week, estimatedTime, interruptibleActivity, description);
                model.setValueAt(id, maintenanceTable.getSelectedRow(),0);
                model.setValueAt(typologyOfMaintenance, maintenanceTable.getSelectedRow(),1);
                model.setValueAt(type, maintenanceTable.getSelectedRow(),2);
@@ -385,6 +446,7 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
                model.setValueAt(week, maintenanceTable.getSelectedRow(),4);
                model.setValueAt(estimatedTime, maintenanceTable.getSelectedRow(),5);
                model.setValueAt(interruptibleActivity, maintenanceTable.getSelectedRow(),6);
+               model.setValueAt(description, maintenanceTable.getSelectedRow(),7);
                JOptionPane.showMessageDialog(this, "Update successfully", "INFORMATION MESSAGE", JOptionPane.INFORMATION_MESSAGE);
            }else{
                JOptionPane.showMessageDialog(this, "Plase specify another id.","ERROR",JOptionPane.ERROR_MESSAGE);
@@ -456,7 +518,7 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
       ArrayList <ArrayList> items=new ArrayList();
       items=maintenanceActivities.visualize();
       for (ArrayList k : items){
-        model.insertRow(model.getRowCount(),new Object[]{k.get(0).toString(),k.get(1).toString(),k.get(2).toString(), k.get(3).toString(), k.get(4).toString(), k.get(5), k.get(6).toString()});
+        model.insertRow(model.getRowCount(),new Object[]{k.get(0).toString(),k.get(1).toString(),k.get(2).toString(), k.get(3).toString(), k.get(4).toString(), k.get(5), k.get(6).toString(), k.get(7) });
       }
  }
   
@@ -476,6 +538,7 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
    yesRadioButton.setSelected(false);
    noRadioButton.setSelected(false);
    estimatedTimeSpinner.setValue(1);
+   descriptionTextArea.setText("");
  }
  
  private boolean checkId(){
@@ -496,6 +559,8 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
     String week=model.getValueAt(maintenanceTable.getSelectedRow(), 4).toString();
     Object estimatedTime=model.getValueAt(maintenanceTable.getSelectedRow(), 5);
     String interruptibleActivity=model.getValueAt(maintenanceTable.getSelectedRow(), 6).toString();
+    String description=model.getValueAt(maintenanceTable.getSelectedRow(), 7).toString();
+   // String description=
     idTextField.setText(id);
     typeOfMainanceComboBox.setSelectedItem(typologyOfMaintenance);
     typeComboBox.setSelectedItem(type);
@@ -506,12 +571,24 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
         yesRadioButton.setSelected(true);
     else
         noRadioButton.setSelected(true);
+    descriptionTextArea.setText(description);
 }
+      private void setTableDesig(){
+      maintenanceTable.getTableHeader().setBackground(new Color(141,199,228));
+      maintenanceTable.getTableHeader().setForeground(new Color(27,64,82));
+      maintenanceTable.getTableHeader().setFont(new Font("Tahoma",Font.BOLD,12));
+      maintenanceTable.getTableHeader().setOpaque(false);
+      maintenanceTable.setRowHeight(20);
+ }
+ 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
+    private javax.swing.JScrollPane descriptionScrollPane;
+    private javax.swing.JTextArea descriptionTextArea;
     private javax.swing.JSpinner estimatedTimeSpinner;
     private javax.swing.JTextField idTextField;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
