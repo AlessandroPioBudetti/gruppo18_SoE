@@ -18,9 +18,9 @@ public class TableMaintenanceActivities {
         this.stm = stm;
     }
       
-    public boolean insert(String id, String typeOfMainance, String type, String area, String week, Object estimatedTime, String interruptibleActivity){
+    public boolean insert(String id, String typeOfMainance, String type, String area, String week, Object estimatedTime, String interruptibleActivity, String description){
         StringBuilder temp= new StringBuilder();
-        temp.append("insert into manutenzione(identificativo, tipologia, sito, settimana, tipo_manutenzione, tempo_stimato, interrompibile)");
+        temp.append("insert into manutenzione(identificativo, tipologia, sito, settimana, tipo_manutenzione, tempo_stimato, interrompibile, descrizione )");
         temp.append("values(");
         temp.append("'").append(id).append("',");
         temp.append(" '").append(type).append("',");
@@ -28,7 +28,8 @@ public class TableMaintenanceActivities {
         temp.append(" '").append(week).append("',");
         temp.append(" '").append(typeOfMainance).append("',");
         temp.append(" '").append(estimatedTime).append("',");
-        temp.append(" '").append(interruptibleActivity).append("'");
+        temp.append(" '").append(interruptibleActivity).append("',");
+        temp.append(" '").append(description).append("'");
         temp.append(")");
         try{
         stm.executeUpdate(temp.toString());
@@ -39,7 +40,7 @@ public class TableMaintenanceActivities {
         }
     }
   
-    public boolean update(String oldId, String id, String typeOfMainance, String type, String area, String week, Object estimatedTime, String interruptibleActivity){
+    public boolean update(String oldId, String id, String typeOfMainance, String type, String area, String week, Object estimatedTime, String interruptibleActivity, String description){
         StringBuilder temp= new StringBuilder();
         temp.append("update manutenzione set identificativo=");
         temp.append("'").append(id).append("', tipologia=");
@@ -48,7 +49,8 @@ public class TableMaintenanceActivities {
         temp.append("'").append(week).append("', tipo_manutenzione=");
         temp.append("'").append(typeOfMainance).append("', tempo_stimato=");
         temp.append("'").append(estimatedTime).append("', interrompibile=");
-        temp.append("'").append(interruptibleActivity).append("'");
+        temp.append("'").append(interruptibleActivity).append("', descrizione=");
+        temp.append("'").append(description).append("'");
         temp.append(" where identificativo=");
         temp.append("'").append(oldId).append("'");
         try{
@@ -77,7 +79,7 @@ public class TableMaintenanceActivities {
     public ArrayList<ArrayList> visualize(){
     StringBuilder temp= new StringBuilder();
     ArrayList <ArrayList> maintenance=new ArrayList();
-    String id,typeOfMainance,type,area, week,interruptibleActivity;
+    String id,typeOfMainance,type,area, week,interruptibleActivity, description;
     Object estimatedTime;
         temp.append("select * from manutenzione");    
         try{
@@ -91,6 +93,7 @@ public class TableMaintenanceActivities {
              week=rst.getString("settimana");
              interruptibleActivity=rst.getString("interrompibile");
              estimatedTime=rst.getObject("tempo_stimato");
+             description=rst.getString("descrizione");
              con.add(id);
              con.add(type);
              con.add(typeOfMainance);
@@ -98,6 +101,7 @@ public class TableMaintenanceActivities {
              con.add(week);
              con.add(estimatedTime);
              con.add(interruptibleActivity);
+             con.add(description);
              maintenance.add(con);
          }     
         }catch(SQLException ex){
@@ -177,6 +181,23 @@ public class TableMaintenanceActivities {
         }
     }
      
+    public String getDescription(String identifier) {
+        String query = "select descrizione from Manutenzione where identificativo = '"+identifier+"'";
+        String description;
+        try {
+            ResultSet rst = stm.executeQuery(query);
+            rst.next();
+            description=rst.getString("descrizione"); 
+            return description;
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
+    }
+    
+    
+    
      public String getWeekActivity(String identifier) {
         String query = "select * from Manutenzione where identificativo = '"+identifier+"'";
         String dati;
