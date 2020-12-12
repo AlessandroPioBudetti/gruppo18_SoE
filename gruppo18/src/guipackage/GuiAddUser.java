@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import tablepackage.TableAvailability;
+import tablepackage.TableAvailabilityDay;
 import tablepackage.TableMantainer;
 import tablepackage.TablePlanner;
 
@@ -24,7 +24,7 @@ public class GuiAddUser extends javax.swing.JFrame {
     Statement st;
     TablePlanner planner;
     TableMantainer mantainer;
-    TableAvailability disponibilità;
+    TableAvailabilityDay disponibilità;
 
     /**
      * Creates new form GuiAmministratore
@@ -36,7 +36,7 @@ public class GuiAddUser extends javax.swing.JFrame {
         this.st = st;
         planner = new TablePlanner(st);
         mantainer = new TableMantainer(st);
-        disponibilità = new TableAvailability(st);
+        disponibilità = new TableAvailabilityDay(st);
     }
 
     /**

@@ -14,11 +14,11 @@ import java.util.ArrayList;
  *
  * @author 39392
  */
-public class TableAvailability {
+public class TableAvailabilityDay {
 
     private Statement stm;
 
-    public TableAvailability(Statement stm) {
+    public TableAvailabilityDay(Statement stm) {
         this.stm = stm;
     }
 

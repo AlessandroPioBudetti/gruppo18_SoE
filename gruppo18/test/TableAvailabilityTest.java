@@ -1,7 +1,7 @@
 
 import java.sql.SQLException;
 import java.sql.Statement;
-import tablepackage.TableAvailability;
+import tablepackage.TableAvailabilityDay;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +19,7 @@ import tablepackage.TableMantainer;
  */
 public class TableAvailabilityTest {
    Statement st;
-   TableAvailability a; 
+   TableAvailabilityDay a; 
    TableMantainer m;
    Dbms db;
 
@@ -27,7 +27,7 @@ public class TableAvailabilityTest {
     public void initialization() {
         db = new Dbms();
         st = db.connectToDatabase();
-        a = new TableAvailability(st);
+        a = new TableAvailabilityDay(st);
          m=new TableMantainer(st);
     }
    

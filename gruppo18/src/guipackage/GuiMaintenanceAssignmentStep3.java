@@ -9,9 +9,10 @@ import java.awt.Color;
 import java.awt.Font;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import tablepackage.TableCompetenzeAttività;
-import tablepackage.TableAvailability;
+import tablepackage.TableAvailabilityDay;
 import tablepackage.TableMaintenanceActivities;
 import tablepackage.TableMantainer;
 
@@ -19,31 +20,33 @@ import tablepackage.TableMantainer;
  *
  * @author 39392
  */
-public class GuiMaintenanceAssignment extends javax.swing.JFrame {
+public class GuiMaintenanceAssignmentStep3 extends javax.swing.JFrame {
     private Statement st;
     private DefaultTableModel model;
     private TableMantainer mantainer;
     private TableCompetenzeAttività competenzeAttività;
     private TableMaintenanceActivities maintenanceActivities;
-    private TableAvailability disponibilità;
+    private TableAvailabilityDay disponibilità;
     private TableCompetenzeAttività competenze;
     private String idActivity;
     
     
-    public GuiMaintenanceAssignment(Statement st) {
+    public GuiMaintenanceAssignmentStep3(Statement st, String id) {
         initComponents();
+        this.st=st;
         mantainer= new TableMantainer(st);
         competenzeAttività= new TableCompetenzeAttività(st);
         maintenanceActivities= new TableMaintenanceActivities(st);
-        disponibilità= new TableAvailability(st);
+        disponibilità= new TableAvailabilityDay(st);
         competenze= new TableCompetenzeAttività(st);
         model=(DefaultTableModel)availabilityTable.getModel();
-        idActivity="123";
+        this.idActivity=id;
         visualizeInWeekTextField(idActivity);
         visualizeInTable(idActivity);
         visualizeInSkillsList(idActivity);
         visualizeInActivityDataTextField(idActivity);
         setTableDesig();
+        
     }
 
     /**
@@ -73,6 +76,11 @@ public class GuiMaintenanceAssignment extends javax.swing.JFrame {
 
         setTitle("ASSIGNMENT OF A MAINTENANCE ACTIVITY");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(162, 197, 220));
 
@@ -201,9 +209,15 @@ public class GuiMaintenanceAssignment extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        availabilityTable.setColumnSelectionAllowed(true);
         availabilityTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         availabilityTable.setFocusable(false);
         availabilityTable.setShowVerticalLines(false);
+        availabilityTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                availabilityTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(availabilityTable);
 
         skillsList.setBackground(new java.awt.Color(213, 234, 255));
@@ -266,13 +280,28 @@ public class GuiMaintenanceAssignment extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void availabilityTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_availabilityTableMouseClicked
+     String mantainer= (String) model.getValueAt(availabilityTable.getSelectedRow(), 0);
+     int day=  availabilityTable.getSelectedColumn()-1;
+     String skills= model.getValueAt(availabilityTable.getSelectedRow(),1).toString();
+     int week=maintenanceActivities.getWeekActivity(idActivity);
+     if(availabilityTable.getSelectedColumn()==0 || availabilityTable.getSelectedColumn()==1){
+         JOptionPane.showMessageDialog(this, "The selected column is invalid. For the maintener you want to assign the task to, select a day of the week.","ERROR",JOptionPane.ERROR_MESSAGE);
+     }else{
+     new GuiMaintenanceAssigmentStep4(st,idActivity,mantainer, day, skills, week).setVisible(true);
+     }
+    }//GEN-LAST:event_availabilityTableMouseClicked
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+             JOptionPane.showMessageDialog(this, "Sei sicuro di voler chiudere?","ERROR",JOptionPane.ERROR_MESSAGE);
+
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments
@@ -291,14 +320,17 @@ public class GuiMaintenanceAssignment extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GuiMaintenanceAssignment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GuiMaintenanceAssignmentStep3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GuiMaintenanceAssignment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GuiMaintenanceAssignmentStep3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GuiMaintenanceAssignment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GuiMaintenanceAssignmentStep3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GuiMaintenanceAssignment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GuiMaintenanceAssignmentStep3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
@@ -316,9 +348,9 @@ public class GuiMaintenanceAssignment extends javax.swing.JFrame {
     }
      
     private void visualizeInWeekTextField(String idActivity){
-     String week = new String();
+     int week;
      week=maintenanceActivities.getWeekActivity(idActivity);
-     weekTextField.setText(week);
+     weekTextField.setText(" "+week);
     }
     
     private void visualizeInActivityDataTextField(String idActivity){
@@ -329,8 +361,8 @@ public class GuiMaintenanceAssignment extends javax.swing.JFrame {
     
      private void visualizeInTable(String idActivity){
       ArrayList <ArrayList> items=new ArrayList();
-      String selectedWeek=maintenanceActivities.getWeekActivity(idActivity);
-      items=disponibilità.visualize(selectedWeek);
+      int selectedWeek=maintenanceActivities.getWeekActivity(idActivity);
+      items=disponibilità.visualize(""+selectedWeek);
       for (ArrayList k : items){
         model.insertRow(model.getRowCount(),new Object[]{k.get(0).toString(), skillsPossessed(idActivity, k.get(0).toString()), k.get(1).toString()+"%",k.get(2).toString()+"%", k.get(3).toString()+"%", k.get(4).toString()+"%", k.get(5).toString()+"%", k.get(6).toString()+"%", k.get(7).toString()+"%"});
       }   
@@ -348,7 +380,6 @@ public class GuiMaintenanceAssignment extends javax.swing.JFrame {
         ArrayList<String>competenciesMaintainer= new ArrayList();
         int count=0, count2=0;
         competencies=competenzeAttività.visualizeCompetencies(idActivity);
-        //questo metodo andrà chiamato sull'oggetto tableCompManut
         competenciesMaintainer=competenze.visualizeSkillsMaintenance(maintainer);
         for (String k : competencies){
             if(competenciesMaintainer.contains(k))

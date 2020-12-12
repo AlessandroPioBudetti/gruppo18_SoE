@@ -198,20 +198,18 @@ public class TableMaintenanceActivities {
     
     
     
-     public String getWeekActivity(String identifier) {
+     public int getWeekActivity(String identifier) {
         String query = "select * from Manutenzione where identificativo = '"+identifier+"'";
-        String dati;
-        String week;
+        int week;
         try {
             ResultSet rst = stm.executeQuery(query);
             rst.next();
-            week=rst.getString("settimana"); 
-            dati = "     "+ week;
-            return dati;
+            week=rst.getInt("settimana"); 
+            return week;
             
         } catch (SQLException ex) {
             System.out.println("Errore visualizza attività:\n"+ex.getMessage());
-            return null;
+            return 0;
         }
     }
 }

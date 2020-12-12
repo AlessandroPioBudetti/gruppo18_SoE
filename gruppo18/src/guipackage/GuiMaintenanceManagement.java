@@ -163,16 +163,16 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
             maintenanceTable.getColumnModel().getColumn(1).setMaxWidth(230);
             maintenanceTable.getColumnModel().getColumn(2).setMinWidth(130);
             maintenanceTable.getColumnModel().getColumn(2).setMaxWidth(130);
-            maintenanceTable.getColumnModel().getColumn(3).setMinWidth(150);
-            maintenanceTable.getColumnModel().getColumn(3).setMaxWidth(150);
+            maintenanceTable.getColumnModel().getColumn(3).setMinWidth(120);
+            maintenanceTable.getColumnModel().getColumn(3).setMaxWidth(120);
             maintenanceTable.getColumnModel().getColumn(4).setMinWidth(60);
             maintenanceTable.getColumnModel().getColumn(4).setMaxWidth(60);
             maintenanceTable.getColumnModel().getColumn(5).setMinWidth(270);
             maintenanceTable.getColumnModel().getColumn(5).setMaxWidth(270);
             maintenanceTable.getColumnModel().getColumn(6).setMinWidth(190);
             maintenanceTable.getColumnModel().getColumn(6).setMaxWidth(190);
-            maintenanceTable.getColumnModel().getColumn(7).setMinWidth(150);
-            maintenanceTable.getColumnModel().getColumn(7).setMaxWidth(150);
+            maintenanceTable.getColumnModel().getColumn(7).setMinWidth(180);
+            maintenanceTable.getColumnModel().getColumn(7).setMaxWidth(180);
         }
         maintenanceTable.getAccessibleContext().setAccessibleName("");
 
@@ -436,7 +436,7 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
      Object estimatedTime=estimatedTimeSpinner.getValue();
      String interruptibleActivity=selectedRadioButton();
      String description=descriptionTextArea.getText();
-     if(maintenanceTable.getSelectedRowCount()==1 ){
+     if(maintenanceTable.getSelectedRowCount()==1){
            if(checkId() ||  model.getValueAt(maintenanceTable.getSelectedRow(), 0).toString().equals(idTextField.getText())){
                maintenanceActivities.update(oldId, id, typologyOfMaintenance, type, area, week, estimatedTime, interruptibleActivity, description);
                model.setValueAt(id, maintenanceTable.getSelectedRow(),0);
@@ -448,6 +448,7 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
                model.setValueAt(interruptibleActivity, maintenanceTable.getSelectedRow(),6);
                model.setValueAt(description, maintenanceTable.getSelectedRow(),7);
                JOptionPane.showMessageDialog(this, "Update successfully", "INFORMATION MESSAGE", JOptionPane.INFORMATION_MESSAGE);
+               resetFields();
            }else{
                JOptionPane.showMessageDialog(this, "Plase specify another id.","ERROR",JOptionPane.ERROR_MESSAGE);
            }
