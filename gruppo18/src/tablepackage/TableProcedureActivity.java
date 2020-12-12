@@ -8,6 +8,8 @@ package tablepackage;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -55,6 +57,19 @@ public class TableProcedureActivity {
             System.out.println("Errore delete procedure_attività:\n" + ex.getMessage());
             return false;
         }
-    }     
+    }
+    
+    public String getProcedureName(String id){
+        String query = "select procedura from procedure_attività where attività = '"+id+"'";
+        try {
+            ResultSet rs = st.executeQuery(query);
+            rs.next();
+            return rs.getString("procedura");
+        } catch (SQLException ex) {
+            System.out.println("Errore getProcedureName:\n" + ex.getMessage());
+            return null;
+        }
+        
+    }
             
 }
