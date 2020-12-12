@@ -5,9 +5,18 @@
  */
 package guipackage;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import tablepackage.TableCompetenzeAttività;
 import tablepackage.TableMaintenanceActivities;
+import tablepackage.TableProcedure;
 import tablepackage.TableProcedureActivity;
 
 /**
@@ -20,6 +29,8 @@ public class GuiVerificaAttività extends javax.swing.JFrame {
        private TableMaintenanceActivities attività;
        private TableCompetenzeAttività competenze;
        private TableProcedureActivity procedure;
+       private TableProcedure proc;
+       Statement st;
     /**
      * Creates new form GuiVerificaAttività
      */
@@ -27,10 +38,11 @@ public class GuiVerificaAttività extends javax.swing.JFrame {
         initComponents();
         this.week=week;
         this.id=id;
+        this.st=st;
         attività = new TableMaintenanceActivities(st);
         competenze = new TableCompetenzeAttività(st);
         procedure = new TableProcedureActivity(st);
-        
+        proc = new TableProcedure(st);
         visualizzaCompetenze();
         visualizzaAttività();
         
@@ -119,6 +131,11 @@ public class GuiVerificaAttività extends javax.swing.JFrame {
         jButtonFile.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jButtonFile.setForeground(new java.awt.Color(34, 102, 136));
         jButtonFile.setText("PROCEDURE FILE");
+        jButtonFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFileActionPerformed(evt);
+            }
+        });
 
         jTextFieldProcedure.setBackground(new java.awt.Color(213, 234, 255));
         jTextFieldProcedure.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
@@ -140,6 +157,11 @@ public class GuiVerificaAttività extends javax.swing.JFrame {
         jButtonForward.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jButtonForward.setForeground(new java.awt.Color(34, 102, 136));
         jButtonForward.setText("FORWARD");
+        jButtonForward.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonForwardActionPerformed(evt);
+            }
+        });
 
         jPanel3.setBackground(new java.awt.Color(141, 199, 228));
         jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -159,10 +181,10 @@ public class GuiVerificaAttività extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jPanel4.setBackground(new java.awt.Color(141, 199, 228));
@@ -176,10 +198,10 @@ public class GuiVerificaAttività extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(25, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,14 +223,14 @@ public class GuiVerificaAttività extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addGap(89, 89, 89)
                 .addComponent(jLabel3)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addContainerGap())
         );
@@ -225,16 +247,16 @@ public class GuiVerificaAttività extends javax.swing.JFrame {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
-                .addGap(31, 31, 31))
+                .addGap(72, 72, 72))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel4)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -245,34 +267,30 @@ public class GuiVerificaAttività extends javax.swing.JFrame {
                 .addGap(55, 55, 55)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButtonFile)
-                                .addGap(28, 28, 28)
-                                .addComponent(jTextFieldProcedure, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                    .addGap(40, 40, 40)
-                                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(175, 175, 175)
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(239, 239, 239)
-                                .addComponent(jButtonForward, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(215, 215, 215)
-                                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jTextFieldWeek, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(117, 117, 117)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldActivity, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextFieldActivity, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jButtonFile)
+                                .addGap(28, 28, 28)
+                                .addComponent(jTextFieldProcedure, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(239, 239, 239)
+                                .addComponent(jButtonForward, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(175, 175, 175)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane4)
+                                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -281,13 +299,13 @@ public class GuiVerificaAttività extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextFieldWeek, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTextFieldActivity, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -337,6 +355,40 @@ public class GuiVerificaAttività extends javax.swing.JFrame {
     private void jTextFieldProcedureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldProcedureActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldProcedureActionPerformed
+
+    private void jButtonForwardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonForwardActionPerformed
+        this.setVisible(false);
+        new GuiMaintenanceAssignment(st).setVisible(true);
+    }//GEN-LAST:event_jButtonForwardActionPerformed
+
+    private void jButtonFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFileActionPerformed
+        String url = proc.getUrl(procedure.getProcedureName(id));
+        if (url.isEmpty()){
+            JOptionPane.showMessageDialog(null,"No procedure defined for this activity","Error",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try {
+            URL uri = new URL(url);
+            Desktop.getDesktop().browse(uri.toURI());
+            //La classe Desktop ha un costruttore privato, e per questo viene istanziato tramite il suo metodo static sync getDestkop().
+            //Una volta istanziato l'oggetto, possiamo chiamare la funzione browse che ci permette di lanciare il nostro browser di default.
+            //Il metodo browse vuole un oggetto di tipo URI, ottenibile grazie al metodo toURI di URL.
+            // new URL(url) prende la stringa e la converte in URL e se fallisce lancia l'eccezione MalformedURLException.
+            // il metodo toURI (Uniform Resource Identifier) converte il corrispettivo URL in URI e lancia, se fallisce, l'eccezione URISyntaxException.
+        } catch (MalformedURLException ex) {
+            //by new URL(url) - Questa eccezione è lanciata se non viene specificato alcun protocollo, o viene trovato un protocollo sconosciuto o la specifica(url nel nostro caso) è nulla 
+            Logger.getLogger(GuiProcedureManagement.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,"Unspecified or incorrect protocol or missing URL.","Malformed",JOptionPane.ERROR_MESSAGE);
+        } catch (URISyntaxException ex) {
+            //by toURI() - Questa eccezione è lanciata nel caso in cui l'URL non è formattato rigorosamente secondo RFC2396 e non può essere convertito in un URI.
+            Logger.getLogger(GuiProcedureManagement.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,"URL not formatted correctly according to RFC2396","URISyntax.",JOptionPane.ERROR_MESSAGE);
+        } catch (IOException ex) {
+            //by browse() - Lancia un eccezione se il browser di default non è stato trovato o ha fallito nel lanciare il browser stesso.
+            Logger.getLogger(GuiProcedureManagement.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,"Default browser not found or browser launch failed.","BrowserError",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonFileActionPerformed
     private void visualizzaCompetenze(){
         String[] comp;
        comp = competenze.visualizeCompetencies(id);

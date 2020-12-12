@@ -36,44 +36,44 @@ public class TableMaintenanceActivitiesTest {
     public void testInsertNew(){
        site.insert("SITE");
        type.insert("TYPE");
-       assertTrue(t.insert("ID1", "Planned activity", "TYPE", "SITE", "2", "30", "No"));
+       assertTrue(t.insert("ID1", "Planned activity", "TYPE", "SITE", "2", "30", "No","asdfg"));
     }
 
     @Test
     public void testInsertDuplicate() {
         site.insert("SITE");
         type.insert("TYPE");
-        t.insert("ID1", "Planned activity", "TYPE", "SITE", "2", "30", "No");
-        assertFalse(t.insert("ID1", "Planned activity", "TYPE", "SITE", "2", "30", "No"));
+        t.insert("ID1", "Planned activity", "TYPE", "SITE", "2", "30", "No","asdfgh");
+        assertFalse(t.insert("ID1", "Planned activity", "TYPE", "SITE", "2", "30", "No","asdfgh"));
     }
 
     @Test
     public void testUpdateNoDuplicate() {
         site.insert("SITE");
         type.insert("TYPE");
-        t.insert("ID1", "Planned activity", "TYPE", "SITE", "2", "30", "No");
-        assertTrue(t.update("ID1","ID4", "Planned activity", "TYPE", "SITE", "2", "30", "No"));
+        t.insert("ID1", "Planned activity", "TYPE", "SITE", "2", "30", "No","asdfg");
+        assertTrue(t.update("ID1","ID4", "Planned activity", "TYPE", "SITE", "2", "30", "No","asdfgh"));
     }
     
     @Test
     public void testUpdateDuplicate() {
        site.insert("SITE");
        type.insert("TYPE");
-       t.insert("ID2", "Planned activity", "TYPE", "SITE", "2", "30", "No");
-       t.insert("ID3", "Planned activity", "TYPE", "SITE", "2", "30", "No");
-       assertFalse(t.update("ID2","ID3", "Planned activity", "IDRAULICA", "Nord-Est", "2", "30", "No"));
+       t.insert("ID2", "Planned activity", "TYPE", "SITE", "2", "30", "No","asdfgh");
+       t.insert("ID3", "Planned activity", "TYPE", "SITE", "2", "30", "No","asdfgh");
+       assertFalse(t.update("ID2","ID3", "Planned activity", "IDRAULICA", "Nord-Est", "2", "30", "No","asdfgh"));
     }
     
     @Test
     public void testUpdateUnexisting(){
-        assertTrue(t.update("ID5","ID2", "Planned activity", "IDRAULICA", "Nord-Est", "2", "30", "No"));
+        assertTrue(t.update("ID5","ID2", "Planned activity", "IDRAULICA", "Nord-Est", "2", "30", "No","asdfgh"));
     }
     
     @Test
     public void testDelete(){
         site.insert("SITE");
         type.insert("TYPE");
-        t.insert("ID3", "Planned activity", "TYPE", "SITE", "2", "30", "No");
+        t.insert("ID3", "Planned activity", "TYPE", "SITE", "2", "30", "No","asdfgh");
         assertTrue(t.delete("ID3"));
     }
     

@@ -39,14 +39,14 @@ public class TableCompetenzeAttivitàTest {
         ts = new TableSite(st);
         ts.insert("xxx");
         tc.insert("aaaaa");
-        tma.insert("ID1", "Planned activity", "IDRAULICA", "xxx", "2", "30", "No");
+        tma.insert("ID1", "Planned activity", "IDRAULICA", "xxx", "2", "30", "No","asdfgh");
         tca.insert("aaaaa", "ID1");
     }
     
     @Test
     public void testInsertNew(){
         tc.insert("aabbb");
-        tma.insert("ID2", "Planned activity", "IDRAULICA", "xxx", "20", "310", "Yes");
+        tma.insert("ID2", "Planned activity", "IDRAULICA", "xxx", "20", "310", "Yes","asdfgh");
         assertTrue(tca.insert("aabbb", "ID2"));
     }
     
