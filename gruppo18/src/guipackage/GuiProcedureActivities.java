@@ -228,7 +228,14 @@ String selectedProcedure;
         if(procedure_attività.insertProcToAct(actitivy, proced))
             visualizzaProcedureAttività(selectedProcedure);
         else
-            JOptionPane.showMessageDialog(null,"Procedure already added for this activity or another activity");
+            //In questo caso, dovevano essere gestite le eccezioni in modo separato: 
+            //1: Caso in cui una attività ha già una procedura (vincolo_chiave_duplicata)
+            //2: Caso in cui la procedura è stata già inserita per una attività (vincolo_procedura_duplicata)
+            //Queste eccezioni esistono in quanto vi è una relazione 1-1 fra le due entità (1 attività può avere 1 procedura, e 1 procedura può essere assegnata ad una sola attività)
+            JOptionPane.showMessageDialog(null,"Caution:\n" +
+            "- The selected activity already has a procedure;\n" +
+            "- The selected procedure has already been assigned to an activity.\n" +
+            "Check carefully.", "ERROR", JOptionPane.ERROR_MESSAGE);
     }
      private void deleteAssign(String activity){
         

@@ -8,8 +8,6 @@ package tablepackage;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -27,7 +25,8 @@ public class TableProcedureActivity {
             st.executeUpdate(query);
             return true;
         } catch (SQLException ex) {
-            System.out.println("Errore inserimento procedure_attività:\n" + ex);
+            System.out.println("Errore inserimento procedure_attività:\n" + ex.getMessage());
+            //Bisognerebbe gestire il caso in cui l'errore è perché la chiave ha già una procedura o perché quella procedura è usata
             return false;
         }
     }
