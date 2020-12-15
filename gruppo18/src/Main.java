@@ -3,6 +3,10 @@ import guipackage.GuiCompetencies;
 import guipackage.GuiCompetenzeAttività;
 import guipackage.GuiCompetenzeMantainer;
 import guipackage.GuiLogin;
+import guipackage.GuiMaintenanceAssignmentStep3;
+import guipackage.GuiMaintenanceManagement;
+import guipackage.GuiTypeManagment;
+import guipackage.GuiVerificaAttività;
 import java.sql.Statement;
 
 
@@ -46,7 +50,13 @@ java.awt.EventQueue.invokeLater(new Runnable() {
 
  java.awt.EventQueue.invokeLater(new Runnable() {
      public void run() {
-        new GuiCompetenzeMantainer(st).setVisible(true);
+        //new GuiCompetenzeMantainer(st).setVisible(true);
+        // new GuiLogin(st).setVisible(true);
+      // new GuiMaintenanceAssignmentStep3(st, "123").setVisible(true);
+        new GuiVerificaAttività(st, 2, "127").setVisible(true);
+         //new  GuiMaintenanceManagement(st).setVisible(true);
+        //new  GuiTypeManagment(st).setVisible(true);
+        
       }
      });
  }

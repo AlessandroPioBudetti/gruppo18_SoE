@@ -196,7 +196,20 @@ public class TableMaintenanceActivities {
         }
     }
     
-    
+    public int getEstimatedTime(String identifier) {
+        String query = "select tempo_stimato from Manutenzione where identificativo = '"+identifier+"'";
+        int description;
+        try {
+            ResultSet rst = stm.executeQuery(query);
+            rst.next();
+            description=rst.getInt("tempo_stimato"); 
+            return description;
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return 0;
+        }
+    }
     
      public int getWeekActivity(String identifier) {
         String query = "select * from Manutenzione where identificativo = '"+identifier+"'";

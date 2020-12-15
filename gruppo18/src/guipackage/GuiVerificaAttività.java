@@ -358,7 +358,7 @@ public class GuiVerificaAttività extends javax.swing.JFrame {
 
     private void jButtonForwardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonForwardActionPerformed
         this.setVisible(false);
-        new GuiMaintenanceAssignmentStep3(st, id).setVisible(true);
+        new GuiMaintenanceAssignmentStep3(st, id, week).setVisible(true);
     }//GEN-LAST:event_jButtonForwardActionPerformed
 
     private void jButtonFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFileActionPerformed

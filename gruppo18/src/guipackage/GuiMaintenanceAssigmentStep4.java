@@ -5,12 +5,16 @@
  */
 package guipackage;
 
+import com.sun.tools.javac.util.Convert;
 import java.awt.Color;
 import java.awt.Font;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import tablepackage.TableAssignedActivities;
+import tablepackage.TableAvailabilityDay;
 import tablepackage.TableAvailabilityHours;
 import tablepackage.TableCompetenzeAttività;
 import tablepackage.TableMaintenanceActivities;
@@ -20,35 +24,44 @@ import tablepackage.TableMaintenanceActivities;
  * @author 39392
  */
 public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
-
+    private Statement st;
+    private String id;
     private String mantainer;
     private int day;
     private String skills;
+    private int week;
+    private Boolean changes;
+    private int missingTime;
     private DefaultTableModel model;
     private TableMaintenanceActivities maintenanceActivities;
     private TableCompetenzeAttività competenzeAttività;
     private TableAvailabilityHours availabilityHours;
-    private int week;
+    private TableAssignedActivities assignedActivities;
+    private TableAvailabilityDay availabilityDay;
     
-    public GuiMaintenanceAssigmentStep4(Statement st, String id, String mantainer, int day, String skills, int week) {
-        initComponents(); 
-        this.day=day;
+    public GuiMaintenanceAssigmentStep4(Statement st, String id, String mantainer, int day, String skills, int week, Boolean changes, int missingTime) {
+        initComponents();
+        this.st=st;
+        this.id=id;
         this.mantainer=mantainer;
+        this.day=day;
         this.skills=skills;
         this.week=week;
+        this.changes=changes; //Il valore di default di changes è false
+        this.missingTime=missingTime; //il valore di default è 0
         model=(DefaultTableModel)availabilityTable2.getModel();
         maintenanceActivities= new TableMaintenanceActivities(st);
         competenzeAttività= new TableCompetenzeAttività(st);
         availabilityHours=new TableAvailabilityHours(st);
+        assignedActivities= new TableAssignedActivities(st);
+        availabilityDay= new TableAvailabilityDay(st);
         activityDataTextField.setText(""+day);
         visualizeWeekTextField(id);
         visualizeInActivityDataTextField(id);
         visualizeDay();
         visualizeMantainerTextField();
-        visualizeInTable(id);
+        visualizeInTable();
         setTableDesig();
-        
-        
     }
 
     /**
@@ -76,11 +89,16 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
         availabilityTable2 = new javax.swing.JTable();
         sendButton = new javax.swing.JButton();
         dayTextField1 = new javax.swing.JTextField();
+        jPanel5 = new javax.swing.JPanel();
+        xButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setTitle("MAINTENACE ASSIGMENT");
+        setUndecorated(true);
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(162, 197, 220));
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setToolTipText("");
 
         jPanel.setBackground(new java.awt.Color(141, 199, 228));
@@ -177,7 +195,9 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(maintenanceAvailabilityLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(maintenanceAvailabilityLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 1114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -235,12 +255,63 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
             }
         });
 
+        jPanel5.setBackground(new java.awt.Color(44, 137, 232));
+
+        xButton.setBackground(new java.awt.Color(141, 199, 228));
+        xButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        xButton.setForeground(new java.awt.Color(34, 102, 136));
+        xButton.setText("X");
+        xButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                xButtonMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                xButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                xButtonMouseExited(evt);
+            }
+        });
+        xButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel1.setText("MAINTENACE ASSIGMENT #STEP4");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(xButton))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(xButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 1112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -252,29 +323,25 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
                             .addComponent(dayTextField1))
                         .addGap(14, 14, 14)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(1368, 1368, 1368)
+                                .addGap(158, 158, 158)
                                 .addComponent(weekTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(activityDataTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 608, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(activityDataTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1181, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(560, 560, 560)
+                        .addGap(474, 474, 474)
                         .addComponent(sendButton, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9)
                 .addComponent(weekTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(9, 9, 9)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -299,16 +366,17 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void sendButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sendButtonMouseClicked
@@ -316,7 +384,62 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
     }//GEN-LAST:event_sendButtonMouseClicked
 
     private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
-        // TODO add your handling code here:
+        int estimatedTime=maintenanceActivities.getEstimatedTime(id);
+        int column=availabilityTable2.getSelectedColumn();
+        int row=availabilityTable2.getSelectedRow();
+        int missingTime2;
+        int selectedHours=Integer.parseInt(model.getValueAt(row, column).toString());
+        String percentuale=newPercentuale(estimatedTime);
+        //int selectedHours=availabilityHours.getAvailabilityHours(id, ""+week, getDay().toUpperCase(), column);
+        
+        if(availabilityTable2.getSelectedColumnCount()==1){
+        if(selectedHours==0){
+           JOptionPane.showMessageDialog(this, "The task cannot be assigned, the mantainer is already busy.","ERROR",JOptionPane.ERROR_MESSAGE); 
+        }else if(selectedHours >= estimatedTime){
+           if(!changes){
+           missingTime=selectedHours-estimatedTime;
+           availabilityHours.update(mantainer,week, getDay().toUpperCase(), column, missingTime);
+           availabilityDay.update(mantainer, week, day, percentuale);
+          //assignedActivities.insert(id, mantainer);
+          //update attr.  maintenanceActivities
+          JOptionPane.showMessageDialog(this, "The maintenance task was successfully assigned.", "INFORMATION MESSAGE", JOptionPane.INFORMATION_MESSAGE);  
+          this.setVisible(false);
+          new GuiMenuPlanner(st).setVisible(true);
+           }}else{
+             if(!changes){
+             missingTime=estimatedTime-selectedHours; 
+             availabilityHours.update(mantainer,week, getDay().toUpperCase(), column, 0);
+             availabilityDay.update(mantainer, week, day, percentuale);
+             JOptionPane.showMessageDialog(this, "The maintenance task was successfully assigned, there are still "+missingTime+" min to be assigned.", "INFORMATION MESSAGE", JOptionPane.INFORMATION_MESSAGE);
+             //ora bisogna effettuare una seconda selezione
+             this.setVisible(false);
+             new GuiMaintenanceAssigmentStep4(st,id,mantainer, day, skills, week, true, missingTime).setVisible(true);
+             }else{
+                if(selectedHours >= missingTime){
+                    missingTime2=selectedHours-missingTime; //60-15=45
+                    availabilityHours.update(mantainer,week, getDay().toUpperCase(), column, missingTime2);
+                    availabilityDay.update(mantainer, week, day, percentuale);
+                    JOptionPane.showMessageDialog(this, "The maintenance task was successfully assigned.", "INFORMATION MESSAGE", JOptionPane.INFORMATION_MESSAGE);  
+                    new GuiMenuPlanner(st).setVisible(true); 
+                    this.setVisible(false);
+                }else{
+                    missingTime2=missingTime-selectedHours;   
+                    availabilityHours.update(mantainer,week, getDay().toUpperCase(), column, 0);
+                    availabilityDay.update(mantainer, week, day, percentuale);
+                    JOptionPane.showMessageDialog(this, "The maintenance task was successfully assigned, there are still "+missingTime2+" min to be assigned.", "INFORMATION MESSAGE", JOptionPane.INFORMATION_MESSAGE);
+                    new GuiMaintenanceAssigmentStep4(st,id,mantainer, day, skills, week, true, missingTime2).setVisible(true);
+                    this.setVisible(false);
+                }
+                 
+             }
+            }
+       // }else if(availabilityTable2.getSelectedRowCount()==2){
+           
+       }else{ 
+           JOptionPane.showMessageDialog(this, "Please, make a selection.","ERROR",JOptionPane.ERROR_MESSAGE);
+       }
+       
+        
     }//GEN-LAST:event_sendButtonActionPerformed
 
     private void dayTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dayTextFieldActionPerformed
@@ -330,6 +453,34 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
     private void activityDataTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activityDataTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_activityDataTextFieldActionPerformed
+
+    private void xButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xButtonMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_xButtonMouseClicked
+
+    private void xButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xButtonActionPerformed
+        int seletOption;
+        if (changes){
+        seletOption= JOptionPane.showConfirmDialog(this, "Are you sure you want to go back and undo your changes?", "SELECT AN OPTION", JOptionPane.YES_NO_OPTION);
+            if(seletOption==0){
+                //da gestire il ripristino
+                new GuiMaintenanceAssignmentStep3(st, id, week).setVisible(true);
+                this.setVisible(false);
+            }
+        }else{
+             new GuiMaintenanceAssignmentStep3(st, id, week).setVisible(true);
+             this.setVisible(false);
+            }
+           
+    }//GEN-LAST:event_xButtonActionPerformed
+
+    private void xButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xButtonMouseEntered
+         xButton.setBackground(Color.red);
+    }//GEN-LAST:event_xButtonMouseEntered
+
+    private void xButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xButtonMouseExited
+        xButton.setBackground(new Color(141,199,228));
+    }//GEN-LAST:event_xButtonMouseExited
 
     /**
      * @param args the command line arguments
@@ -366,51 +517,20 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
             }
         });
     }
+ 
    private void visualizeWeekTextField(String idActivity){
-    int week ;
-    week=maintenanceActivities.getWeekActivity(idActivity);
     dayTextField.setText(" "+week);
-    
 }
-   private String getDay(){
-      switch (day){
-		case 1: 
-                    return "Monday";
-		 
-		case 2: 
-                    return "Tuesday";
-		
-		case 3: 
-                    return "Wednesday";
-		
-		case 4: 
-                    return "Thursday";
-		
-                case 5: 
-                    return "Friday";
-		
-                case 6: 
-                    return "Saturday";
-		
-                case 7: 
-                    return "Sunday";
-		
-    } 
-      return "";
-   }
    
    private void visualizeDay(){
-    String dayS=getDay();
-    dayLabel.setText(dayS);
+    dayLabel.setText(getDay());
     Calendar cal = Calendar.getInstance();
     cal.set(Calendar.YEAR, 2021);
     cal.set(Calendar.WEEK_OF_YEAR, week);
-    cal.set(Calendar.DAY_OF_WEEK,day+1);
+    cal.set(Calendar.DAY_OF_WEEK,day);
     int day =cal.get(Calendar.DAY_OF_WEEK_IN_MONTH);
-    int ordinalDay = cal.get(Calendar.DAY_OF_YEAR);
-    dayTextField1.setText(""+day);
+    dayTextField1.setText(" "+day);
 }
-   
    
    private void visualizeInActivityDataTextField(String idActivity){
         String data = new String();
@@ -422,15 +542,39 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
     maintenanceAvailabilityLabel.setText("AVAILABILITY "+mantainer.toUpperCase());
 }
    
-   private void visualizeInTable(String idActivity){
+   private void visualizeInTable(){
       ArrayList <ArrayList> items=new ArrayList();
-      String dayS=getDay();
-      int selectedWeek=maintenanceActivities.getWeekActivity(idActivity);
-      items=availabilityHours.visualize(""+selectedWeek, dayS, mantainer);
+      String dayS=getDay().toUpperCase();
+      items=availabilityHours.visualize(week, dayS, mantainer);
+      if(items.isEmpty()){
+       availabilityHours.insertDefault(mantainer,week, dayS); 
+       items=availabilityHours.visualize(week, dayS, mantainer);
+      }
       for (ArrayList k : items){
-        model.insertRow(model.getRowCount(),new Object[]{mantainer, skills, k.get(0).toString()+" min" ,k.get(1).toString()+" min",k.get(2).toString()+" min", k.get(3).toString()+" min",k.get(4).toString()+" min", k.get(5).toString()+" min", k.get(6).toString()+" min"});
+        model.insertRow(model.getRowCount(),new Object[]{mantainer, skills, k.get(0).toString(),k.get(1).toString(),k.get(2).toString(), k.get(3).toString(),k.get(4).toString(), k.get(5).toString(), k.get(6).toString()});
       }   
  }
+   
+     private String getDay(){
+      switch (day){
+		case 2: 
+                    return "Monday";
+		case 3: 
+                    return "Tuesday";
+		case 4: 
+                    return "Wednesday";
+		case 5: 
+                    return "Thursday";
+                case 6: 
+                    return "Friday";
+                case 7: 
+                    return "Saturday";
+                case 8: 
+                    return "Sunday";	
+    } 
+      return "";
+   }
+   
      //213,234,255
     private void setTableDesig(){
       availabilityTable2.getTableHeader().setBackground(new Color(141,199,228));
@@ -440,6 +584,15 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
       availabilityTable2.setRowHeight(26);
  }
     
+    //da vedere
+    private String newPercentuale(int minAssegnati){
+         String oldPercS=availabilityDay.getPercentuale(mantainer, week, day).replaceAll("[ %]", ""); 
+         int oldPercI=Integer.parseInt(oldPercS);
+         int minTotaliNonAssegnate=420;
+         minTotaliNonAssegnate=minTotaliNonAssegnate-minAssegnati;
+         int newPerc=((minTotaliNonAssegnate)*oldPercI)/(minTotaliNonAssegnate+minAssegnati);
+         return newPerc+"%";
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField activityDataTextField;
@@ -448,15 +601,18 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
     private javax.swing.JTextField dayTextField;
     private javax.swing.JTextField dayTextField1;
     private javax.swing.JLabel jLabel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel maintenanceAvailabilityLabel;
     private javax.swing.JButton sendButton;
     private javax.swing.JTextField weekTextField;
+    private javax.swing.JButton xButton;
     // End of variables declaration//GEN-END:variables
 }
