@@ -62,6 +62,22 @@ public class TableMaintenanceActivities {
         }
     }
     
+     public boolean updateAssignedActivities(String id){
+        StringBuilder temp= new StringBuilder();
+        temp.append("update manutenzione set assegnata=");
+        temp.append("'").append(true).append("'");
+        temp.append(" where identificativo=");
+        temp.append("'").append(id).append("'");
+        try{
+        stm.executeUpdate(temp.toString());
+        return true;
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
+    
+    
     public boolean delete(String id){
         StringBuilder temp= new StringBuilder();
         temp.append("delete from manutenzione ");

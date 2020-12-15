@@ -32,6 +32,9 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
     private int week;
     private Boolean changes;
     private int missingTime;
+    private int oldColumn;
+    private int oldSelectedHours;
+    private String oldPercentuale;
     private DefaultTableModel model;
     private TableMaintenanceActivities maintenanceActivities;
     private TableCompetenzeAttività competenzeAttività;
@@ -39,7 +42,7 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
     private TableAssignedActivities assignedActivities;
     private TableAvailabilityDay availabilityDay;
     
-    public GuiMaintenanceAssigmentStep4(Statement st, String id, String mantainer, int day, String skills, int week, Boolean changes, int missingTime) {
+    public GuiMaintenanceAssigmentStep4(Statement st, String id, String mantainer, int day, String skills, int week, Boolean changes, int missingTime, int oldColumn, int oldSelectedHours, String oldPercentuale) {
         initComponents();
         this.st=st;
         this.id=id;
@@ -49,6 +52,9 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
         this.week=week;
         this.changes=changes; //Il valore di default di changes è false
         this.missingTime=missingTime; //il valore di default è 0
+        this.oldColumn=oldColumn; //il valore di default è 0
+        this.oldPercentuale=oldPercentuale; //il valore di default è null 
+        this.oldSelectedHours=oldSelectedHours; //il valore di default è 0
         model=(DefaultTableModel)availabilityTable2.getModel();
         maintenanceActivities= new TableMaintenanceActivities(st);
         competenzeAttività= new TableCompetenzeAttività(st);
@@ -390,6 +396,10 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
         int missingTime2;
         int selectedHours=Integer.parseInt(model.getValueAt(row, column).toString());
         String percentuale=newPercentuale(estimatedTime);
+        
+        oldSelectedHours=selectedHours;
+        oldColumn=column;
+        System.out.println(""+oldSelectedHours+"---"+oldColumn);
         //int selectedHours=availabilityHours.getAvailabilityHours(id, ""+week, getDay().toUpperCase(), column);
         
         if(availabilityTable2.getSelectedColumnCount()==1){
@@ -413,24 +423,28 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(this, "The maintenance task was successfully assigned, there are still "+missingTime+" min to be assigned.", "INFORMATION MESSAGE", JOptionPane.INFORMATION_MESSAGE);
              //ora bisogna effettuare una seconda selezione
              this.setVisible(false);
-             new GuiMaintenanceAssigmentStep4(st,id,mantainer, day, skills, week, true, missingTime).setVisible(true);
+             System.out.println(""+oldSelectedHours+"---"+oldColumn);
+             new GuiMaintenanceAssigmentStep4(st,id,mantainer, day, skills, week, true, missingTime, oldColumn, oldSelectedHours, oldPercentuale).setVisible(true);
              }else{
+               
                 if(selectedHours >= missingTime){
-                    missingTime2=selectedHours-missingTime; //60-15=45
+                    missingTime2=selectedHours-missingTime; 
                     availabilityHours.update(mantainer,week, getDay().toUpperCase(), column, missingTime2);
-                    availabilityDay.update(mantainer, week, day, percentuale);
+                    //availabilityDay.update(mantainer, week, day, percentuale);
                     JOptionPane.showMessageDialog(this, "The maintenance task was successfully assigned.", "INFORMATION MESSAGE", JOptionPane.INFORMATION_MESSAGE);  
                     new GuiMenuPlanner(st).setVisible(true); 
                     this.setVisible(false);
+                    
+                    
                 }else{
                     missingTime2=missingTime-selectedHours;   
                     availabilityHours.update(mantainer,week, getDay().toUpperCase(), column, 0);
-                    availabilityDay.update(mantainer, week, day, percentuale);
+                    //availabilityDay.update(mantainer, week, day, percentuale);
                     JOptionPane.showMessageDialog(this, "The maintenance task was successfully assigned, there are still "+missingTime2+" min to be assigned.", "INFORMATION MESSAGE", JOptionPane.INFORMATION_MESSAGE);
-                    new GuiMaintenanceAssigmentStep4(st,id,mantainer, day, skills, week, true, missingTime2).setVisible(true);
+                    System.out.println(""+oldSelectedHours+"---"+oldColumn);
+                    new GuiMaintenanceAssigmentStep4(st,id,mantainer, day, skills, week, true, missingTime2, oldColumn, oldSelectedHours, oldPercentuale).setVisible(true);
                     this.setVisible(false);
                 }
-                 
              }
             }
        // }else if(availabilityTable2.getSelectedRowCount()==2){
@@ -464,6 +478,9 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
         seletOption= JOptionPane.showConfirmDialog(this, "Are you sure you want to go back and undo your changes?", "SELECT AN OPTION", JOptionPane.YES_NO_OPTION);
             if(seletOption==0){
                 //da gestire il ripristino
+                System.out.println( "  "+oldSelectedHours+"  "+oldPercentuale);
+                availabilityHours.update(mantainer,week, getDay().toUpperCase(), oldColumn, oldSelectedHours);
+                availabilityDay.update(mantainer, week, day, oldPercentuale);
                 new GuiMaintenanceAssignmentStep3(st, id, week).setVisible(true);
                 this.setVisible(false);
             }
@@ -586,8 +603,8 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
     
     //da vedere
     private String newPercentuale(int minAssegnati){
-         String oldPercS=availabilityDay.getPercentuale(mantainer, week, day).replaceAll("[ %]", ""); 
-         int oldPercI=Integer.parseInt(oldPercS);
+         oldPercentuale=availabilityDay.getPercentuale(mantainer, week, day);
+         int oldPercI=Integer.parseInt(oldPercentuale.replaceAll("[ %]", ""));
          int minTotaliNonAssegnate=420;
          minTotaliNonAssegnate=minTotaliNonAssegnate-minAssegnati;
          int newPerc=((minTotaliNonAssegnate)*oldPercI)/(minTotaliNonAssegnate+minAssegnati);

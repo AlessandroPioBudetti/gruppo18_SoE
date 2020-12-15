@@ -347,7 +347,7 @@ public class GuiMaintenanceAssignmentStep3 extends javax.swing.JFrame {
      if(availabilityTable.getSelectedColumn()==0 || availabilityTable.getSelectedColumn()==1){
          JOptionPane.showMessageDialog(this, "The selected column is invalid. For the maintener you want to assign the task to, select a day of the week.","ERROR",JOptionPane.ERROR_MESSAGE);
      }else{
-     new GuiMaintenanceAssigmentStep4(st,idActivity,mantainerUser, day, skills, week, false, 0).setVisible(true);
+     new GuiMaintenanceAssigmentStep4(st,idActivity,mantainerUser, day, skills, week, false, 0, 0, 0, null).setVisible(true);
      this.setVisible(false);
      }
     }//GEN-LAST:event_availabilityTableMouseClicked
@@ -360,12 +360,9 @@ public class GuiMaintenanceAssignmentStep3 extends javax.swing.JFrame {
     }//GEN-LAST:event_xButtonMouseClicked
 
     private void xButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xButtonActionPerformed
-     int seletOption= JOptionPane.showConfirmDialog(this, "Select YES to return to the MENU, NO to return to the previous step STEP#2.", "SELECT AN OPTION", JOptionPane.YES_NO_OPTION);
+     int seletOption= JOptionPane.showConfirmDialog(this, "Do you want to go back?.", "SELECT AN OPTION", JOptionPane.YES_NO_OPTION);
        if(seletOption==0){
-        new GuiMenuPlanner(st).setVisible(true);
-         this.setVisible(false);
-       }else{
-         new GuiVerificaAttività(st, week, idActivity).setVisible(true);
+        new GuiVerificaAttività(st, week, idActivity).setVisible(true);
          this.setVisible(false);
        }
     }//GEN-LAST:event_xButtonActionPerformed
