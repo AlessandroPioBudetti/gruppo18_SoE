@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package guipackage;
-
-import com.sun.tools.javac.util.Convert;
 import java.awt.Color;
 import java.awt.Font;
 import java.sql.Statement;
@@ -96,13 +94,16 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
         availabilityTable2 = new javax.swing.JTable();
         sendButton = new javax.swing.JButton();
         dayTextField1 = new javax.swing.JTextField();
-        jPanel5 = new javax.swing.JPanel();
-        xButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
 
-        setTitle("MAINTENACE ASSIGMENT");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("MAINTENACE ASSIGMENT #STEP1");
         setUndecorated(true);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(162, 197, 220));
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -262,54 +263,10 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
             }
         });
 
-        jPanel5.setBackground(new java.awt.Color(44, 137, 232));
-
-        xButton.setBackground(new java.awt.Color(141, 199, 228));
-        xButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        xButton.setForeground(new java.awt.Color(34, 102, 136));
-        xButton.setText("X");
-        xButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                xButtonMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                xButtonMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                xButtonMouseExited(evt);
-            }
-        });
-        xButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                xButtonActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel1.setText("MAINTENACE ASSIGMENT #STEP4");
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(xButton))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(xButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1))
-        );
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -343,8 +300,7 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9)
+                .addGap(34, 34, 34)
                 .addComponent(weekTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(9, 9, 9)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -426,14 +382,10 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_activityDataTextFieldActionPerformed
 
-    private void xButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xButtonMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_xButtonMouseClicked
-
-    private void xButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xButtonActionPerformed
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         int seletOption;
         if (changes){
-        seletOption= JOptionPane.showConfirmDialog(this, "Are you sure you want to go back and undo your changes?", "SELECT AN OPTION", JOptionPane.YES_NO_OPTION);
+            seletOption= JOptionPane.showConfirmDialog(this, "Are you sure you want to go back and undo your changes?", "SELECT AN OPTION", JOptionPane.YES_NO_OPTION);
             if(seletOption==0){
                 //da gestire il ripristin
                 availabilityHours.update(mantainer,week, getDay().toUpperCase(), oldColumn, oldSelectedHours);
@@ -441,19 +393,10 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
                 this.setVisible(false);
             }
         }else{
-             new GuiMaintenanceAssignmentStep3(st, id, week).setVisible(true);
-             this.setVisible(false);
-            }
-           
-    }//GEN-LAST:event_xButtonActionPerformed
-
-    private void xButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xButtonMouseEntered
-         xButton.setBackground(Color.red);
-    }//GEN-LAST:event_xButtonMouseEntered
-
-    private void xButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xButtonMouseExited
-        xButton.setBackground(new Color(141,199,228));
-    }//GEN-LAST:event_xButtonMouseExited
+            new GuiMaintenanceAssignmentStep3(st, id, week).setVisible(true);
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -596,18 +539,15 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
     private javax.swing.JTextField dayTextField;
     private javax.swing.JTextField dayTextField1;
     private javax.swing.JLabel jLabel;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel maintenanceAvailabilityLabel;
     private javax.swing.JButton sendButton;
     private javax.swing.JTextField weekTextField;
-    private javax.swing.JButton xButton;
     // End of variables declaration//GEN-END:variables
 }
