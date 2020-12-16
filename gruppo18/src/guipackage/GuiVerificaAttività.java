@@ -104,6 +104,7 @@ public class GuiVerificaAttività extends javax.swing.JFrame {
         jScrollPane3.setViewportView(jTextAreaProcedure);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("MAINTENANCE ACTIVITY #STEP2");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 WindowClosing(evt);

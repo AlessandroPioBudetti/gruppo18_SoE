@@ -5,7 +5,6 @@
  */
 package guipackage;
 
-import com.sun.tools.javac.util.Convert;
 import java.awt.Color;
 import java.awt.Font;
 import java.sql.Statement;
