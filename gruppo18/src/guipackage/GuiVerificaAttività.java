@@ -24,21 +24,23 @@ import tablepackage.TableProcedureActivity;
  * @author sabrina
  */
 public class GuiVerificaAttività extends javax.swing.JFrame {
-       private int week;
-       private String id;
-       private TableMaintenanceActivities attività;
-       private TableCompetenzeAttività competenze;
-       private TableProcedureActivity procedure;
-       private TableProcedure proc;
-       Statement st;
+
+    private int week;
+    private String id;
+    private TableMaintenanceActivities attività;
+    private TableCompetenzeAttività competenze;
+    private TableProcedureActivity procedure;
+    private TableProcedure proc;
+    Statement st;
+
     /**
      * Creates new form GuiVerificaAttività
      */
     public GuiVerificaAttività(Statement st, int week, String id) {
         initComponents();
-        this.week=week;
-        this.id=id;
-        this.st=st;
+        this.week = week;
+        this.id = id;
+        this.st = st;
         attività = new TableMaintenanceActivities(st);
         competenze = new TableCompetenzeAttività(st);
         procedure = new TableProcedureActivity(st);
@@ -101,7 +103,12 @@ public class GuiVerificaAttività extends javax.swing.JFrame {
         jTextAreaProcedure.setRows(5);
         jScrollPane3.setViewportView(jTextAreaProcedure);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                WindowClosing(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(162, 197, 220));
 
@@ -109,11 +116,6 @@ public class GuiVerificaAttività extends javax.swing.JFrame {
         jTextFieldWeek.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jTextFieldWeek.setForeground(new java.awt.Color(46, 92, 137));
         jTextFieldWeek.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextFieldWeek.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldWeekActionPerformed(evt);
-            }
-        });
 
         jTextFieldActivity.setBackground(new java.awt.Color(213, 234, 255));
         jTextFieldActivity.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -141,11 +143,6 @@ public class GuiVerificaAttività extends javax.swing.JFrame {
         jTextFieldProcedure.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         jTextFieldProcedure.setForeground(new java.awt.Color(46, 92, 137));
         jTextFieldProcedure.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextFieldProcedure.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldProcedureActionPerformed(evt);
-            }
-        });
 
         jListCompetencies.setBackground(new java.awt.Color(213, 234, 255));
         jListCompetencies.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
@@ -302,7 +299,7 @@ public class GuiVerificaAttività extends javax.swing.JFrame {
                     .addComponent(jTextFieldActivity, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -327,7 +324,7 @@ public class GuiVerificaAttività extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -338,23 +335,15 @@ public class GuiVerificaAttività extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldWeekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldWeekActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldWeekActionPerformed
-
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
-
-    private void jTextFieldProcedureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldProcedureActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldProcedureActionPerformed
 
     private void jButtonForwardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonForwardActionPerformed
         this.setVisible(false);
@@ -362,11 +351,11 @@ public class GuiVerificaAttività extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonForwardActionPerformed
 
     private void jButtonFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFileActionPerformed
-        String url = proc.getUrl(procedure.getProcedureName(id));
-        if (url.isEmpty()){
-            JOptionPane.showMessageDialog(null,"No procedure defined for this activity","Error",JOptionPane.ERROR_MESSAGE);
+        if (procedure.getProcedureName(id) == null) {
+            JOptionPane.showMessageDialog(null, "No procedure defined for this activity1", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        String url = proc.getUrl(procedure.getProcedureName(id));
         try {
             URL uri = new URL(url);
             Desktop.getDesktop().browse(uri.toURI());
@@ -378,36 +367,51 @@ public class GuiVerificaAttività extends javax.swing.JFrame {
         } catch (MalformedURLException ex) {
             //by new URL(url) - Questa eccezione è lanciata se non viene specificato alcun protocollo, o viene trovato un protocollo sconosciuto o la specifica(url nel nostro caso) è nulla 
             Logger.getLogger(GuiProcedureManagement.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null,"Unspecified or incorrect protocol or missing URL.","Malformed",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Unspecified or incorrect protocol or missing URL.", "Malformed", JOptionPane.ERROR_MESSAGE);
         } catch (URISyntaxException ex) {
             //by toURI() - Questa eccezione è lanciata nel caso in cui l'URL non è formattato rigorosamente secondo RFC2396 e non può essere convertito in un URI.
             Logger.getLogger(GuiProcedureManagement.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null,"URL not formatted correctly according to RFC2396","URISyntax.",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "URL not formatted correctly according to RFC2396", "URISyntax.", JOptionPane.ERROR_MESSAGE);
         } catch (IOException ex) {
             //by browse() - Lancia un eccezione se il browser di default non è stato trovato o ha fallito nel lanciare il browser stesso.
             Logger.getLogger(GuiProcedureManagement.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null,"Default browser not found or browser launch failed.","BrowserError",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Default browser not found or browser launch failed.", "BrowserError", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonFileActionPerformed
-    private void visualizzaCompetenze(){
-        String[] comp;
-       comp = competenze.visualizeCompetencies(id);
-       jListCompetencies.setListData(comp);
-       jListCompetencies.setEnabled(false);
-    }
+
+    private void WindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_WindowClosing
+      new GuiSelectActivities(st).setVisible(true);
+       this.setVisible(false);
+    }//GEN-LAST:event_WindowClosing
     
-    private void visualizzaAttività(){
-        String dati = attività.visualizeActivity2(id);
-        jTextFieldActivity.setText(dati);
-        jTextFieldActivity.setEditable(false);
-        String week1 =Integer.toString(week);
-        jTextFieldWeek.setText(week1);
-        jTextFieldWeek.setEditable(false);
-        jTextAreaDescription.setText(attività.getDescription(id));
-        jTextAreaDescription.setEditable(false);
-        jTextFieldProcedure.setText(procedure.getProcedureName(id));
-        jTextFieldProcedure.setEditable(false);
+    private void visualizzaCompetenze() {
+        String[] comp;
+        comp = competenze.visualizeCompetencies(id);
+        jListCompetencies.setListData(comp);
+        jListCompetencies.setEnabled(false);
     }
+
+    private void visualizzaAttività() {
+        String dati = attività.visualizeActivity2(id);
+        if (dati != null) {
+            jTextFieldActivity.setText(dati);
+            jTextFieldActivity.setEditable(false);
+            String week1 = Integer.toString(week);
+            jTextFieldWeek.setText(week1);
+            jTextFieldWeek.setEditable(false);
+        }
+        if (attività.getDescription(id) != null) {
+            jTextAreaDescription.setText(attività.getDescription(id));
+            jTextAreaDescription.setEditable(false);
+        }
+
+        if (procedure.getProcedureName(id) != null) {
+            jTextFieldProcedure.setText(procedure.getProcedureName(id));
+            jTextFieldProcedure.setEditable(false);
+        }
+
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -438,7 +442,7 @@ public class GuiVerificaAttività extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-              //  new GuiVerificaAttività().setVisible(true);
+                //  new GuiVerificaAttività().setVisible(true);
             }
         });
     }

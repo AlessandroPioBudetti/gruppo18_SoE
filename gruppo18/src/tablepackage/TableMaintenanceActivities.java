@@ -241,4 +241,31 @@ public class TableMaintenanceActivities {
             return 0;
         }
     }
+    public ArrayList<ArrayList> visualizeActivitiesFromWeek(String week){
+    StringBuilder temp= new StringBuilder();
+    ArrayList <ArrayList> activities=new ArrayList();
+    String id;
+    String area;
+    String type;
+    Object estimatedTime;
+        temp.append("select * from manutenzione where settimana = '" + week + "' and assegnata = false");    
+        try{
+         ResultSet rst=stm.executeQuery(temp.toString());
+         while(rst.next()){
+             ArrayList <Object> con=new ArrayList();
+             id=rst.getString("identificativo");
+             type=rst.getString("tipo_manutenzione");
+             area=rst.getString("sito");
+             estimatedTime=rst.getObject("tempo_stimato");
+             con.add(id);
+             con.add(type);
+             con.add(area);
+             con.add(estimatedTime);
+             activities.add(con);
+         }     
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+     return activities; 
+    }
 }
