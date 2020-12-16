@@ -116,6 +116,7 @@ public class GuiMaintenanceAssignmentStep3 extends javax.swing.JFrame {
 
         weekTextField.setEditable(false);
         weekTextField.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        weekTextField.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jPanel3.setBackground(new java.awt.Color(141, 199, 228));
         jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -144,6 +145,7 @@ public class GuiMaintenanceAssignmentStep3 extends javax.swing.JFrame {
 
         activityDataTextField.setEditable(false);
         activityDataTextField.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        activityDataTextField.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jPanel4.setBackground(new java.awt.Color(141, 199, 228));
         jPanel4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -258,7 +260,7 @@ public class GuiMaintenanceAssignmentStep3 extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
+                .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(weekTextField)
@@ -283,7 +285,7 @@ public class GuiMaintenanceAssignmentStep3 extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 322, Short.MAX_VALUE)
         );
 
         pack();

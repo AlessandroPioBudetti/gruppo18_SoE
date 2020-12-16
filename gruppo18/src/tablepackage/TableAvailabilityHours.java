@@ -108,7 +108,6 @@ public class TableAvailabilityHours {
         try {
             ResultSet rst=stm.executeQuery(temp.toString());
             while(rst.next()){
-             System.out.println("Sono qui1");
              ottoNove=rst.getInt("otto_nove");
              noveDieci=rst.getInt("nove_dieci");
              dieciUndici=rst.getInt("dieci_undici");
@@ -117,7 +116,6 @@ public class TableAvailabilityHours {
              quindiciSedici=rst.getInt("quindici_sedici");
              sediciDiciassette=rst.getInt("sedici_diciassette");  
              sumMinDisp=ottoNove+noveDieci+dieciUndici+undiciDodici+quattordiciQuindici+quindiciSedici+sediciDiciassette;
-             System.out.println("Sono qui2");
             }
         } catch (SQLException ex) {
            

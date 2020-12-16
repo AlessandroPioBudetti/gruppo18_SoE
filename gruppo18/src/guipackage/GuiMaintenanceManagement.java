@@ -94,6 +94,11 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
 
         setTitle("MAINTENANCE MANAGEMENT");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(162, 197, 220));
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -102,6 +107,7 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
         addButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         addButton.setForeground(new java.awt.Color(34, 102, 136));
         addButton.setText("Add");
+        addButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         addButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 addButtonMouseClicked(evt);
@@ -112,6 +118,7 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
         removeButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         removeButton.setForeground(new java.awt.Color(34, 102, 136));
         removeButton.setText("Remove");
+        removeButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         removeButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 removeButtonMouseClicked(evt);
@@ -122,6 +129,7 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
         updateButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         updateButton.setForeground(new java.awt.Color(34, 102, 136));
         updateButton.setText("Update");
+        updateButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         updateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateButtonActionPerformed(evt);
@@ -182,6 +190,7 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
         jLabel3.setText("ID:");
 
         idTextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        idTextField.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         idTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 idTextFieldActionPerformed(evt);
@@ -202,10 +211,12 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
 
         typeComboBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         typeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "[-- Select one type --]" }));
+        typeComboBox.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         yesRadioButton.setBackground(new java.awt.Color(162, 197, 220));
         yesRadioButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         yesRadioButton.setText("Yes");
+        yesRadioButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         yesRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 yesRadioButtonActionPerformed(evt);
@@ -215,6 +226,7 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
         noRadioButton.setBackground(new java.awt.Color(162, 197, 220));
         noRadioButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         noRadioButton.setText("No");
+        noRadioButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         noRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 noRadioButtonActionPerformed(evt);
@@ -232,6 +244,7 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
         weekComboBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         weekComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "[-- Select one week --]" }));
         weekComboBox.setToolTipText("");
+        weekComboBox.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         weekComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 weekComboBoxActionPerformed(evt);
@@ -244,12 +257,15 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
 
         typeOfMainanceComboBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         typeOfMainanceComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "[-- Select one typology --]", "Planned activity", "Un-planned activity (EWO)", "Extra activity (unplanned activity)" }));
+        typeOfMainanceComboBox.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         estimatedTimeSpinner.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         estimatedTimeSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        estimatedTimeSpinner.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         siteComboBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         siteComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "[-- Select one site --]" }));
+        siteComboBox.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(27, 64, 82));
@@ -258,6 +274,7 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
         descriptionTextArea.setColumns(20);
         descriptionTextArea.setRows(3);
         descriptionTextArea.setTabSize(5);
+        descriptionTextArea.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         descriptionScrollPane.setViewportView(descriptionTextArea);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -265,7 +282,7 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -306,19 +323,20 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(yesRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(noRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(descriptionScrollPane)))
+                                .addComponent(noRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(descriptionScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 1240, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                        .addComponent(jScrollPane4)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(19, 19, 19)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
@@ -343,7 +361,7 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
                             .addComponent(jLabel6)
                             .addComponent(estimatedTimeSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(descriptionScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addButton)
                     .addComponent(removeButton)
@@ -357,7 +375,7 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -461,6 +479,11 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Plase select one row.","ERROR",JOptionPane.ERROR_MESSAGE);
     }
     }//GEN-LAST:event_updateButtonActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        this.setVisible(false);
+        new GuiMenuAdmin(st).setVisible(true);
+    }//GEN-LAST:event_formWindowClosing
 
 
     public static void main(String args[]) {
@@ -581,7 +604,7 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
       maintenanceTable.getTableHeader().setForeground(new Color(27,64,82));
       maintenanceTable.getTableHeader().setFont(new Font("Tahoma",Font.BOLD,12));
       maintenanceTable.getTableHeader().setOpaque(false);
-      maintenanceTable.setRowHeight(20);
+      maintenanceTable.setRowHeight(26);
  }
  
     // Variables declaration - do not modify//GEN-BEGIN:variables
