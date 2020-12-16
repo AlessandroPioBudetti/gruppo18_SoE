@@ -31,10 +31,10 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
     private String skills;
     private int week;
     private Boolean changes;
-    private int missingTime;
+    private int timeToAllot;
     private int oldColumn;
     private int oldSelectedHours;
-    private String oldPercentuale;
+    private String percentuale;
     private DefaultTableModel model;
     private TableMaintenanceActivities maintenanceActivities;
     private TableCompetenzeAttività competenzeAttività;
@@ -42,7 +42,8 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
     private TableAssignedActivities assignedActivities;
     private TableAvailabilityDay availabilityDay;
     
-    public GuiMaintenanceAssigmentStep4(Statement st, String id, String mantainer, int day, String skills, int week, Boolean changes, int missingTime, int oldColumn, int oldSelectedHours, String oldPercentuale) {
+    
+    public GuiMaintenanceAssigmentStep4(Statement st, String id, String mantainer, int day, String skills, int week, Boolean changes, int timeToAllot, int oldColumn, int oldSelectedHours, String percentuale) {
         initComponents();
         this.st=st;
         this.id=id;
@@ -51,10 +52,10 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
         this.skills=skills;
         this.week=week;
         this.changes=changes; //Il valore di default di changes è false
-        this.missingTime=missingTime; //il valore di default è 0
+        this.timeToAllot=timeToAllot; //il valore di default è 0
         this.oldColumn=oldColumn; //il valore di default è 0
-        this.oldPercentuale=oldPercentuale; //il valore di default è null 
         this.oldSelectedHours=oldSelectedHours; //il valore di default è 0
+        this.percentuale=percentuale; //il valore di default è null
         model=(DefaultTableModel)availabilityTable2.getModel();
         maintenanceActivities= new TableMaintenanceActivities(st);
         competenzeAttività= new TableCompetenzeAttività(st);
@@ -104,7 +105,7 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(162, 197, 220));
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setToolTipText("");
 
         jPanel.setBackground(new java.awt.Color(141, 199, 228));
@@ -299,11 +300,9 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(xButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)))
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(xButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -339,7 +338,7 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(474, 474, 474)
                         .addComponent(sendButton, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -376,9 +375,7 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 269, Short.MAX_VALUE)
         );
 
         pack();
@@ -393,67 +390,28 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
         int estimatedTime=maintenanceActivities.getEstimatedTime(id);
         int column=availabilityTable2.getSelectedColumn();
         int row=availabilityTable2.getSelectedRow();
-        int missingTime2;
         int selectedHours=Integer.parseInt(model.getValueAt(row, column).toString());
-        String percentuale=newPercentuale(estimatedTime);
-        
+       
+       if(!changes)
+       percentuale=newPercentuale(estimatedTime);
+          
         oldSelectedHours=selectedHours;
         oldColumn=column;
-        System.out.println(""+oldSelectedHours+"---"+oldColumn);
-        //int selectedHours=availabilityHours.getAvailabilityHours(id, ""+week, getDay().toUpperCase(), column);
         
-        if(availabilityTable2.getSelectedColumnCount()==1){
+       if(availabilityTable2.getSelectedColumnCount()==1){
         if(selectedHours==0){
            JOptionPane.showMessageDialog(this, "The task cannot be assigned, the mantainer is already busy.","ERROR",JOptionPane.ERROR_MESSAGE); 
-        }else if(selectedHours >= estimatedTime){
-           if(!changes){
-           missingTime=selectedHours-estimatedTime;
-           availabilityHours.update(mantainer,week, getDay().toUpperCase(), column, missingTime);
+        }else{
+           timeToAllot=updateMinChanges(selectedHours,estimatedTime,column);
+           if(timeToAllot==0){
            availabilityDay.update(mantainer, week, day, percentuale);
-          //assignedActivities.insert(id, mantainer);
-          //update attr.  maintenanceActivities
-          JOptionPane.showMessageDialog(this, "The maintenance task was successfully assigned.", "INFORMATION MESSAGE", JOptionPane.INFORMATION_MESSAGE);  
-          this.setVisible(false);
-          new GuiMenuPlanner(st).setVisible(true);
-           }}else{
-             if(!changes){
-             missingTime=estimatedTime-selectedHours; 
-             availabilityHours.update(mantainer,week, getDay().toUpperCase(), column, 0);
-             availabilityDay.update(mantainer, week, day, percentuale);
-             JOptionPane.showMessageDialog(this, "The maintenance task was successfully assigned, there are still "+missingTime+" min to be assigned.", "INFORMATION MESSAGE", JOptionPane.INFORMATION_MESSAGE);
-             //ora bisogna effettuare una seconda selezione
-             this.setVisible(false);
-             System.out.println(""+oldSelectedHours+"---"+oldColumn);
-             new GuiMaintenanceAssigmentStep4(st,id,mantainer, day, skills, week, true, missingTime, oldColumn, oldSelectedHours, oldPercentuale).setVisible(true);
-             }else{
-               
-                if(selectedHours >= missingTime){
-                    missingTime2=selectedHours-missingTime; 
-                    availabilityHours.update(mantainer,week, getDay().toUpperCase(), column, missingTime2);
-                    //availabilityDay.update(mantainer, week, day, percentuale);
-                    JOptionPane.showMessageDialog(this, "The maintenance task was successfully assigned.", "INFORMATION MESSAGE", JOptionPane.INFORMATION_MESSAGE);  
-                    new GuiMenuPlanner(st).setVisible(true); 
-                    this.setVisible(false);
-                    
-                    
-                }else{
-                    missingTime2=missingTime-selectedHours;   
-                    availabilityHours.update(mantainer,week, getDay().toUpperCase(), column, 0);
-                    //availabilityDay.update(mantainer, week, day, percentuale);
-                    JOptionPane.showMessageDialog(this, "The maintenance task was successfully assigned, there are still "+missingTime2+" min to be assigned.", "INFORMATION MESSAGE", JOptionPane.INFORMATION_MESSAGE);
-                    System.out.println(""+oldSelectedHours+"---"+oldColumn);
-                    new GuiMaintenanceAssigmentStep4(st,id,mantainer, day, skills, week, true, missingTime2, oldColumn, oldSelectedHours, oldPercentuale).setVisible(true);
-                    this.setVisible(false);
-                }
+           //assignedActivities.insert(id, mantainer);
+           //maintenanceActivities.updateAssignedActivities(id);
+           }
              }
-            }
-       // }else if(availabilityTable2.getSelectedRowCount()==2){
-           
        }else{ 
-           JOptionPane.showMessageDialog(this, "Please, make a selection.","ERROR",JOptionPane.ERROR_MESSAGE);
+           JOptionPane.showMessageDialog(this, "Please, make one selection.","ERROR",JOptionPane.ERROR_MESSAGE);
        }
-       
-        
     }//GEN-LAST:event_sendButtonActionPerformed
 
     private void dayTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dayTextFieldActionPerformed
@@ -477,10 +435,8 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
         if (changes){
         seletOption= JOptionPane.showConfirmDialog(this, "Are you sure you want to go back and undo your changes?", "SELECT AN OPTION", JOptionPane.YES_NO_OPTION);
             if(seletOption==0){
-                //da gestire il ripristino
-                System.out.println( "  "+oldSelectedHours+"  "+oldPercentuale);
+                //da gestire il ripristin
                 availabilityHours.update(mantainer,week, getDay().toUpperCase(), oldColumn, oldSelectedHours);
-                availabilityDay.update(mantainer, week, day, oldPercentuale);
                 new GuiMaintenanceAssignmentStep3(st, id, week).setVisible(true);
                 this.setVisible(false);
             }
@@ -571,7 +527,7 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
         model.insertRow(model.getRowCount(),new Object[]{mantainer, skills, k.get(0).toString(),k.get(1).toString(),k.get(2).toString(), k.get(3).toString(),k.get(4).toString(), k.get(5).toString(), k.get(6).toString()});
       }   
  }
-   
+ 
      private String getDay(){
       switch (day){
 		case 2: 
@@ -603,14 +559,36 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
     
     //da vedere
     private String newPercentuale(int minAssegnati){
-         oldPercentuale=availabilityDay.getPercentuale(mantainer, week, day);
-         int oldPercI=Integer.parseInt(oldPercentuale.replaceAll("[ %]", ""));
-         int minTotaliNonAssegnate=420;
-         minTotaliNonAssegnate=minTotaliNonAssegnate-minAssegnati;
-         int newPerc=((minTotaliNonAssegnate)*oldPercI)/(minTotaliNonAssegnate+minAssegnati);
+         int minTotaliNonAssegnati,newPerc;
+         minTotaliNonAssegnati=availabilityHours.getSumMinDisp(mantainer, week, getDay().toUpperCase())-minAssegnati;
+         newPerc=((minTotaliNonAssegnati)*100)/420;
+         System.out.println("-"+minTotaliNonAssegnati+"-"+newPerc);
          return newPerc+"%";
     }
     
+  private int updateMinChanges(int selectedHours, int estimatedTime, int column){
+  int  missingTime;
+        if(changes)
+            estimatedTime=timeToAllot;
+	if(selectedHours >= estimatedTime){
+            missingTime=selectedHours-estimatedTime;
+            availabilityHours.update(mantainer,week, getDay().toUpperCase(), column, missingTime);
+            JOptionPane.showMessageDialog(this, "The maintenance task was successfully assigned.", "INFORMATION MESSAGE", JOptionPane.INFORMATION_MESSAGE);  
+            this.setVisible(false);
+            timeToAllot=0;
+            new GuiMenuPlanner(st).setVisible(true);  
+         }else{
+             missingTime=estimatedTime-selectedHours; 
+             availabilityHours.update(mantainer,week, getDay().toUpperCase(), column, 0);
+             JOptionPane.showMessageDialog(this, "The maintenance task was successfully assigned, there are still "+missingTime+" min to be assigned.", "INFORMATION MESSAGE", JOptionPane.INFORMATION_MESSAGE);
+             //bisogna effettuare una seconda selezione
+	     this.setVisible(false);
+             timeToAllot=missingTime;
+             new GuiMaintenanceAssigmentStep4(st,id,mantainer, day, skills, week, true, timeToAllot, oldColumn, oldSelectedHours, percentuale).setVisible(true);
+           }  
+   return timeToAllot;
+  }
+  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField activityDataTextField;
     private javax.swing.JTable availabilityTable2;

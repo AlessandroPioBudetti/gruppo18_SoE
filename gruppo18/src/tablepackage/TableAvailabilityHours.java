@@ -99,23 +99,33 @@ public class TableAvailabilityHours {
     }
   
     
-    /*
-    public int getAvailabilityHours(String mantener,String week, String day,int attributeHours) {
+    
+    public int getSumMinDisp(String mantener,int week, String day) {
     StringBuilder temp= new StringBuilder();
     temp.append("select * from orari_disponibilità where maintainer='").append(mantener).append("' and  week='").append(week).append("' and giorno='").append(day).append("'"); 
-    int estimatedTime=0;
+    int sumMinDisp=0;
+    int ottoNove=0, noveDieci=0, dieciUndici=0, undiciDodici=0,quattordiciQuindici=0, quindiciSedici=0, sediciDiciassette=0;
         try {
             ResultSet rst=stm.executeQuery(temp.toString());
             while(rst.next()){
-            estimatedTime=rst.getInt(getAttributeHours(attributeHours)); 
+             System.out.println("Sono qui1");
+             ottoNove=rst.getInt("otto_nove");
+             noveDieci=rst.getInt("nove_dieci");
+             dieciUndici=rst.getInt("dieci_undici");
+             undiciDodici=rst.getInt("undici_dodici");
+             quattordiciQuindici=rst.getInt("quattordici_quindici");
+             quindiciSedici=rst.getInt("quindici_sedici");
+             sediciDiciassette=rst.getInt("sedici_diciassette");  
+             sumMinDisp=ottoNove+noveDieci+dieciUndici+undiciDodici+quattordiciQuindici+quindiciSedici+sediciDiciassette;
+             System.out.println("Sono qui2");
             }
         } catch (SQLException ex) {
-           System.out.println(ex.getMessage());
-            
+           
+           System.out.println("ERRORE"+ex.getMessage());
         }
-        return estimatedTime;
+       
+        return sumMinDisp;
     }
-*/
 
  private String getAttributeHours(int attributeHoursN){
     switch (attributeHoursN){

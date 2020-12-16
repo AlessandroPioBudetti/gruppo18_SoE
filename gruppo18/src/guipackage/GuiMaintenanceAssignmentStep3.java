@@ -329,7 +329,7 @@ public class GuiMaintenanceAssignmentStep3 extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -360,10 +360,10 @@ public class GuiMaintenanceAssignmentStep3 extends javax.swing.JFrame {
     }//GEN-LAST:event_xButtonMouseClicked
 
     private void xButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xButtonActionPerformed
-     int seletOption= JOptionPane.showConfirmDialog(this, "Do you want to go back?.", "SELECT AN OPTION", JOptionPane.YES_NO_OPTION);
+     int seletOption= JOptionPane.showConfirmDialog(this, "Do you want to go back?", "SELECT AN OPTION", JOptionPane.YES_NO_OPTION);
        if(seletOption==0){
         new GuiVerificaAttività(st, week, idActivity).setVisible(true);
-         this.setVisible(false);
+        this.setVisible(false);
        }
     }//GEN-LAST:event_xButtonActionPerformed
 
@@ -470,12 +470,10 @@ public class GuiMaintenanceAssignmentStep3 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField activityDataTextField;
     private javax.swing.JTable availabilityTable;
-    private javax.swing.JButton comeBackButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -483,7 +481,6 @@ public class GuiMaintenanceAssignmentStep3 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JList<String> skillsList;
