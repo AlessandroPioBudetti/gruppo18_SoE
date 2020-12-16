@@ -39,8 +39,14 @@ public class GuiSiteManagment extends javax.swing.JFrame {
         removeSiteButton = new javax.swing.JButton();
         updateSiteButton = new javax.swing.JButton();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("SITE MANAGEMENT");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(162, 197, 220));
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -48,18 +54,23 @@ public class GuiSiteManagment extends javax.swing.JFrame {
 
         siteComboBox.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         siteComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "[-- Select one site --]" }));
+        siteComboBox.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         siteComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 siteComboBoxActionPerformed(evt);
             }
         });
 
+        siteTextField.setBackground(new java.awt.Color(213, 234, 255));
         siteTextField.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        siteTextField.setForeground(new java.awt.Color(46, 92, 137));
+        siteTextField.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         AddSiteButton.setBackground(new java.awt.Color(141, 199, 228));
         AddSiteButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         AddSiteButton.setForeground(new java.awt.Color(34, 102, 136));
-        AddSiteButton.setText("Add");
+        AddSiteButton.setText("ADD");
+        AddSiteButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         AddSiteButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 AddSiteButtonMouseClicked(evt);
@@ -69,7 +80,8 @@ public class GuiSiteManagment extends javax.swing.JFrame {
         removeSiteButton.setBackground(new java.awt.Color(141, 199, 228));
         removeSiteButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         removeSiteButton.setForeground(new java.awt.Color(34, 102, 136));
-        removeSiteButton.setText("Remove");
+        removeSiteButton.setText("REMOVE");
+        removeSiteButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         removeSiteButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 removeSiteButtonMouseClicked(evt);
@@ -79,7 +91,8 @@ public class GuiSiteManagment extends javax.swing.JFrame {
         updateSiteButton.setBackground(new java.awt.Color(141, 199, 228));
         updateSiteButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         updateSiteButton.setForeground(new java.awt.Color(34, 102, 136));
-        updateSiteButton.setText("Update");
+        updateSiteButton.setText("UPDATE");
+        updateSiteButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         updateSiteButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 updateSiteButtonMouseClicked(evt);
@@ -101,7 +114,7 @@ public class GuiSiteManagment extends javax.swing.JFrame {
                     .addComponent(siteTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
                 .addComponent(updateSiteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,7 +123,7 @@ public class GuiSiteManagment extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(siteComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(siteTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AddSiteButton)
                     .addComponent(removeSiteButton)
@@ -122,7 +135,9 @@ public class GuiSiteManagment extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,6 +201,11 @@ public class GuiSiteManagment extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_updateSiteButtonMouseClicked
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        this.setVisible(false);
+        new GuiMenuAdmin(st).setVisible(true);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

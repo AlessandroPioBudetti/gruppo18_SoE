@@ -1,6 +1,5 @@
 package guipackage;
 
-
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -11,19 +10,19 @@ import tablepackage.TableType;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author 39392
  */
 public class GuiTypeManagment extends javax.swing.JFrame {
-   private Statement st;
-   private TableType typology;
-    
+
+    private Statement st;
+    private TableType typology;
+
     public GuiTypeManagment(Statement st) {
         initComponents();
-        this.st=st;
-        typology= new TableType(st);
+        this.st = st;
+        typology = new TableType(st);
         visualizeInCombo();
     }
 
@@ -65,8 +64,14 @@ public class GuiTypeManagment extends javax.swing.JFrame {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("TYPES MANAGMENT");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(162, 197, 220));
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -74,7 +79,8 @@ public class GuiTypeManagment extends javax.swing.JFrame {
         addButton.setBackground(new java.awt.Color(141, 199, 228));
         addButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         addButton.setForeground(new java.awt.Color(34, 102, 136));
-        addButton.setText("Add");
+        addButton.setText("ADD");
+        addButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         addButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 addButtonMouseClicked(evt);
@@ -84,7 +90,8 @@ public class GuiTypeManagment extends javax.swing.JFrame {
         deleteButton.setBackground(new java.awt.Color(141, 199, 228));
         deleteButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         deleteButton.setForeground(new java.awt.Color(34, 102, 136));
-        deleteButton.setText("Remove");
+        deleteButton.setText("REMOVE");
+        deleteButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         deleteButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 deleteButtonMouseClicked(evt);
@@ -94,7 +101,8 @@ public class GuiTypeManagment extends javax.swing.JFrame {
         updateButton.setBackground(new java.awt.Color(141, 199, 228));
         updateButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         updateButton.setForeground(new java.awt.Color(34, 102, 136));
-        updateButton.setText("Update");
+        updateButton.setText("UPDATE");
+        updateButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         updateButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 updateButtonMouseClicked(evt);
@@ -108,13 +116,17 @@ public class GuiTypeManagment extends javax.swing.JFrame {
 
         typeComboBox.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         typeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "[-- Select one type --]" }));
+        typeComboBox.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         typeComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 typeComboBoxActionPerformed(evt);
             }
         });
 
+        typeTextField.setBackground(new java.awt.Color(213, 234, 255));
         typeTextField.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        typeTextField.setForeground(new java.awt.Color(46, 92, 137));
+        typeTextField.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -132,7 +144,7 @@ public class GuiTypeManagment extends javax.swing.JFrame {
                         .addGap(26, 26, 26)
                         .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(typeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,7 +153,7 @@ public class GuiTypeManagment extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(typeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(typeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addButton)
                     .addComponent(deleteButton)
@@ -153,7 +165,7 @@ public class GuiTypeManagment extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,55 +177,55 @@ public class GuiTypeManagment extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void updateButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateButtonMouseClicked
-        int on=0;
-        String updateType=typeTextField.getText().toUpperCase();
-        if(typeComboBox.getSelectedIndex()==0){
-           typeTextField.setText("Type not valid"); 
-           on=1;
+        int on = 0;
+        String updateType = typeTextField.getText().toUpperCase();
+        if (typeComboBox.getSelectedIndex() == 0) {
+            typeTextField.setText("Type not valid");
+            on = 1;
         }
-        for(int i=0; i<typeComboBox.getItemCount(); i++){
-            if(typeComboBox.getItemAt(i).equals(typeTextField.getText())){
+        for (int i = 0; i < typeComboBox.getItemCount(); i++) {
+            if (typeComboBox.getItemAt(i).equals(typeTextField.getText())) {
                 typeTextField.setText("Type already present");
-                on=1;
+                on = 1;
             }
         }
-        if(on!=1){
-            updateInCombo(updateType,typeComboBox.getSelectedIndex(),typeComboBox.getSelectedItem().toString());
+        if (on != 1) {
+            updateInCombo(updateType, typeComboBox.getSelectedIndex(), typeComboBox.getSelectedItem().toString());
             typeTextField.setText("");
-            
+
         }
     }//GEN-LAST:event_updateButtonMouseClicked
 
     private void deleteButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteButtonMouseClicked
-        String deleteType=typeTextField.getText().toUpperCase();
+        String deleteType = typeTextField.getText().toUpperCase();
         deleteInCombo(deleteType);
         typeTextField.setText("");
     }//GEN-LAST:event_deleteButtonMouseClicked
 
     private void addButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addButtonMouseClicked
-        int on=0;
-        String newType=typeTextField.getText().toUpperCase();
-        if(typeTextField.getText().equals("") ){
-           typeTextField.setText("Type not valid"); 
-           on=1;
+        int on = 0;
+        String newType = typeTextField.getText().toUpperCase();
+        if (typeTextField.getText().equals("")) {
+            typeTextField.setText("Type not valid");
+            on = 1;
         }
-        for(int i=0; i<typeComboBox.getItemCount(); i++){
-            if(typeComboBox.getItemAt(i).equals(newType)){
+        for (int i = 0; i < typeComboBox.getItemCount(); i++) {
+            if (typeComboBox.getItemAt(i).equals(newType)) {
                 typeTextField.setText("Type already present");
-                on=1;
+                on = 1;
             }
         }
-        if(on!=1){
+        if (on != 1) {
             addInCombo(newType);
             typeTextField.setText("");
         }
     }//GEN-LAST:event_addButtonMouseClicked
 
     private void typeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_typeComboBoxActionPerformed
-       String selectedValue=typeComboBox.getSelectedItem().toString();
-        if(typeComboBox.getSelectedIndex()==0){
+        String selectedValue = typeComboBox.getSelectedItem().toString();
+        if (typeComboBox.getSelectedIndex() == 0) {
             typeTextField.setText("Invalid selection");
-        }else{
+        } else {
             typeTextField.setText(selectedValue);
         }
     }//GEN-LAST:event_typeComboBoxActionPerformed
@@ -221,6 +233,11 @@ public class GuiTypeManagment extends javax.swing.JFrame {
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_updateButtonActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        this.setVisible(false);
+        new GuiMenuAdmin(st).setVisible(true);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -253,32 +270,36 @@ public class GuiTypeManagment extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-               // new GuiTypeManagment().setVisible(true);
+                // new GuiTypeManagment().setVisible(true);
             }
         });
     }
-     private void visualizeInCombo(){
-      ArrayList <String> items=new ArrayList();
-      items=typology.visualize();
-      for (String k : items){
-          typeComboBox.addItem(k);
-      }
+
+    private void visualizeInCombo() {
+        ArrayList<String> items = new ArrayList();
+        items = typology.visualize();
+        for (String k : items) {
+            typeComboBox.addItem(k);
+        }
     }
-    private void addInCombo(String item){
-      typology.insert(item);
-      typeComboBox.addItem(item);  
+
+    private void addInCombo(String item) {
+        typology.insert(item);
+        typeComboBox.addItem(item);
     }
-    private void deleteInCombo(String item){
-      typology.delete(item);
-      typeComboBox.removeItem(item);
+
+    private void deleteInCombo(String item) {
+        typology.delete(item);
+        typeComboBox.removeItem(item);
     }
-    private void updateInCombo(String newItem, int indexOldItem,String oldItem){
-      typology.update(oldItem, newItem);
-      typeComboBox.insertItemAt(newItem, indexOldItem);
-      typeComboBox.removeItem(oldItem);
+
+    private void updateInCombo(String newItem, int indexOldItem, String oldItem) {
+        typology.update(oldItem, newItem);
+        typeComboBox.insertItemAt(newItem, indexOldItem);
+        typeComboBox.removeItem(oldItem);
     }
-    
-       
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JButton deleteButton;

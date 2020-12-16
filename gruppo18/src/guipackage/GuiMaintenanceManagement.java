@@ -180,8 +180,8 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
             maintenanceTable.getColumnModel().getColumn(5).setMaxWidth(270);
             maintenanceTable.getColumnModel().getColumn(6).setMinWidth(190);
             maintenanceTable.getColumnModel().getColumn(6).setMaxWidth(190);
-            maintenanceTable.getColumnModel().getColumn(7).setMinWidth(180);
-            maintenanceTable.getColumnModel().getColumn(7).setMaxWidth(180);
+            maintenanceTable.getColumnModel().getColumn(7).setMinWidth(200);
+            maintenanceTable.getColumnModel().getColumn(7).setMaxWidth(200);
         }
         maintenanceTable.getAccessibleContext().setAccessibleName("");
 
@@ -482,7 +482,7 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         this.setVisible(false);
-        new GuiMenuAdmin(st).setVisible(true);
+        new GuiMenuPlanner(st).setVisible(true);
     }//GEN-LAST:event_formWindowClosing
 
 

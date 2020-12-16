@@ -98,7 +98,6 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("MAINTENACE ASSIGMENT #STEP1");
-        setUndecorated(true);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -328,11 +327,11 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -362,8 +361,8 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
            timeToAllot=updateMinChanges(selectedHours,estimatedTime,column);
            if(timeToAllot==0){
            availabilityDay.update(mantainer, week, day, percentuale);
-           //assignedActivities.insert(id, mantainer);
-           //maintenanceActivities.updateAssignedActivities(id);
+           assignedActivities.insert(id, mantainer);
+           maintenanceActivities.updateAssignedActivities(id);
            }
              }
        }else{ 
@@ -492,7 +491,7 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
       return "";
    }
    
-     //213,234,255
+     
     private void setTableDesig(){
       availabilityTable2.getTableHeader().setBackground(new Color(141,199,228));
       availabilityTable2.getTableHeader().setForeground(new Color(27,64,82));
@@ -501,12 +500,11 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
       availabilityTable2.setRowHeight(26);
  }
     
-    //da vedere
+    
     private String newPercentuale(int minAssegnati){
          int minTotaliNonAssegnati,newPerc;
          minTotaliNonAssegnati=availabilityHours.getSumMinDisp(mantainer, week, getDay().toUpperCase())-minAssegnati;
          newPerc=((minTotaliNonAssegnati)*100)/420;
-         System.out.println("-"+minTotaliNonAssegnati+"-"+newPerc);
          return newPerc+"%";
     }
     

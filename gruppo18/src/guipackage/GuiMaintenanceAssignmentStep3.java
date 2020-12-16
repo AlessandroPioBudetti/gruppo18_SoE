@@ -311,8 +311,9 @@ public class GuiMaintenanceAssignmentStep3 extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         int seletOption= JOptionPane.showConfirmDialog(this, "Do you want to go back?", "SELECT AN OPTION", JOptionPane.YES_NO_OPTION);
         if(seletOption==0){
-            new GuiVerificaAttività(st, week, idActivity).setVisible(true);
             this.setVisible(false);
+            new GuiVerificaAttività(st, week, idActivity).setVisible(true);
+            
         }
     }//GEN-LAST:event_formWindowClosing
 

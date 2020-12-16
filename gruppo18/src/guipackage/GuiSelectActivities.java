@@ -5,6 +5,8 @@
  */
 package guipackage;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -31,6 +33,7 @@ public class GuiSelectActivities extends javax.swing.JFrame {
         tableMan = new TableMaintenanceActivities(st);
         model = (DefaultTableModel) maintenanceTable.getModel();
         visualizeWeekInCombo();
+        setTableDesig();
     }
 
     /**
@@ -42,13 +45,25 @@ public class GuiSelectActivities extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         maintenanceTable = new javax.swing.JTable();
         weekComboBox = new javax.swing.JComboBox<>();
         jButtonSel = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
         jLabelWeek = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("MAINTENANCE ACTIVITY  #STEP 1");
+        setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
+
+        jPanel1.setBackground(new java.awt.Color(162, 197, 220));
+        jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         maintenanceTable.setBackground(new java.awt.Color(213, 234, 255));
         maintenanceTable.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -80,8 +95,11 @@ public class GuiSelectActivities extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(maintenanceTable);
 
-        weekComboBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        weekComboBox.setBackground(new java.awt.Color(213, 234, 255));
+        weekComboBox.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        weekComboBox.setForeground(new java.awt.Color(46, 92, 137));
         weekComboBox.setToolTipText("");
+        weekComboBox.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         weekComboBox.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 weekComboBoxMouseClicked(evt);
@@ -96,47 +114,87 @@ public class GuiSelectActivities extends javax.swing.JFrame {
             }
         });
 
+        jButtonSel.setBackground(new java.awt.Color(141, 199, 228));
+        jButtonSel.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jButtonSel.setForeground(new java.awt.Color(34, 102, 136));
         jButtonSel.setText("SELECT");
+        jButtonSel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButtonSel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSelActionPerformed(evt);
             }
         });
 
-        jLabelWeek.setText("WEEK");
+        jPanel2.setBackground(new java.awt.Color(141, 199, 228));
+        jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabelWeek.setBackground(new java.awt.Color(27, 64, 82));
+        jLabelWeek.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelWeek.setForeground(new java.awt.Color(27, 64, 82));
+        jLabelWeek.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelWeek.setText("Week");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabelWeek, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabelWeek))
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(weekComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 1011, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(433, 433, 433)
+                        .addComponent(jButtonSel, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(weekComboBox))
+                .addGap(29, 29, 29)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(jButtonSel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(41, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jLabelWeek)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(weekComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(539, 539, 539)
-                        .addComponent(jButtonSel, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(588, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(weekComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelWeek))
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonSel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void maintenanceTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maintenanceTableMouseClicked
@@ -148,9 +206,16 @@ public class GuiSelectActivities extends javax.swing.JFrame {
         week = weekComboBox.getSelectedItem().toString();
         ArrayList<ArrayList> items = new ArrayList();
         items = tableMan.visualizeActivitiesFromWeek(week);
-        for (ArrayList k : items) {
-            System.out.println(k + " ");
-            model.insertRow(model.getRowCount(), new Object[]{k.get(0).toString(), k.get(1).toString(), k.get(2).toString(), k.get(3).toString()});
+        if (items.isEmpty()) {
+            //Se nella week selezionata non troviamo nessuna attività, la table deve essere vuota.
+            //Un modo per fare ciò, è quello di inserire una row vuota e cancellarla
+            model.insertRow(model.getRowCount(), new Object[]{"", "", "", ""});
+            model.getDataVector().removeAllElements();
+            
+        } else {
+            for (ArrayList k : items) {
+                model.insertRow(model.getRowCount(), new Object[]{k.get(0).toString(), k.get(1).toString(), k.get(2).toString(), k.get(3).toString()});
+            }
         }
     }//GEN-LAST:event_weekComboBoxActionPerformed
 
@@ -169,15 +234,28 @@ public class GuiSelectActivities extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Plase select a row.", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        String id=(String)model.getValueAt(maintenanceTable.getSelectedRow(), 0);
-        new GuiVerificaAttività(st,Integer.parseInt(week),id).setVisible(true);
+        String id = (String) model.getValueAt(maintenanceTable.getSelectedRow(), 0);
+        new GuiVerificaAttività(st, Integer.parseInt(week), id).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButtonSelActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        new GuiMenuPlanner(st).setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_formWindowClosing
     private void visualizeWeekInCombo() {
         for (int i = 1; i < 53; i++) {
             weekComboBox.addItem("" + i);
         }
     }
+    
+    private void setTableDesig(){
+      maintenanceTable.getTableHeader().setBackground(new Color(141,199,228));
+      maintenanceTable.getTableHeader().setForeground(new Color(27,64,82));
+      maintenanceTable.getTableHeader().setFont(new Font("Tahoma",Font.BOLD,12));
+      maintenanceTable.getTableHeader().setOpaque(false);
+      maintenanceTable.setRowHeight(26);
+ }
 
     /**
      * @param args the command line arguments
@@ -217,6 +295,8 @@ public class GuiSelectActivities extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonSel;
     private javax.swing.JLabel jLabelWeek;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable maintenanceTable;
     private javax.swing.JComboBox<String> weekComboBox;

@@ -63,7 +63,7 @@ public class TableAvailabilityHoursTest {
     public void removePreviousInsert() {
         String query= "delete from Disponibilità where manutentore='MANTAINER1'";
         String query1= "delete from orari_disponibilità where maintainer='MANTAINER1'";
-        String query2 = "delete from mantainer where username like '%'";
+        String query2 = "delete from mantainer where username like 'MANTAINER%'";
         try {
             st.executeUpdate(query);
             st.executeUpdate(query1);

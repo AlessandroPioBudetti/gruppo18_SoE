@@ -41,9 +41,12 @@ public class GuiMenuMaint extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menù maintainer");
         setAlwaysOnTop(true);
+        setResizable(false);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagepackage/technician-thumb.png"))); // NOI18N
 
+        jMenu1.setBackground(new java.awt.Color(213, 234, 255));
+        jMenu1.setForeground(new java.awt.Color(27, 64, 82));
         jMenu1.setText("File");
 
         jMenuItem1.setText("Exit");
@@ -56,6 +59,7 @@ public class GuiMenuMaint extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu2.setForeground(new java.awt.Color(27, 64, 82));
         jMenu2.setText("Edit");
         jMenuBar1.add(jMenu2);
 
@@ -73,6 +77,7 @@ public class GuiMenuMaint extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
