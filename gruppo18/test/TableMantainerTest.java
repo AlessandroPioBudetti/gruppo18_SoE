@@ -19,9 +19,9 @@ import tablepackage.TableMantainer;
  * @author sabrina
  */
 public class TableMantainerTest {
-   Dbms db;
-    Statement st;
-    TableMantainer tm;
+   private Dbms db;
+    private Statement st;
+    private TableMantainer tm;
 
     @Before
     public void initialization() {

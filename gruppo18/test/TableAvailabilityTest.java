@@ -18,10 +18,10 @@ import tablepackage.TableMantainer;
  * @author 39392
  */
 public class TableAvailabilityTest {
-   Statement st;
-   TableAvailabilityDay a; 
-   TableMantainer m;
-   Dbms db;
+   private Statement st;
+   private TableAvailabilityDay a; 
+   private TableMantainer m;
+   private Dbms db;
 
      @Before
     public void initialization() {

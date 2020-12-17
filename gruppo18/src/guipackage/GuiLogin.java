@@ -21,7 +21,7 @@ import tablepackage.TablePlanner;
  * @author ALEX
  */
 public class GuiLogin extends javax.swing.JFrame {
-    Statement st;
+    private Statement st;
     /**
      * Creates new form GuiLogin
      */

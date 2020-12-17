@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class TableCompetenzeAttività {
 
-    Statement st;
+    private Statement st;
 
     public TableCompetenzeAttività(Statement st) {
         this.st = st;

@@ -18,9 +18,9 @@ import tablepackage.TableSite;
  * @author 39392
  */
 public class TableSiteTest {
-   Statement st;
-   TableSite s; 
-   Dbms db;
+   private Statement st;
+   private TableSite s; 
+   private Dbms db;
    
     @Before
     public void initialization() {

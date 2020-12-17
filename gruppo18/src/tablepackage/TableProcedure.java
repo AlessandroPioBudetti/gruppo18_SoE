@@ -16,7 +16,7 @@ import java.sql.Statement;
 
 //Questa classe è stata creata per gestire le procedure di manuntezione. Per gestione intendiamo inserimento/cancellazione/modifica e visualizzazione.
 public class TableProcedure {
-    Statement st;
+    private Statement st;
     public TableProcedure(Statement st) {
         this.st = st;
         

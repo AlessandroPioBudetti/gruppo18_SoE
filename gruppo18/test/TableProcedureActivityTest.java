@@ -22,12 +22,12 @@ import tablepackage.TableSite;
  */
 public class TableProcedureActivityTest {
     
-    Dbms db;
-    Statement st;
-    TableProcedureActivity tablePA;
-    TableProcedure tableproced;
-    TableMaintenanceActivities tableMA;
-    TableSite tableS;
+    private Dbms db;
+    private Statement st;
+    private TableProcedureActivity tablePA;
+    private TableProcedure tableproced;
+    private TableMaintenanceActivities tableMA;
+    private TableSite tableS;
     
     
     @Before

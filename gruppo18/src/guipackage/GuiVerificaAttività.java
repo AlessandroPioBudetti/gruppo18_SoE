@@ -31,7 +31,7 @@ public class GuiVerificaAttività extends javax.swing.JFrame {
     private TableCompetenzeAttività competenze;
     private TableProcedureActivity procedure;
     private TableProcedure proc;
-    Statement st;
+    private Statement st;
 
     /**
      * Creates new form GuiVerificaAttività

@@ -22,12 +22,12 @@ import tablepackage.TableSite;
  */
 public class TableCompetenzeAttivitàTest {
     
-    Dbms db;
-    Statement st;
-    TableCompetencies tc;
-    TableCompetenzeAttività tca;
-    TableMaintenanceActivities tma;
-    TableSite ts;
+    private Dbms db;
+    private Statement st;
+    private TableCompetencies tc;
+    private TableCompetenzeAttività tca;
+    private TableMaintenanceActivities tma;
+    private TableSite ts;
     
     @Before
     public void setUp() {

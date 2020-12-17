@@ -15,7 +15,7 @@ import java.sql.Statement;
  */
 public class TableCompetencies {
 
-    Statement st;
+    private Statement st;
 
     public TableCompetencies(Statement st) {
         this.st = st;

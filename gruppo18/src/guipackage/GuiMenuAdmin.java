@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
  */
 public class GuiMenuAdmin extends javax.swing.JFrame {
 
-    Statement st;
+    private Statement st;
 
     /**
      * Creates new form GuiMenuAdmin

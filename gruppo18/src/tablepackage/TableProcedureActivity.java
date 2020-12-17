@@ -14,7 +14,7 @@ import java.sql.Statement;
  * @author ALEX
  */
 public class TableProcedureActivity {
-    Statement st;
+    private Statement st;
 
     public TableProcedureActivity(Statement st) {
         this.st = st;

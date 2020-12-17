@@ -16,10 +16,10 @@ import tablepackage.TableProcedureCompetencies;
  * @author ALEX
  */
 public class GuiProcedureCompetencies extends javax.swing.JFrame {
-    Statement st;
-    TableCompetencies competenze;
-    TableProcedure procedure;
-    TableProcedureCompetencies competenze_procedure;
+    private Statement st;
+    private TableCompetencies competenze;
+    private TableProcedure procedure;
+    private TableProcedureCompetencies competenze_procedure;
     /**
      * Creates new form GuiProcedureCompetencies
      */
@@ -269,8 +269,8 @@ public class GuiProcedureCompetencies extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-String selectedComp;
-String selectedProced;
+private String selectedComp;
+private String selectedProced;
     private void jRemoveCoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRemoveCoActionPerformed
         String competenza = jListCompProc.getSelectedValue();
         if(competenza == null){

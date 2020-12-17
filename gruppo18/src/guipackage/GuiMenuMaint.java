@@ -14,7 +14,7 @@ import java.sql.Statement;
  * @author ALEX
  */
 public class GuiMenuMaint extends javax.swing.JFrame {
-    Statement st;
+    private Statement st;
     /**
      * Creates new form GuiMenuMaint
      */

@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  */
 public class TableMantainer {// Questa classe gestisce gli inserimenti di username e password dei mantainer
 
-    Statement st;
+    private Statement st;
 
     public TableMantainer(Statement st) {
         this.st = st;

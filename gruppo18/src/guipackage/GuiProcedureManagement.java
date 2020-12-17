@@ -21,8 +21,8 @@ import tablepackage.TableProcedure;
  * @author ALEX
  */
 public class GuiProcedureManagement extends javax.swing.JFrame {
-    Statement st;
-    TableProcedure proced;
+    private Statement st;
+    private TableProcedure proced;
     public GuiProcedureManagement(Statement st) {
         initComponents();
         this.st = st;
@@ -315,8 +315,8 @@ public class GuiProcedureManagement extends javax.swing.JFrame {
         visualizzaListaProcedure();
         
     }//GEN-LAST:event_jVisualizeActionPerformed
-    String nameSelected;
-    String urlSelected;
+    private String nameSelected;
+    private String urlSelected;
     private void jListProcedureMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListProcedureMouseClicked
         nameSelected = jListProcedure.getSelectedValue();
         jNameField.setText(nameSelected);

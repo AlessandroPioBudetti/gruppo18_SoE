@@ -15,9 +15,9 @@ import tablepackage.TableType;
  * @author 39392
  */
 public class TableTypeTest {
-   Statement st;
-   TableType t; 
-   Dbms db;
+   private Statement st;
+   private TableType t; 
+   private Dbms db;
    
     @Before
     public void initialization() {

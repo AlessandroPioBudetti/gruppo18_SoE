@@ -21,9 +21,9 @@ import tablepackage.TableProcedure;
  */
 public class TableProcedureTest {
     
-    Dbms db;
-    Statement st;
-    TableProcedure tableproc;
+    private Dbms db;
+    private Statement st;
+    private TableProcedure tableproc;
     
     @Before
     public void setUp() {

@@ -21,11 +21,11 @@ import tablepackage.TableMantainer;
  */
 public class TableCompetenzeMaintainersTest {
 
-    Dbms db;
-    Statement st;
-    TableCompetencies tc;
-    TableCompetenzeMaintainers tcm;
-    TableMantainer tm;
+    private Dbms db;
+    private Statement st;
+    private TableCompetencies tc;
+    private TableCompetenzeMaintainers tcm;
+    private TableMantainer tm;
 
     @Before
     public void setUp() {

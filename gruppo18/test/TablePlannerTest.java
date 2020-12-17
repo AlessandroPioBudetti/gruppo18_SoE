@@ -19,9 +19,9 @@ import tablepackage.TablePlanner;
  * @author sabrina
  */
 public class TablePlannerTest {
-    Dbms db;
-    Statement st;
-    TablePlanner tp;
+    private Dbms db;
+    private Statement st;
+    private TablePlanner tp;
 
     @Before
     public void initialization() {

@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  */
 public class TablePlanner { // Questa classe gestisce gli inserimenti di username e password dei planner.
 
-    Statement st;
+    private Statement st;
 
     public TablePlanner(Statement st) {
         this.st = st;

@@ -15,8 +15,8 @@ import tablepackage.TableCompetencies;
  */
 public class GuiCompetencies extends javax.swing.JFrame {
 
-    Statement st;
-    TableCompetencies competenze;
+    private Statement st;
+    private TableCompetencies competenze;
 
     /**
      * Creates new form GuiProcedure
@@ -225,7 +225,7 @@ public class GuiCompetencies extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_jButtonInsertActionPerformed
-    String oldName;
+    private String oldName;
     private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed
         String Name = jTextFieldName.getText(); // dopo la modifica il valore di name dovrebbe essere cambiato
         if (Name.isEmpty()) {

@@ -18,10 +18,10 @@ import tablepackage.TableMantainer;
  */
 public class GuiCompetenzeMantainer extends javax.swing.JFrame {
 
-    Statement st;
-    TableMantainer tm;
-    TableCompetencies tc;
-    TableCompetenzeMaintainers competenzeMantainer;
+    private Statement st;
+    private TableMantainer tm;
+    private TableCompetencies tc;
+    private TableCompetenzeMaintainers competenzeMantainer;
 
     /**
      * Creates new form GuiCompetenzeMantainer
@@ -259,8 +259,8 @@ public class GuiCompetenzeMantainer extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    String selectedMantainer;
-    String selectedCompetence;
+    private String selectedMantainer;
+    private String selectedCompetence;
     private void jListMantainersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListMantainersMouseClicked
         selectedMantainer = jListMantainers.getSelectedValue();
         if (selectedMantainer != null) {

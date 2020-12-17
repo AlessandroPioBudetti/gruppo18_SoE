@@ -21,11 +21,11 @@ import tablepackage.TableMantainer;
 
 
 public class TableAvailabilityHoursTest {
-    Statement st;
-    TableAvailabilityHours t; 
-    TableMantainer tm;
-    TableAvailabilityDay a;
-    Dbms db;
+    private Statement st;
+    private TableAvailabilityHours t; 
+    private TableMantainer tm;
+    private TableAvailabilityDay a;
+    private Dbms db;
    
     @Before
     public void initialization() {

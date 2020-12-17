@@ -16,7 +16,7 @@ import java.sql.Statement;
  * @author ALEX
  */
 public class TableAdministrator {
-    Statement st;
+    private Statement st;
     public TableAdministrator(Statement st) {
         this.st = st;
     }

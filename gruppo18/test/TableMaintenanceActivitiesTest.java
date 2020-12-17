@@ -17,11 +17,11 @@ import tablepackage.TableType;
  * @author 39392
  */
 public class TableMaintenanceActivitiesTest {
-   Statement st;
-   TableMaintenanceActivities t; 
-   TableSite site;
-   TableType type; 
-   Dbms db;
+   private Statement st;
+   private TableMaintenanceActivities t; 
+   private TableSite site;
+   private TableType type; 
+   private Dbms db;
    
     @Before
     public void initialization() {

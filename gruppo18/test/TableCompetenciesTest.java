@@ -19,9 +19,9 @@ import tablepackage.TableCompetencies;
  * @author sabrina
  */
 public class TableCompetenciesTest {
-    Dbms db;
-    Statement st;
-    TableCompetencies tc;
+    private Dbms db;
+    private Statement st;
+    private TableCompetencies tc;
     
     @Before
     public void setUp() {

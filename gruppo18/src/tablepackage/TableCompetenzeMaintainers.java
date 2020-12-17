@@ -14,7 +14,7 @@ import java.sql.Statement;
  * @author sabrina
  */
 public class TableCompetenzeMaintainers {
-    Statement st;
+    private Statement st;
 
     public TableCompetenzeMaintainers(Statement st) {
         this.st = st;

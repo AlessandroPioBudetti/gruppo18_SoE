@@ -16,10 +16,10 @@ import tablepackage.TableMaintenanceActivities;
  * @author sabrina
  */
 public class GuiCompetenzeAttività extends javax.swing.JFrame {
-    Statement st;
-    TableCompetenzeAttività competenzeAttività;
-    TableCompetencies tc;
-    TableMaintenanceActivities tm;
+    private Statement st;
+    private TableCompetenzeAttività competenzeAttività;
+    private TableCompetencies tc;
+    private TableMaintenanceActivities tm;
 
     /**
      * Creates new form GuiCompetenzeAttività
@@ -254,8 +254,8 @@ public class GuiCompetenzeAttività extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-String selectedActivity;
-    String selectedCompetence;
+private String selectedActivity;
+    private String selectedCompetence;
     private void jListActivitiesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListActivitiesMouseClicked
         selectedActivity = jListActivities.getSelectedValue();
         String dati = tm.visualizeActivity(selectedActivity);

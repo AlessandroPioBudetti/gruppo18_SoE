@@ -23,11 +23,11 @@ import tablepackage.TableProcedureCompetencies;
  */
 public class TableProcedureCompeTest {
     
-    Dbms db;
-    Statement st;
-    TableCompetencies tablecomp;
-    TableProcedureCompetencies tablePC;
-    TableProcedure tableproced;
+    private Dbms db;
+    private Statement st;
+    private TableCompetencies tablecomp;
+    private TableProcedureCompetencies tablePC;
+    private TableProcedure tableproced;
     
     
     @Before

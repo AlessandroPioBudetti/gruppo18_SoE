@@ -21,10 +21,10 @@ import tablepackage.TablePlanner;
  */
 public class GuiAddUser extends javax.swing.JFrame {
 
-    Statement st;
-    TablePlanner planner;
-    TableMantainer mantainer;
-    TableAvailabilityDay disponibilità;
+    private Statement st;
+    private TablePlanner planner;
+    private TableMantainer mantainer;
+    private TableAvailabilityDay disponibilità;
 
     /**
      * Creates new form GuiAmministratore
@@ -353,8 +353,8 @@ public class GuiAddUser extends javax.swing.JFrame {
     private void jComboBoxUtentiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxUtentiMouseClicked
 
     }//GEN-LAST:event_jComboBoxUtentiMouseClicked
-    String userSelected;
-    String passSelected;
+    private String userSelected;
+    private String passSelected;
     private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
         boolean result;
         String user = jTextFieldUserName.getText();

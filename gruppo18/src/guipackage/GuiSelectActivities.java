@@ -19,10 +19,10 @@ import tablepackage.TableMaintenanceActivities;
  */
 public class GuiSelectActivities extends javax.swing.JFrame {
 
-    Statement st;
-    TableMaintenanceActivities tableMan;
-    DefaultTableModel model;
-    String week;
+    private Statement st;
+    private TableMaintenanceActivities tableMan;
+    private DefaultTableModel model;
+    private String week;
 
     /**
      * Creates new form GuiSelectActivities

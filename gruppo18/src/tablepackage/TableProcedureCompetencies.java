@@ -14,7 +14,7 @@ import java.sql.Statement;
  * @author ALEX
  */
 public class TableProcedureCompetencies {
-Statement st;
+private Statement st;
     public TableProcedureCompetencies(Statement st) {
         this.st = st;
     }

@@ -19,9 +19,9 @@ import tablepackage.TableAdministrator;
  * @author ALEX
  */
 public class TableAdminTest {
-    Statement st;
-    TableAdministrator admin;
-    Dbms db;
+    private Statement st;
+    private TableAdministrator admin;
+    private Dbms db;
     
     @Before
     public void iniz(){

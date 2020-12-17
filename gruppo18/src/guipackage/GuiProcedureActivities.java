@@ -16,10 +16,10 @@ import tablepackage.TableProcedureActivity;
  * @author ALEX
  */
 public class GuiProcedureActivities extends javax.swing.JFrame {
-Statement st;
-TableMaintenanceActivities activity;
-TableProcedure procedure;
-TableProcedureActivity procedure_attività;
+private Statement st;
+private TableMaintenanceActivities activity;
+private TableProcedure procedure;
+private TableProcedureActivity procedure_attività;
     /**
      * Creates new form GuiProcedureActivities
      */
@@ -249,8 +249,8 @@ TableProcedureActivity procedure_attività;
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-String selectedActivity;
-String selectedProcedure;
+private String selectedActivity;
+private String selectedProcedure;
     private void jListActMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListActMouseClicked
         selectedActivity = jListAct.getSelectedValue();
         String dati = activity.visualizeActivity(selectedActivity);
