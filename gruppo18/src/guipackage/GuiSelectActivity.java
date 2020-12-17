@@ -17,7 +17,7 @@ import tablepackage.TableMaintenanceActivities;
  *
  * @author ALEX
  */
-public class GuiSelectActivities extends javax.swing.JFrame {
+public class GuiSelectActivity extends javax.swing.JFrame {
 
     private Statement st;
     private TableMaintenanceActivities tableMan;
@@ -27,7 +27,7 @@ public class GuiSelectActivities extends javax.swing.JFrame {
     /**
      * Creates new form GuiSelectActivities
      */
-    public GuiSelectActivities(Statement st) {
+    public GuiSelectActivity(Statement st) {
         initComponents();
         this.st = st;
         tableMan = new TableMaintenanceActivities(st);
@@ -54,7 +54,7 @@ public class GuiSelectActivities extends javax.swing.JFrame {
         jLabelWeek = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("MAINTENANCE ACTIVITY  #STEP 1");
+        setTitle("SELECT ACTIVITY  #STEP 1");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -184,9 +184,7 @@ public class GuiSelectActivities extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,7 +203,7 @@ public class GuiSelectActivities extends javax.swing.JFrame {
         model.getDataVector().removeAllElements();
         week = weekComboBox.getSelectedItem().toString();
         ArrayList<ArrayList> items = new ArrayList();
-        items = tableMan.visualizeActivitiesFromWeek(week);
+        items = tableMan.getActivitiesFromWeek(week);
         if (items.isEmpty()) {
             //Se nella week selezionata non troviamo nessuna attività, la table deve essere vuota.
             //Un modo per fare ciò, è quello di inserire una row vuota e cancellarla
@@ -235,7 +233,7 @@ public class GuiSelectActivities extends javax.swing.JFrame {
             return;
         }
         String id = (String) model.getValueAt(maintenanceTable.getSelectedRow(), 0);
-        new GuiVerificaAttività(st, Integer.parseInt(week), id).setVisible(true);
+        new GuiActivityVerification(st, Integer.parseInt(week), id).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButtonSelActionPerformed
 
@@ -274,14 +272,21 @@ public class GuiSelectActivities extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GuiSelectActivities.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GuiSelectActivity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GuiSelectActivities.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GuiSelectActivity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GuiSelectActivities.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GuiSelectActivity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GuiSelectActivities.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GuiSelectActivity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

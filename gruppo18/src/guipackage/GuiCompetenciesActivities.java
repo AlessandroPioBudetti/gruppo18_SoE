@@ -8,16 +8,16 @@ package guipackage;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import tablepackage.TableCompetencies;
-import tablepackage.TableCompetenzeAttività;
+import tablepackage.TableCompetenciesActivity;
 import tablepackage.TableMaintenanceActivities;
 
 /**
  *
  * @author sabrina
  */
-public class GuiCompetenzeAttività extends javax.swing.JFrame {
+public class GuiCompetenciesActivities extends javax.swing.JFrame {
     private Statement st;
-    private TableCompetenzeAttività competenzeAttività;
+    private TableCompetenciesActivity competenzeAttività;
     private TableCompetencies tc;
     private TableMaintenanceActivities tm;
 
@@ -26,9 +26,9 @@ public class GuiCompetenzeAttività extends javax.swing.JFrame {
      *
      * @param st
      */
-    public GuiCompetenzeAttività(Statement st) {
+    public GuiCompetenciesActivities(Statement st) {
         initComponents();
-        competenzeAttività = new TableCompetenzeAttività(st);
+        competenzeAttività = new TableCompetenciesActivity(st);
         tc = new TableCompetencies(st);
         tm = new TableMaintenanceActivities(st);
         visualizzaAttività();
@@ -258,7 +258,7 @@ private String selectedActivity;
     private String selectedCompetence;
     private void jListActivitiesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListActivitiesMouseClicked
         selectedActivity = jListActivities.getSelectedValue();
-        String dati = tm.visualizeActivity(selectedActivity);
+        String dati = tm.getAllActivityData(selectedActivity);
         if (selectedActivity != null) {
             JOptionPane.showMessageDialog(null, dati);
             visualizzaCompetenzeAttività();
@@ -321,7 +321,7 @@ private String selectedActivity;
     }
 
     private void visualizzaAttività() {
-        String[] attività = tm.visualizeActivities();
+        String[] attività = tm.getId();
         jListActivities.setListData(attività);
     }
 
@@ -347,14 +347,15 @@ private String selectedActivity;
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GuiCompetenzeAttività.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GuiCompetenciesActivities.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GuiCompetenzeAttività.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GuiCompetenciesActivities.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GuiCompetenzeAttività.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GuiCompetenciesActivities.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GuiCompetenzeAttività.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GuiCompetenciesActivities.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

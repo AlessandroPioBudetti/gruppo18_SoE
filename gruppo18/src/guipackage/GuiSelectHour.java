@@ -15,14 +15,14 @@ import javax.swing.table.DefaultTableModel;
 import tablepackage.TableAssignedActivities;
 import tablepackage.TableAvailabilityDay;
 import tablepackage.TableAvailabilityHours;
-import tablepackage.TableCompetenzeAttività;
+import tablepackage.TableCompetenciesActivity;
 import tablepackage.TableMaintenanceActivities;
 
 /**
  *
  * @author 39392
  */
-public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
+public class GuiSelectHour extends javax.swing.JFrame {
     private Statement st;
     private String id;
     private String mantainer;
@@ -36,13 +36,12 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
     private String percentuale;
     private DefaultTableModel model;
     private TableMaintenanceActivities maintenanceActivities;
-    private TableCompetenzeAttività competenzeAttività;
     private TableAvailabilityHours availabilityHours;
     private TableAssignedActivities assignedActivities;
     private TableAvailabilityDay availabilityDay;
     
     
-    public GuiMaintenanceAssigmentStep4(Statement st, String id, String mantainer, int day, String skills, int week, Boolean changes, int timeToAllot, int oldColumn, int oldSelectedHours, String percentuale) {
+    public GuiSelectHour(Statement st, String id, String mantainer, int day, String skills, int week, Boolean changes, int timeToAllot, int oldColumn, int oldSelectedHours, String percentuale) {
         initComponents();
         this.st=st;
         this.id=id;
@@ -57,7 +56,6 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
         this.percentuale=percentuale; //il valore di default è null
         model=(DefaultTableModel)availabilityTable2.getModel();
         maintenanceActivities= new TableMaintenanceActivities(st);
-        competenzeAttività= new TableCompetenzeAttività(st);
         availabilityHours=new TableAvailabilityHours(st);
         assignedActivities= new TableAssignedActivities(st);
         availabilityDay= new TableAvailabilityDay(st);
@@ -97,7 +95,7 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
         dayTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("MAINTENACE ASSIGMENT #STEP1");
+        setTitle(" SELECT HOUR #STEP4");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -268,34 +266,31 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 1112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1)))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(dayTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
+                    .addComponent(dayTextField1))
+                .addGap(14, 14, 14)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 1112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1)))
+                        .addGap(158, 158, 158)
+                        .addComponent(weekTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(dayTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
-                            .addComponent(dayTextField1))
-                        .addGap(14, 14, 14)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(158, 158, 158)
-                                .addComponent(weekTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(activityDataTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(474, 474, 474)
-                        .addComponent(sendButton, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(activityDataTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(474, 474, 474)
+                .addComponent(sendButton, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -327,7 +322,9 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -362,7 +359,7 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
            if(timeToAllot==0){
            availabilityDay.update(mantainer, week, day, percentuale);
            assignedActivities.insert(id, mantainer);
-           maintenanceActivities.updateAssignedActivities(id);
+           maintenanceActivities.setAssignedActivities(id);
            }
              }
        }else{ 
@@ -389,11 +386,11 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
             if(seletOption==0){
                 //da gestire il ripristin
                 availabilityHours.update(mantainer,week, getDay().toUpperCase(), oldColumn, oldSelectedHours);
-                new GuiMaintenanceAssignmentStep3(st, id, week).setVisible(true);
+                new GuiSelectDay(st, id, week).setVisible(true);
                 this.setVisible(false);
             }
         }else{
-            new GuiMaintenanceAssignmentStep3(st, id, week).setVisible(true);
+            new GuiSelectDay(st, id, week).setVisible(true);
             this.setVisible(false);
         }
     }//GEN-LAST:event_formWindowClosing
@@ -415,14 +412,16 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GuiMaintenanceAssigmentStep4.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GuiSelectHour.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GuiMaintenanceAssigmentStep4.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GuiSelectHour.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GuiMaintenanceAssigmentStep4.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GuiSelectHour.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GuiMaintenanceAssigmentStep4.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GuiSelectHour.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
@@ -450,7 +449,7 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
    
    private void visualizeInActivityDataTextField(String idActivity){
         String data = new String();
-        data=maintenanceActivities.visualizeActivity2(idActivity);
+        data=maintenanceActivities.getActivityData(idActivity);
         activityDataTextField.setText(data);
     }
    
@@ -490,7 +489,6 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
     } 
       return "";
    }
-   
      
     private void setTableDesig(){
       availabilityTable2.getTableHeader().setBackground(new Color(141,199,228));
@@ -500,7 +498,9 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
       availabilityTable2.setRowHeight(26);
  }
     
-    
+    /*Il metodo newPercentuale calcola la percentuale di disponibilità giornaliera dei mantainer, in base ai minuti totali di disponibilità che ha in quel giorno.
+    Ritorna la percentuale calcolata.
+    */
     private String newPercentuale(int minAssegnati){
          int minTotaliNonAssegnati,newPerc;
          minTotaliNonAssegnati=availabilityHours.getSumMinDisp(mantainer, week, getDay().toUpperCase())-minAssegnati;
@@ -508,6 +508,14 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
          return newPerc+"%";
     }
     
+    
+   /*Il metodo updateMinChanges effettua un confronto tra i minuti stimati per l'attività di manutenzione (estimatedTime) e i minuti disponibili del mantainer
+    nella fascia oraria selezionata (selectedHours). Se selectedHours è maggiore o uguale all'estimatedTime, allora l'attività viene assegnata con successo 
+    e vengono effettuate le modifiche per aggiornare i minuti di disponibilità del mantainer. Se selectedHours è minore di estimatedTime, allora, l'attività viene
+    assegnata in parte ed è necessario effettuare una seconda assegnazione. Dunque, viene istanziato un nuovo oggetto di tipo GuiSelectHour a cui viene passato il parametro 
+    changes settato a true, così che, quando verrà rinvocato il metodo updateMinChanges i minuti stimati per l'attività di manutenzione saranno quelli non ancora assegnati. 
+    Il metodo restituisce alla chiamata il numero di minuti dell'attività che restano ancora da assegnare.
+    */
   private int updateMinChanges(int selectedHours, int estimatedTime, int column){
   int  missingTime;
         if(changes)
@@ -526,7 +534,7 @@ public class GuiMaintenanceAssigmentStep4 extends javax.swing.JFrame {
              //bisogna effettuare una seconda selezione
 	     this.setVisible(false);
              timeToAllot=missingTime;
-             new GuiMaintenanceAssigmentStep4(st,id,mantainer, day, skills, week, true, timeToAllot, oldColumn, oldSelectedHours, percentuale).setVisible(true);
+             new GuiSelectHour(st,id,mantainer, day, skills, week, true, timeToAllot, oldColumn, oldSelectedHours, percentuale).setVisible(true);
            }  
    return timeToAllot;
   }

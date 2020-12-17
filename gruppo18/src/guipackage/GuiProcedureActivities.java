@@ -253,7 +253,7 @@ private String selectedActivity;
 private String selectedProcedure;
     private void jListActMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListActMouseClicked
         selectedActivity = jListAct.getSelectedValue();
-        String dati = activity.visualizeActivity(selectedActivity);
+        String dati = activity.getAllActivityData(selectedActivity);
         visualizzaProcedureAttività(selectedActivity);
         if (selectedActivity != null) {
             JOptionPane.showMessageDialog(null, dati);
@@ -324,7 +324,7 @@ private String selectedProcedure;
             JOptionPane.showMessageDialog(null,"ERROR");
     }
      private void visualizzaAttività() {
-        String[] attività = activity.visualizeActivities();
+        String[] attività = activity.getId();
         jListAct.setListData(attività);
     }
     

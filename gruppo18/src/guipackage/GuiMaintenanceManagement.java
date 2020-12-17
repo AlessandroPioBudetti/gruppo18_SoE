@@ -567,8 +567,8 @@ public class GuiMaintenanceManagement extends javax.swing.JFrame {
    descriptionTextArea.setText("");
  }
  
+ /*Il metodo checkId() ritorna true se l'id non è già presente nella tabella, false altrimenti.*/
  private boolean checkId(){
-     //ritorna true se l'id non è già presente nella tabella, false altrimenti.
      for(int i=0; i<model.getRowCount(); i++){
          //in getValue i è la riga, 0 è la colonna
          if(idTextField.getText().equals(model.getValueAt(i, 0).toString())){

@@ -2,9 +2,9 @@ package guipackage;
 
 
 import guipackage.GuiCompetencies;
-import guipackage.GuiCompetenzeAttività;
+import guipackage.GuiCompetenciesActivities;
 import guipackage.GuiProcedureManagement;
-import guipackage.GuiSiteManagment;
+import guipackage.GuiSiteManagement;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 
@@ -236,7 +236,7 @@ public class GuiMenuAdmin extends javax.swing.JFrame {
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         this.setVisible(false);
-        new GuiSiteManagment(st).setVisible(true);
+        new GuiSiteManagement(st).setVisible(true);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
@@ -251,7 +251,7 @@ public class GuiMenuAdmin extends javax.swing.JFrame {
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         this.setVisible(false);
-        new GuiTypeManagment(st).setVisible(true);
+        new GuiTypeManagement(st).setVisible(true);
         
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
@@ -268,7 +268,7 @@ public class GuiMenuAdmin extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         this.setVisible(false);
-        new GuiCompetenzeAttività(st).setVisible(true);
+        new GuiCompetenciesActivities(st).setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
@@ -281,7 +281,7 @@ public class GuiMenuAdmin extends javax.swing.JFrame {
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
         this.setVisible(false);
-        new GuiCompetenzeMantainer(st).setVisible(true);
+        new GuiCompetenciesMantainer(st).setVisible(true);
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed

@@ -12,7 +12,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 import tablepackage.TableCompetencies;
-import tablepackage.TableCompetenzeAttività;
+import tablepackage.TableCompetenciesActivity;
 import tablepackage.TableMaintenanceActivities;
 import tablepackage.TableSite;
 
@@ -20,12 +20,12 @@ import tablepackage.TableSite;
  *
  * @author sabrina
  */
-public class TableCompetenzeAttivitàTest {
+public class TableCompetenciesActivitiesTest {
     
     private Dbms db;
     private Statement st;
     private TableCompetencies tc;
-    private TableCompetenzeAttività tca;
+    private TableCompetenciesActivity tca;
     private TableMaintenanceActivities tma;
     private TableSite ts;
     
@@ -34,7 +34,7 @@ public class TableCompetenzeAttivitàTest {
         db = new Dbms();
         st = db.connectToDatabase();
         tc = new TableCompetencies(st);
-        tca = new TableCompetenzeAttività(st);
+        tca = new TableCompetenciesActivity(st);
         tma = new TableMaintenanceActivities(st);
         ts = new TableSite(st);
         ts.insert("xxx");

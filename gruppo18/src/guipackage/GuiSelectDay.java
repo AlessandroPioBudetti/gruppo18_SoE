@@ -11,7 +11,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import tablepackage.TableCompetenzeAttività;
+import tablepackage.TableCompetenciesActivity;
 import tablepackage.TableAvailabilityDay;
 import tablepackage.TableMaintenanceActivities;
 import tablepackage.TableMantainer;
@@ -20,27 +20,23 @@ import tablepackage.TableMantainer;
  *
  * @author 39392
  */
-public class GuiMaintenanceAssignmentStep3 extends javax.swing.JFrame {
+public class GuiSelectDay extends javax.swing.JFrame {
     private Statement st;
     private String idActivity;
     private int week;
-    private DefaultTableModel model;
-    private TableMantainer mantainer;
-    private TableCompetenzeAttività competenzeAttività;
+    private TableCompetenciesActivity competenzeAttività;
     private TableMaintenanceActivities maintenanceActivities;
     private TableAvailabilityDay disponibilità;
-    private TableCompetenzeAttività competenze;
+    private DefaultTableModel model;
     
-    public GuiMaintenanceAssignmentStep3(Statement st, String id,int week) {
+    public GuiSelectDay(Statement st, String id, int week) {
         initComponents();
         this.st=st;
         this.idActivity=id;
         this.week=week;
-        mantainer= new TableMantainer(st);
-        competenzeAttività= new TableCompetenzeAttività(st);
+        competenzeAttività= new TableCompetenciesActivity(st);
         maintenanceActivities= new TableMaintenanceActivities(st);
         disponibilità= new TableAvailabilityDay(st);
-        competenze= new TableCompetenzeAttività(st);
         model=(DefaultTableModel)availabilityTable.getModel();
         visualizeInWeekTextField(idActivity);
         visualizeInTable(idActivity);
@@ -75,7 +71,7 @@ public class GuiMaintenanceAssignmentStep3 extends javax.swing.JFrame {
         skillsList = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("ASSIGNMENT OF A MAINTENANCE ACTIVITY");
+        setTitle("SELECT DAY #STEP3");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -281,7 +277,7 @@ public class GuiMaintenanceAssignmentStep3 extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -299,8 +295,8 @@ public class GuiMaintenanceAssignmentStep3 extends javax.swing.JFrame {
      if(availabilityTable.getSelectedColumn()==0 || availabilityTable.getSelectedColumn()==1){
          JOptionPane.showMessageDialog(this, "The selected column is invalid. For the maintener you want to assign the task to, select a day of the week.","ERROR",JOptionPane.ERROR_MESSAGE);
      }else{
-     new GuiMaintenanceAssigmentStep4(st,idActivity,mantainerUser, day, skills, week, false, 0, 0, 0, null).setVisible(true);
-     this.setVisible(false);
+         new GuiSelectHour(st,idActivity,mantainerUser, day, skills, week, false, 0, 0, 0, null).setVisible(true);
+         this.setVisible(false);
      }
     }//GEN-LAST:event_availabilityTableMouseClicked
 
@@ -312,7 +308,7 @@ public class GuiMaintenanceAssignmentStep3 extends javax.swing.JFrame {
         int seletOption= JOptionPane.showConfirmDialog(this, "Do you want to go back?", "SELECT AN OPTION", JOptionPane.YES_NO_OPTION);
         if(seletOption==0){
             this.setVisible(false);
-            new GuiVerificaAttività(st, week, idActivity).setVisible(true);
+            new GuiActivityVerification(st, week, idActivity).setVisible(true);
             
         }
     }//GEN-LAST:event_formWindowClosing
@@ -334,14 +330,18 @@ public class GuiMaintenanceAssignmentStep3 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GuiMaintenanceAssignmentStep3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GuiSelectDay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GuiMaintenanceAssignmentStep3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GuiSelectDay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GuiMaintenanceAssignmentStep3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GuiSelectDay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GuiMaintenanceAssignmentStep3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GuiSelectDay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -367,7 +367,7 @@ public class GuiMaintenanceAssignmentStep3 extends javax.swing.JFrame {
     
     private void visualizeInActivityDataTextField(String idActivity){
         String data = new String();
-        data=maintenanceActivities.visualizeActivity2(idActivity);
+        data=maintenanceActivities.getActivityData(idActivity);
         activityDataTextField.setText(data);
     }
     
@@ -379,7 +379,7 @@ public class GuiMaintenanceAssignmentStep3 extends javax.swing.JFrame {
         model.insertRow(model.getRowCount(),new Object[]{k.get(0).toString(), skillsPossessed(idActivity, k.get(0).toString()), k.get(1).toString()+"%",k.get(2).toString()+"%", k.get(3).toString()+"%", k.get(4).toString()+"%", k.get(5).toString()+"%", k.get(6).toString()+"%", k.get(7).toString()+"%"});
       }   
  }
-     //213,234,255
+    
       private void setTableDesig(){
       availabilityTable.getTableHeader().setBackground(new Color(141,199,228));
       availabilityTable.getTableHeader().setForeground(new Color(27,64,82));
@@ -388,20 +388,23 @@ public class GuiMaintenanceAssignmentStep3 extends javax.swing.JFrame {
       availabilityTable.setRowHeight(20);
  }
       
+      /*Il metodo skillsPossessed effettua un confronto tra le competenze richieste dall'attività e le competenze possedute dal mantainer.
+       Restituisce il risultato di tale confronto.
+      */
      private String skillsPossessed(String idActivity, String maintainer){
         String[] competencies = new String[50];
         ArrayList<String>competenciesMaintainer= new ArrayList();
-        int count=0, count2=0;
+        int competenzeMan=0, competenzeAtt=0;
         competencies=competenzeAttività.visualizeCompetencies(idActivity);
-        competenciesMaintainer=competenze.visualizeSkillsMaintenance(maintainer);
+        competenciesMaintainer=competenzeAttività.visualizeSkillsMaintenance(maintainer);
         for (String k : competencies){
             if(competenciesMaintainer.contains(k))
-               count++;
+               competenzeMan++;
             if(k==null)
-                return count+"/"+count2;
-            count2++;
+                return competenzeMan+"/"+competenzeAtt;
+            competenzeAtt++;
         }
-        return count+"/"+count2;
+        return competenzeMan+"/"+competenzeAtt;
      }
      
      

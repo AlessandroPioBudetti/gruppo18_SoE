@@ -14,11 +14,11 @@ import java.util.ArrayList;
  *
  * @author sabrina
  */
-public class TableCompetenzeAttività {
+public class TableCompetenciesActivity {
 
     private Statement st;
 
-    public TableCompetenzeAttività(Statement st) {
+    public TableCompetenciesActivity(Statement st) {
         this.st = st;
     }
 

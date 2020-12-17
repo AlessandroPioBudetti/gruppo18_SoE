@@ -13,10 +13,10 @@ import java.sql.Statement;
  *
  * @author sabrina
  */
-public class TableCompetenzeMaintainers {
+public class TableCompetenciesMaintainers {
     private Statement st;
 
-    public TableCompetenzeMaintainers(Statement st) {
+    public TableCompetenciesMaintainers(Statement st) {
         this.st = st;
     }
 

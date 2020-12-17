@@ -14,7 +14,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import tablepackage.TableCompetenzeAttività;
+import tablepackage.TableCompetenciesActivity;
 import tablepackage.TableMaintenanceActivities;
 import tablepackage.TableProcedure;
 import tablepackage.TableProcedureActivity;
@@ -23,12 +23,12 @@ import tablepackage.TableProcedureActivity;
  *
  * @author sabrina
  */
-public class GuiVerificaAttività extends javax.swing.JFrame {
+public class GuiActivityVerification extends javax.swing.JFrame {
 
     private int week;
     private String id;
     private TableMaintenanceActivities attività;
-    private TableCompetenzeAttività competenze;
+    private TableCompetenciesActivity competenze;
     private TableProcedureActivity procedure;
     private TableProcedure proc;
     private Statement st;
@@ -36,13 +36,13 @@ public class GuiVerificaAttività extends javax.swing.JFrame {
     /**
      * Creates new form GuiVerificaAttività
      */
-    public GuiVerificaAttività(Statement st, int week, String id) {
+    public GuiActivityVerification(Statement st, int week, String id) {
         initComponents();
         this.week = week;
         this.id = id;
         this.st = st;
         attività = new TableMaintenanceActivities(st);
-        competenze = new TableCompetenzeAttività(st);
+        competenze = new TableCompetenciesActivity(st);
         procedure = new TableProcedureActivity(st);
         proc = new TableProcedure(st);
         visualizzaCompetenze();
@@ -104,7 +104,7 @@ public class GuiVerificaAttività extends javax.swing.JFrame {
         jScrollPane3.setViewportView(jTextAreaProcedure);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("MAINTENANCE ACTIVITY #STEP2");
+        setTitle("ACTIVITY VERIFICATION #STEP2");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -280,7 +280,7 @@ public class GuiVerificaAttività extends javax.swing.JFrame {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(32, 32, 32)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
                             .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButtonForward, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -326,7 +326,9 @@ public class GuiVerificaAttività extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -337,7 +339,7 @@ public class GuiVerificaAttività extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -354,7 +356,7 @@ public class GuiVerificaAttività extends javax.swing.JFrame {
 
     private void jButtonForwardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonForwardActionPerformed
         this.setVisible(false);
-        new GuiMaintenanceAssignmentStep3(st, id, week).setVisible(true);
+        new GuiSelectDay(st, id, week).setVisible(true);
     }//GEN-LAST:event_jButtonForwardActionPerformed
 
     private void jButtonFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFileActionPerformed
@@ -387,7 +389,7 @@ public class GuiVerificaAttività extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonFileActionPerformed
 
     private void WindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_WindowClosing
-      new GuiSelectActivities(st).setVisible(true);
+      new GuiSelectActivity(st).setVisible(true);
        this.setVisible(false);
     }//GEN-LAST:event_WindowClosing
     
@@ -399,7 +401,7 @@ public class GuiVerificaAttività extends javax.swing.JFrame {
     }
 
     private void visualizzaAttività() {
-        String dati = attività.visualizeActivity2(id);
+        String dati = attività.getActivityData(id);
         if (dati != null) {
             jTextFieldActivity.setText(dati);
             jTextFieldActivity.setEditable(false);
@@ -436,14 +438,17 @@ public class GuiVerificaAttività extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GuiVerificaAttività.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GuiActivityVerification.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GuiVerificaAttività.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GuiActivityVerification.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GuiVerificaAttività.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GuiActivityVerification.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GuiVerificaAttività.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GuiActivityVerification.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

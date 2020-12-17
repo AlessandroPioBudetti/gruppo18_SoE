@@ -118,7 +118,7 @@ public class GuiMenuPlanner extends javax.swing.JFrame {
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         this.setVisible(false);
-        new GuiSelectActivities(st).setVisible(true);
+        new GuiSelectActivity(st).setVisible(true);
         
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 

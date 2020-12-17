@@ -11,20 +11,20 @@ import org.junit.Before;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import tablepackage.TableCompetencies;
-import tablepackage.TableCompetenzeAttività;
-import tablepackage.TableCompetenzeMaintainers;
+import tablepackage.TableCompetenciesActivity;
+import tablepackage.TableCompetenciesMaintainers;
 import tablepackage.TableMantainer;
 
 /**
  *
  * @author sabrina
  */
-public class TableCompetenzeMaintainersTest {
+public class TableCompetenciesMaintainersTest {
 
     private Dbms db;
     private Statement st;
     private TableCompetencies tc;
-    private TableCompetenzeMaintainers tcm;
+    private TableCompetenciesMaintainers tcm;
     private TableMantainer tm;
 
     @Before
@@ -32,7 +32,7 @@ public class TableCompetenzeMaintainersTest {
         db = new Dbms();
         st = db.connectToDatabase();
         tc = new TableCompetencies(st);
-        tcm = new TableCompetenzeMaintainers(st);
+        tcm = new TableCompetenciesMaintainers(st);
         tm = new TableMantainer(st);
         tc.insert("aaaaa");
         tm.insert("giovanni1", "aaaa");

@@ -61,22 +61,7 @@ public class TableMaintenanceActivities {
             return false;
         }
     }
-    
-     public boolean updateAssignedActivities(String id){
-        StringBuilder temp= new StringBuilder();
-        temp.append("update manutenzione set assegnata=");
-        temp.append("'").append(true).append("'");
-        temp.append(" where identificativo=");
-        temp.append("'").append(id).append("'");
-        try{
-        stm.executeUpdate(temp.toString());
-        return true;
-        }catch(SQLException ex){
-            System.out.println(ex.getMessage());
-            return false;
-        }
-    }
-    
+      
     
     public boolean delete(String id){
         StringBuilder temp= new StringBuilder();
@@ -125,24 +110,8 @@ public class TableMaintenanceActivities {
         }
      return maintenance; 
     }
-   
-    public String[] visualizeActivities() {
-        String query = "select * from Manutenzione ";
-        String[] activities = new String[100];
-        int i = 0;
-        try {
-            ResultSet rs = stm.executeQuery(query);
-            while (rs.next()) {
-                activities[i] = rs.getString("identificativo");
-                i++;
-            }
-        } catch (SQLException ex) {
-            System.out.println("Errore visualizza attività:\n"+ex.getMessage());
-        }
-        return activities;
-    }
     
-     public String visualizeActivity(String identifier) {
+      public String getAllActivityData(String identifier) {
         String query = "select * from Manutenzione where identificativo = '"+identifier+"'";
         String dati;
         String id,typeOfMainance,type,area, week,interruptibleActivity,estimatedTime;
@@ -169,9 +138,40 @@ public class TableMaintenanceActivities {
             System.out.println("Errore visualizza attività:\n"+ex.getMessage());
             return null;
         }
-       
     }
-    public String visualizeActivity2(String identifier) {
+   
+        public boolean setAssignedActivities(String id){
+        StringBuilder temp= new StringBuilder();
+        temp.append("update manutenzione set assegnata=");
+        temp.append("'").append(true).append("'");
+        temp.append(" where identificativo=");
+        temp.append("'").append(id).append("'");
+        try{
+        stm.executeUpdate(temp.toString());
+        return true;
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
+  
+    public String[] getId() {
+        String query = "select * from Manutenzione ";
+        String[] activities = new String[100];
+        int i = 0;
+        try {
+            ResultSet rs = stm.executeQuery(query);
+            while (rs.next()) {
+                activities[i] = rs.getString("identificativo");
+                i++;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Errore visualizza attività:\n"+ex.getMessage());
+        }
+        return activities;
+    }
+     
+    public String getActivityData(String identifier) {
         String query = "select * from Manutenzione where identificativo = '"+identifier+"'";
         String dati;
         String id,typeOfMainance,area,estimatedTime;
@@ -241,7 +241,7 @@ public class TableMaintenanceActivities {
             return 0;
         }
     }
-    public ArrayList<ArrayList> visualizeActivitiesFromWeek(String week){
+    public ArrayList<ArrayList> getActivitiesFromWeek(String week){
     StringBuilder temp= new StringBuilder();
     ArrayList <ArrayList> activities=new ArrayList();
     String id;
